@@ -7,6 +7,14 @@
     margin-top: 10px;
 }
 
+.wdt{
+    width: 40%;
+}
+
+.center{
+    text-align: center;
+}
+
 mat-divider{
     margin: 20px 0px;
 }
