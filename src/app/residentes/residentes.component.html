@@ -1,0 +1,31 @@
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Id Column -->
+    <ng-container matColumnDef="casa">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nº Casa</th>
+      <td mat-cell *matCellDef="let row">{{row.casa}}</td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Residente</th>
+      <td mat-cell *matCellDef="let row">{{row.nome}}</td>
+    </ng-container>
+
+     <!-- Name Column -->
+     <ng-container matColumnDef="ramal">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ramal</th>
+      <td mat-cell *matCellDef="let row">{{row.ramal}}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator #paginator
+      [length]="dataSource?.data.length"
+      [pageIndex]="0"
+      [pageSize]="10"
+      [pageSizeOptions]="[10, 20, 50, 100]">
+  </mat-paginator>
+</div>

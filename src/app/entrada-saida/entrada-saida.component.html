@@ -1,0 +1,59 @@
+<mat-list style="width: 90%;">
+    <div mat-subheader>ENTRADA</div>
+    <mat-list-item>
+        <div mat-line>
+            <mat-form-field appearance="" class="block">
+                <mat-label>Tipo</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                        {{tipo.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div mat-line>
+            <mat-form-field appearance="" class="block">
+                <mat-label>Nome Completo</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div mat-line>
+            <mat-form-field class="block">
+                <mat-label>Casa</mat-label>
+                <input matInput type="number">
+            </mat-form-field>            
+        </div>
+        <div mat-line style="text-align: center;">
+            <button mat-raised-button color="accent" class="btn">ENTRAR</button>
+        </div>
+    </mat-list-item>
+    <mat-divider></mat-divider>
+    <div mat-subheader>SAÍDA</div>
+    <mat-list-item>
+        <div mat-line>
+            <mat-form-field appearance="" class="block">
+                <mat-label>Tipo</mat-label>
+                <mat-select>
+                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
+                        {{tipo.viewValue}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div mat-line>
+            <mat-form-field appearance="" class="block">
+                <mat-label>Nome Completo</mat-label>
+                <input matInput>
+            </mat-form-field>
+        </div>
+        <div mat-line>
+            <mat-form-field class="block">
+                <mat-label>Casa</mat-label>
+                <input matInput type="number">
+            </mat-form-field>        
+        </div>
+        <div mat-line style="text-align: center;">
+            <button mat-raised-button color="warn" class="btn">SAIR</button>
+        </div>
+    </mat-list-item>
+</mat-list>

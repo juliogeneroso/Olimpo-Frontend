@@ -1,0 +1,12 @@
+.block{
+    display: block;
+}
+
+.btn{
+    width: 50%;    
+    margin-top: 10px;
+}
+
+mat-divider{
+    margin: 20px 0px;
+}
