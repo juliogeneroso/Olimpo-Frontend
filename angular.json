@@ -122,5 +122,8 @@
       }
     }
   },
-  "defaultProject": "olimpo"
+  "defaultProject": "olimpo",
+  "cli": {
+    "analytics": false
+  }
 }
