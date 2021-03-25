@@ -58,7 +58,7 @@ export class EntregasComponent {
   }
 
   onSubmit(){
-    console.log(this.checkoutForm.value['viewValue']+" - "+" AP "+this.checkoutForm.value['number']+"º");
+    //console.log(this.checkoutForm.value['viewValue']+" - "+" AP "+this.checkoutForm.value['number']+"º");
     this.restantes.push(this.checkoutForm.value['viewValue']+" - "+" AP "+this.checkoutForm.value['number']+"º");
   }
 }
