@@ -26,7 +26,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { EntradaSaidaComponent } from './entrada-saida/entrada-saida.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -57,10 +58,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatGridListModule,
     MatCardModule,
     MatMenuModule,
-    MatExpansionModule
-    
+    MatExpansionModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [FormBuilder],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
