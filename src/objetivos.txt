@@ -1,0 +1,20 @@
+<!-- 
+    ADICIONAR FORM ------ OK
+    VALIDACAO DE FORM ---- Ok . 
+    VALIDACAO DE NOME --- ok
+    ADICIONAR TABELA DE ENTRADA E SAIDA ----ok 
+-->
+
+
+Arrumar a parte de entregas. -- ok
+Adicionr limite de dropcard = 5, passando de 5, exclui o ultimo. // Mudar para modal -- table de MAx=5 Bootstrap
+adicionar componente de histórico. 
+Ligar ao MongoDB.
+Criar model de pessoas e entregas. 
+Criar service de integração. 
+Consulta para evitar duplicidade.
+implementar noticias.
+
+
+
+ajuda = https://www.youtube.com/watch?v=mlgk-LMCiVw

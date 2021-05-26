@@ -1,35 +1,51 @@
-<form [formGroup]="checkoutForm">
-  <div id="novaEntrega" >
-    <h2>Nova Entrega</h2>
-    <mat-form-field>
-      <mat-label>Tipo</mat-label>
-        <mat-select class="mat-select" [(value)]="selectedTipo" formControlName="viewValue">
-          <mat-option [value]="option.viewValue" *ngFor="let option of tipos">{{ option.viewValue }}</mat-option>
-        </mat-select>
-    </mat-form-field>
-    <mat-form-field style="display: block;">    
-      <mat-label>Casa</mat-label>
-      <input matInput type="number" name="number" formControlName="number" required> 
-    </mat-form-field>
-    <button mat-raised-button color="accent" [disabled]="!checkoutForm.valid" (click)="onSubmit()">Adicionar</button>
-  </div>
-</form>
 
-<div class="container">
-  <h2>Restantes</h2>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6"><!--COL de cadastro de entregas -->
+      <div class="novaEntrega">
+        <form [formGroup]="checkoutForm">
+          <div mat-subheader>Nova entrega</div>
+          <mat-form-field>
+            <mat-label>Tipo</mat-label>
+              <mat-select class="mat-select" [(value)]="selectedTipo" formControlName="viewValue">
+                <mat-option [value]="option.viewValue" *ngFor="let option of tipos">
+                  {{ option.viewValue }}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <mat-form-field style="display: block;">    
+            <mat-label>Casa</mat-label>
+            <input matInput type="number" name="number" formControlName="number" required> 
+          </mat-form-field>
+            <button mat-raised-button color="accent" [disabled]="!checkoutForm.valid" (click)="onSubmit()">Adicionar</button>
+        </form>
+      </div>
+    </div><!--Fim COl de cadastro de entregas-->
+    <div class="col-sm-6">
+      <div class="listagem">
+        <div class="container">
+          <h3>Restantes</h3>
+          <div *ngIf="restantes?.length">
+            <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="restantes"
+                [cdkDropListConnectedTo]="doneList" class="list" (cdkDropListDropped)="drop($event)">
+              <div class="list-item" *ngFor="let item of restantes" cdkDrag>{{item}}</div>
+            </div>
+          </div>
+          <div *ngIf="!restantes?.length">
+            <p>Nenhuma entrega pendente!</p>
+          </div>
+        </div>
 
-  <div cdkDropList #todoList="cdkDropList" [cdkDropListData]="restantes"
-      [cdkDropListConnectedTo]="doneList" class="list" (cdkDropListDropped)="drop($event)">
-    <div class="list-item" *ngFor="let item of restantes" cdkDrag>{{item}}</div>
-  </div>
-</div>
+        <div class="container">
+          <h3>Concluídas</h3>
 
-<div class="container">
-  <h2>Concluídas</h2>
-
-  <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="concluidas"
-      [cdkDropListConnectedTo]="" class="list" (cdkDropListDropped)="drop($event)">
-    <div class="list-item" *ngFor="let item of concluidas" cdkDrag>{{item}}</div>
+          <div cdkDropList #doneList="cdkDropList" [cdkDropListData]="concluidas"
+              [cdkDropListConnectedTo]="" class="list" (cdkDropListDropped)="drop($event)">
+            <div class="list-item" *ngFor="let item of concluidas" cdkDrag>{{item}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <!--[cdkDropListConnectTo]="todoList" foi desconectado-->

@@ -1,14 +1,11 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FormBuilder,FormsModule,ReactiveFormsModule } from '@angular/forms';
-
-
+import { FormBuilder } from '@angular/forms';
 
 interface Tipo {
   value: string;
   viewValue: string;
 }
-
 
 @Component({
   selector: 'app-entregas',
@@ -31,7 +28,7 @@ export class EntregasComponent {
     {value: '2', viewValue: 'Mercadorias'}
   ];
 
-  selectedTipo = this.tipos[2].viewValue;
+  selectedTipo = this.tipos[0].viewValue;
 
   restantes = [
     'IFood - AP 62º',
@@ -58,7 +55,7 @@ export class EntregasComponent {
   }
 
   onSubmit(){
-    //console.log(this.checkoutForm.value['viewValue']+" - "+" AP "+this.checkoutForm.value['number']+"º");
+    console.log(this.checkoutForm.value['viewValue']+" - "+" AP "+this.checkoutForm.value['number']+"º");
     this.restantes.push(this.checkoutForm.value['viewValue']+" - "+" AP "+this.checkoutForm.value['number']+"º");
   }
 }

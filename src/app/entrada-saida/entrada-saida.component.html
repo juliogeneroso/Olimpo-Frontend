@@ -1,59 +1,131 @@
-<mat-list style="width: 90%;">
-    <div mat-subheader>ENTRADA</div>
-    <mat-list-item>
-        <div mat-line>
-            <mat-form-field appearance="" class="block wdt">
-                <mat-label>Tipo</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
-                        {{tipo.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
+<div>
+    <div class="row mt-1" *ngIf="erro">
+        <div class="col">
+          <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            <strong>Exemplo de alerta</strong> o botão de fechar funciona.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
-        <div mat-line>
-            <mat-form-field appearance="" class="block wdt">
-                <mat-label>Nome Completo</mat-label>
-                <input matInput>
-            </mat-form-field>
+      </div>
+<!--INICIO ENTRADA-->
+    <mat-list style="width: 100%;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div mat-subheader>ENTRADA</div>
+                    <form [formGroup]="EntrarForm">
+                            <mat-list-item class="full">
+                                <div mat-line class="full">
+                                    <mat-form-field appearance="" class="block wdt semifull">
+                                        <mat-label>Tipo</mat-label>
+                                        <mat-select class="mat-select full" [(value)]="selectedTipoEntrada" formControlName="viewValueEntrada">
+                                            <mat-option [value]="tipoEntrada.viewValue" *ngFor="let tipoEntrada of tiposEntrada">                                            {{tipoEntrada.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div mat-line class="full">
+                                    <mat-form-field appearance="" class="block wdt semifull">
+                                        <mat-label>Nome Completo</mat-label>
+                                        <input matInput type="text" name="nome" formControlName="nomeCompleto" required>
+                                    </mat-form-field>
+                                </div>
+                                <div mat-line class="full">
+                                    <mat-form-field class="block wdt semifull">
+                                        <mat-label>Casa</mat-label>
+                                        <input matInput type="number" name="number" formControlName="casa" required>
+                                    </mat-form-field>
+                                </div>
+                                <div mat-line class="wdt center semifull">
+                                    <button mat-raised-button color="accent" [disabled]="!EntrarForm.valid" (click)="onSubmitEntrada()">ENTRAR</button><!--Implementar submit-->
+                                </div>
+                            </mat-list-item>    
+                    </form>    
+                </div>
+                    <!--Arrastar CARD ENTRADA E SAIDA-->
+                <div class="col-sm-6">
+                    <div class="container">
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Últimas Entradas</th>
+                              </tr>
+                            </thead>
+                            <tbody>                                  
+                              <tr *ngFor="let entrada of entradas">
+                                 <td>{{entrada}}</td>
+                              </tr>
+                            </tbody>
+                        </table>    
+                        <div *ngIf="!entradas?.length">
+                            <p>Nenhuma entrada relatada</p>
+                        </div>
+                    </div> 
+                </div>
+            </div>
         </div>
-        <div mat-line>
-            <mat-form-field class="block wdt">
-                <mat-label>Casa</mat-label>
-                <input matInput type="number">
-            </mat-form-field>
-        </div>
-        <div mat-line class="wdt center">
-            <button mat-raised-button color="accent" class="btn">ENTRAR</button>
-        </div>
-    </mat-list-item>
+    </mat-list>
+    <!--FIM ENTRADA-->
     <mat-divider></mat-divider>
-    <div mat-subheader>SAÍDA</div>
-    <mat-list-item>
-        <div mat-line>
-            <mat-form-field appearance="" class="block wdt">
-                <mat-label>Tipo</mat-label>
-                <mat-select>
-                    <mat-option *ngFor="let tipo of tipos" [value]="tipo.value">
-                        {{tipo.viewValue}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-        <div mat-line>
-            <mat-form-field appearance="" class="block wdt">
-                <mat-label>Nome Completo</mat-label>
-                <input matInput>
-            </mat-form-field>
-        </div>
-        <div mat-line>
-            <mat-form-field class="block wdt">
-                <mat-label>Casa</mat-label>
-                <input matInput type="number">
-            </mat-form-field>
-        </div>
-        <div mat-line class="wdt center">
-            <button mat-raised-button color="warn" class="btn ">SAIR</button>
-        </div>
-    </mat-list-item>
-</mat-list>
+    <!--INICIO SAIDA-->
+    <mat-list style="width: 100%;">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div mat-subheader>SAÍDA</div>
+                        <form [formGroup]="SaidaForm">
+                            <mat-list-item class="full">
+                                <div mat-line class="full">
+                                    <mat-form-field appearance="" class="block wdt semifull">
+                                        <mat-label>Tipo</mat-label>
+                                        <mat-select class="mat-select full" [(value)]="selectedTipoSaida" formControlName="viewValueSaida">
+                                            <mat-option [value]="tipoSaida.viewValue" *ngFor="let tipoSaida of tiposSaida">
+                                                {{tipoSaida.viewValue}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div mat-line>
+                                    <mat-form-field appearance="" class="block wdt semifull">
+                                        <mat-label>Nome Completo</mat-label>
+                                        <input matInput type="text" name="nome" formControlName="nomeCompleto" required>
+                                    </mat-form-field>
+                                </div>
+                                <div mat-line>
+                                    <mat-form-field class="block wdt semifull">
+                                        <mat-label>Casa</mat-label>
+                                        <input matInput type="number" name="number" formControlName="casa" required>
+                                    </mat-form-field>
+                                </div>
+                                <div mat-line class="wdt center semifull">
+                                    <button mat-raised-button color="warn" [disabled]="!SaidaForm.valid" (click)="onSubmitSaida()">SAÍDA</button><!--Implementar submit-->
+                                </div>
+                            </mat-list-item>    
+                        </form>
+                </div>
+                <div class="col-sm-6">
+                    <div class="container">
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Últimas Saídas</th>
+                              </tr>
+                            </thead>
+                            <tbody>                                  
+                              <tr *ngFor="let saida of saidas">
+                                 <td>{{saida}}</td>
+                              </tr>
+                            </tbody>
+                        </table> 
+                        <div *ngIf="!saidas?.length">
+                            <p>Nenhuma entrada relatada</p>
+                        </div>   
+                    </div>
+                </div>
+            </div>
+        </div>    
+    </mat-list>  
+ <!--FIM SAIDA-->
+</div>
