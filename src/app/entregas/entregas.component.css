@@ -1,7 +1,6 @@
 .novaEntrega{
   width: 100%;
   max-width: 100%;
-  margin: 0 30px;
   display: inline-block;
   vertical-align: top;
 }
@@ -18,9 +17,7 @@
 }
 
 .list {
-  border: solid 1px #ccc;
   min-height: 60px;
-  background: white;
   border-radius: 4px;
   display: block;
   overflow: hidden;
@@ -28,10 +25,10 @@
 
 .list-item {
   padding: 20px 10px;
-  border-bottom: solid 1px #ccc;
+  border-bottom: solid 1px rgb(0, 0, 0);
   box-sizing: border-box;
   cursor: move;
-  background: white;
+  background: #ffd740;
   color: black;
   font-size: 14px;
 }

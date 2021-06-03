@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ConexaoService } from '../service/conexao.service';
 
 
 
@@ -16,14 +17,16 @@ interface Tipo {
 })
 export class EntradaSaidaComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder){}
+  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService){}
 
   //Entrada
   EntrarForm = this.formBuilder.group({
     viewValueEntrada: '',
     nomeCompleto: '',
+    bloco:'',
     casa: '',
   });
+  
   //controle de entrada --- ok 
   tiposEntrada: Tipo[] = [
     {value: '0', viewValue: 'Residente'},
@@ -37,6 +40,7 @@ export class EntradaSaidaComponent implements OnInit {
   SaidaForm = this.formBuilder.group({
     viewValueSaida: '',
     nomeCompleto: '',
+    bloco:'', 
     casa: '',
   });
   /*controle saida----ok */
@@ -51,30 +55,26 @@ export class EntradaSaidaComponent implements OnInit {
 
 
   entradas = [
-    'Residente - Julio Cesar - AP 33º',
-    'Visitante - Joao Camargo - AP 31º',
-    'Serviços - Mario Cesar - AP 23º',
+    
   ];
 
   saidas = [
-    'Residente - Joaozin - AP 32º',
-    'Visitante - Testao - AP 11º',
-    'Serviços - Piazin - AP 03º',
+   
   ];
 
   ngOnInit(): void {
   }
 
   onSubmitEntrada(){
-    console.log(this.entradas)
-    //console.log(this.EntrarForm.value['viewValueEntrada']+" - "+this.EntrarForm.value['nomeCompleto']+" -  AP "+this.EntrarForm.value['casa']+"º");
-    this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" - "+this.EntrarForm.value['nomeCompleto']+" -  AP "+this.EntrarForm.value['casa']+"º");
+    this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
+    this.conexao.entrada(this.EntrarForm);
+    this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
   }
   onSubmitSaida(){
-    //console.log(this.SaidaForm.value['viewValueSaida']+" - "+this.SaidaForm.value['nomeCompleto']+" -  AP "+this.SaidaForm.value['casa']+"º");
-    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" - "+this.SaidaForm.value['nomeCompleto']+" -  AP "+this.SaidaForm.value['casa']+"º");
+    this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
+    this.conexao.saida(this.SaidaForm);
+    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
   }
 
-
-  erro = "";
+  erro="";
 }

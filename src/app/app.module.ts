@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -28,6 +29,9 @@ import { EntradaSaidaComponent } from './entrada-saida/entrada-saida.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { ConexaoService } from './service/conexao.service';
+import { HistoricoComponent } from './historico/historico.component';
+
 
 @NgModule({
   declarations: [
@@ -36,7 +40,8 @@ import { FormsModule } from '@angular/forms';
     EntregasComponent,
     ResidentesComponent,
     ComunicadosComponent,
-    EntradaSaidaComponent
+    EntradaSaidaComponent,
+    HistoricoComponent
   ],
   imports: [
     BrowserModule,
@@ -60,9 +65,10 @@ import { FormsModule } from '@angular/forms';
     MatMenuModule,
     MatExpansionModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
-  providers: [FormBuilder],
+  providers: [FormBuilder,ConexaoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
