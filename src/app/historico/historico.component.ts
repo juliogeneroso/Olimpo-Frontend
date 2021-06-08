@@ -114,14 +114,18 @@ export class HistoricoComponent implements OnInit,OnDestroy {
     );
   }
   entregar(pendentes){
-    console.log(pendentes);
+    
     let indice = this.controleEntregasPendentes.indexOf(pendentes);
     
+    //Remove a entrega no banco de dados. pendentes valores em um array: {viewValue:'',bloco:'',num:,obs:''} //lembrando que num é do tipo number
+    this.conexaoService.entregasConcluidas(pendentes);
+    
+    //Remove o item da lista de Entregas Pendentes.
     while(indice>=0){
       this.controleEntregasPendentes.splice(indice,1);
       indice = this.controleEntregasPendentes.indexOf(pendentes);
     }
-    this.conexaoService.entregasConcluidas(pendentes);
+    
   }
   ngOnDestroy(){
     this.historico.unsubscribe();

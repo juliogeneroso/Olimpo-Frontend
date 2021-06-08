@@ -26,3 +26,10 @@ export class controleEntregasConcluidas{
     hora: string;
     dia: string;
 }
+export class ResidentesItem {
+    id: number;
+    nome: string;
+    ramal:string;
+    bloco: string;
+    num: string;
+  }

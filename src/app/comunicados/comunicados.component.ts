@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 
+
 @Component({
   selector: 'app-comunicados',
   templateUrl: './comunicados.component.html',
@@ -7,4 +8,6 @@ import { Component } from '@angular/core';
 })
 export class ComunicadosComponent {
   panelOpenState = false;
+
+  imagePath = "/assets/maintenance.png";
 }

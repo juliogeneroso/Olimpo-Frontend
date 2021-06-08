@@ -5,14 +5,16 @@ import { EntradaSaidaComponent } from './entrada-saida/entrada-saida.component';
 import { EntregasComponent } from './entregas/entregas.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { ResidentesComponent } from './residentes/residentes.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 const routes:Routes = [
   {path:'entrada_saida',component:EntradaSaidaComponent},
   {path:'historico',component:HistoricoComponent},
   {path:'entregas',component: EntregasComponent },
   {path:'residentes',component:ResidentesComponent},
+  {path:'cadastro',component:CadastroComponent},
   {path:'comunicados',component:ComunicadosComponent},
-  {path:'',component:EntregasComponent}
+  {path:'',component:EntradaSaidaComponent}
 ];
 
 @NgModule({

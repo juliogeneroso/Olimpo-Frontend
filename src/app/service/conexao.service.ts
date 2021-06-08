@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, JsonpClientBackend } from '@angular/common/http';
-import { interval, Observable, throwError  } from 'rxjs';
+import { interval, Observable, ObservedValueOf, throwError  } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
-import { ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario } from './conexao.model';
+import { ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +16,7 @@ export class ConexaoService {
   
   constructor(private http:HttpClient) { }
 
-
+  //Condição para passagem de dados via json para o Node.
   private headers = new HttpHeaders({
     "Content-Type":  "application/json",
     "Accept": "application/json"
@@ -24,12 +24,19 @@ export class ConexaoService {
   private httpOptions = {
     headers: this.headers
   };
-
+  
+  //Pega a lista de todos moradores, é retornado o array de obejtos JSON. Contendo informações de: 
+  getMoradores():Observable<ResidentesItem>{
+    let caminho = `${this.baseUrl}/moradores`;
+    return this.http.get<ResidentesItem>(caminho);
+  }
+  //Pega o registro de entradas total já realizados, é retornado o array de objetos JSON. Contendo informações de Nome,Tipo,Bloco,Num,Data e hora
   getEntrada():Observable<ControleEntradaSaida>{
     let caminho = `${this.baseUrl}/entrada`;
     return this.http.get<ControleEntradaSaida>(caminho);
   }
 
+  //Pega o registro de saidas total já realizados, é retornado o array de objetos JSON. Contendo informações de Nome,Tipo,Bloco,Num,Data e hora
   getSaida():Observable<ControleEntradaSaida>{
     let caminho = `${this.baseUrl}/saida`;
     return this.http.get<ControleEntradaSaida>(caminho);
@@ -92,16 +99,18 @@ export class ConexaoService {
     });
   }
 
+
+  //HandleError permite leitura do erro em outras funções
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';
     if (error.error instanceof ErrorEvent) {
-      // Erro ocorreu no lado do client
+      // Erro ocorreu no lado do cliente
       errorMessage = error.error.message;
     } else {
       // Erro ocorreu no lado do servidor
       errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
     }
-    console.log("handleError"+errorMessage);
+    //console.log("handleError"+errorMessage);
     return throwError(errorMessage);
   };
 }

@@ -1,31 +1,36 @@
-<div class="mat-elevation-z8">
-  <table mat-table class="full-width-table" matSort aria-label="Elements">
-    <!-- Id Column -->
-    <ng-container matColumnDef="casa">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Nº Casa</th>
-      <td mat-cell *matCellDef="let row">{{row.casa}}</td>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="nome">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Residente</th>
-      <td mat-cell *matCellDef="let row">{{row.nome}}</td>
-    </ng-container>
-
-     <!-- Name Column -->
-     <ng-container matColumnDef="ramal">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>Ramal</th>
-      <td mat-cell *matCellDef="let row">{{row.ramal}}</td>
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+<div class="moradores" style="width: 100%;">     
+  <table class="table table-responsive-sm table-hover" *ngIf="moradores?.length" style="margin-top:20px">
+  <thead class="thead-dark">
+      <tr>
+          <th>Bloco</th>
+          <th>Número</th>
+          <th>Nome</th>
+          <th>ID</th>
+          <th>Ramal</th>
+      </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let morador of moradores">
+              <td>{{morador.bloco}}</td>
+              <td>{{morador.num}}</td>
+              <td>{{morador.nome}}</td>
+              <td>{{morador.id}}</td>
+              <td>{{morador.ramal}}</td>
+          </tr>
+      </tbody>
   </table>
-
-  <mat-paginator #paginator
-      [length]="dataSource?.data.length"
-      [pageIndex]="0"
-      [pageSize]="10"
-      [pageSizeOptions]="[10, 20, 50, 100]">
-  </mat-paginator>
+  <table class="table table-responsive-sm table-hover" *ngIf="!moradores?.length">
+      <thead class="thead-dark">
+          <tr>
+            <th>Bloco</th>
+            <th>Número</th>
+            <th>Nome</th>
+            <th>ID</th>
+            <th>Ramal</th>
+          </tr>
+          </thead>
+          <tbody>
+                  <p class="vazio">Não existem moradores registrados!</p>
+          </tbody>
+      </table>
 </div>

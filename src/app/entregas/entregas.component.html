@@ -15,15 +15,15 @@
           </mat-form-field>
           <mat-form-field style="display: block;">    
             <mat-label>Bloco   (A-Z)</mat-label>
-            <input matInput type="text" name="bloco" formControlName="bloco" ngModel pattern="^[a-zA-Z]" required> 
+            <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required> 
           </mat-form-field>
           <mat-form-field style="display: block;">    
             <mat-label>Casa</mat-label>
-            <input matInput type="number" name="num" formControlName="num" ngModel pattern="^[1-9]{1,3}" required> 
+            <input matInput type="number" name="num" formControlName="num" pattern="^[1-9]{1,3}" required> 
           </mat-form-field>
           <div>          
             <mat-label>Deseja adicionar obervação?</mat-label>
-            <input style="margin-left: 10px" type="checkbox" [checked]="observacao" (click)="adicionarOBS()">
+            <input style="margin-left: 10px" type="checkbox" [checked]="observacao" maxlength="500" (click)="adicionarOBS()">
           </div>
           <mat-form-field *ngIf="observacao" style="display: block;">    
             <input matInput type="text" name="obs" formControlName="obs" placeholder="Obervação"> 

@@ -31,6 +31,7 @@ import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ConexaoService } from './service/conexao.service';
 import { HistoricoComponent } from './historico/historico.component';
+import { CadastroComponent } from './cadastro/cadastro.component';
 
 
 @NgModule({
@@ -41,7 +42,8 @@ import { HistoricoComponent } from './historico/historico.component';
     ResidentesComponent,
     ComunicadosComponent,
     EntradaSaidaComponent,
-    HistoricoComponent
+    HistoricoComponent,
+    CadastroComponent
   ],
   imports: [
     BrowserModule,

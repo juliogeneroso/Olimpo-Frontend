@@ -1,30 +1,36 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatSort } from '@angular/material/sort';
-import { MatTable } from '@angular/material/table';
-import { ResidentesDataSource, ResidentesItem } from './residentes-datasource';
+import {  Component, OnInit, OnDestroy } from '@angular/core';
+import { ResidentesItem } from '../service/conexao.model';
+import { ConexaoService } from '../service/conexao.service';
+
 
 @Component({
   selector: 'app-residentes',
   templateUrl: './residentes.component.html',
   styleUrls: ['./residentes.component.css']
 })
-export class ResidentesComponent implements AfterViewInit, OnInit {
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatTable) table: MatTable<ResidentesItem>;
-  dataSource: ResidentesDataSource;
+export class ResidentesComponent implements OnInit,OnDestroy {
+ 
+  constructor(private conexao:ConexaoService){}
 
-  /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ['casa', 'nome','ramal'];
+  private historico;
+  public moradores = new Array<ResidentesItem>();
 
   ngOnInit() {
-    this.dataSource = new ResidentesDataSource();
+    this.ionViewDidEnter();
   }
 
-  ngAfterViewInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
-    this.table.dataSource = this.dataSource;
+  ionViewDidEnter(){
+    this.historico = this.conexao.getMoradores().subscribe(
+      data => {
+        const response = (data as any);
+        this.moradores = response;
+      }, err => {
+          console.log("deu errado aqui");
+      } 
+    )
+  }
+
+  ngOnDestroy(){
+    this.historico.unsubscribe();
   }
 }
