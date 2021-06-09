@@ -3,6 +3,8 @@ import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/dr
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ConexaoService } from '../service/conexao.service';
 import { Entrega } from '../service/conexao.model';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SalvoComponent } from '../salvo/salvo.component';
 
 
 
@@ -20,7 +22,9 @@ export class EntregasComponent {
 
   public observacao:boolean; //Utilizado no html com *ngIf, caso positivo -> exibirá um campo na forma de input para observação
 
-  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService){}
+  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar){}
+
+  durationInSeconds = 5;
 
   checkoutForm = this.formBuilder.group({
     viewValue: '',
@@ -57,6 +61,11 @@ export class EntregasComponent {
 
  }
 
+ openSnackBar() {
+  this.snackBar.openFromComponent(SalvoComponent, {
+    duration: this.durationInSeconds * 1000,
+  });
+}
 
   drop(event: CdkDragDrop<string[]>) {
 
@@ -81,5 +90,6 @@ export class EntregasComponent {
     this.checkoutForm.value.bloco = this.checkoutForm.value.bloco.toUpperCase(); //Convertendo para letra Maiuscula para manter padrão no banco de dados.
     this.conexao.entregasPendentes(this.checkoutForm); //Acionando service de conexao com Node.
     this.restantes.push(this.checkoutForm.value); //Caso saia tudo da forma correta, é acionado o push no vetor.
+    this.openSnackBar();
   }
 }

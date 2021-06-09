@@ -32,6 +32,8 @@ import { FormsModule } from '@angular/forms';
 import { ConexaoService } from './service/conexao.service';
 import { HistoricoComponent } from './historico/historico.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { SalvoComponent } from './salvo/salvo.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     ComunicadosComponent,
     EntradaSaidaComponent,
     HistoricoComponent,
-    CadastroComponent
+    CadastroComponent,
+    SalvoComponent
   ],
   imports: [
     BrowserModule,
@@ -70,7 +73,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [FormBuilder,ConexaoService],
+  providers: [FormBuilder,ConexaoService,MatSnackBar],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

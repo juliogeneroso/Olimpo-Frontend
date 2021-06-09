@@ -3,7 +3,7 @@ import { HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, JsonpClientBac
 import { interval, Observable, ObservedValueOf, throwError  } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
-import { ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
+import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +51,14 @@ export class ConexaoService {
     return this.http.get<controleEntregasConcluidas>(caminho);
   }
 
+  cadastro(form):Promise<Cadastro>{
+    let formulario:Formulario = form.value;
+    let caminho = `${this.baseUrl}/cadastro`;
+    return this.http.post<Cadastro>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().catch(erro=>{
+      return Promise.reject(`Erro ao registrar entrada ` + erro);
+    });
+  }
+
   entrada(form):Promise<Formulario>{
     let formulario:Formulario = form.value;
     //console.log(JSON.stringify(formulario));
@@ -60,6 +68,7 @@ export class ConexaoService {
       return Promise.reject(`Erro ao registrar entrada ` + erro);
     });
   }
+  
   saida(form):Promise<Formulario>{
     let formulario:Formulario = form.value;
     //console.log(JSON.stringify(formulario));
