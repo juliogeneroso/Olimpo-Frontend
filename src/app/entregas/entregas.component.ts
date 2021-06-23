@@ -4,7 +4,8 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ConexaoService } from '../service/conexao.service';
 import { Entrega } from '../service/conexao.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { SalvoComponent } from '../salvo/salvo.component';
+import { SalvoComponent } from '../avisos/salvo/salvo.component';
+import { ErroComponent } from '../avisos/erro/erro.component';
 
 
 
@@ -66,6 +67,11 @@ export class EntregasComponent {
     duration: this.durationInSeconds * 1000,
   });
 }
+  erroSnackBar(){
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 
   drop(event: CdkDragDrop<string[]>) {
 
@@ -93,3 +99,4 @@ export class EntregasComponent {
     this.openSnackBar();
   }
 }
+

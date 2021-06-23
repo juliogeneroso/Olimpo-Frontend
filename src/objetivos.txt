@@ -12,18 +12,20 @@ adicionar componente de histórico.  -- ok
 Ligar ao MongoDB. -- Ligado ao Mysql -- ok
 Criar model de pessoas e entregas. -- ok
 Criar service de integração. -- ok
-Consulta para evitar duplicidade. 
-implementar noticias.
+Consulta para evitar duplicidade. -- No
+implementar noticias. -- No
 
 Próximos objetivos
 
 Consulta para evitar duplicidade. 
 
 implementar noticias.
-implementar lista de moradores. 
-implementar cadastro de moradores.
+implementar lista de moradores.  -- ok
+implementar cadastro de moradores.-- ok
 implementar paginação Angular Material e Bootstrap.
-implementar alerta de erro com temporizador.
-implementar alteração de cadastros do morador e exclusão de dados em tabelas.
+implementar alerta de erro com temporizador. -- No
+implementar alteração de cadastros do morador e exclusão de dados em tabelas. -- ok
 implementar consulta de residente.
 
+Consulta para evitar duplicidade. -- No
+implementar noticias. -- No

@@ -4,6 +4,8 @@ import { interval, Observable, ObservedValueOf, throwError  } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
 import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
+import { ResolveEnd } from '@angular/router';
+;
 
 @Injectable({
   providedIn: 'root'
@@ -108,7 +110,22 @@ export class ConexaoService {
     });
   }
 
-
+  deletarResidente(excluir:ResidentesItem):Promise<ResidentesItem>{
+    let entregas:ResidentesItem = excluir;
+    console.log(entregas);
+    let caminho = `${this.baseUrl}/excluir`;
+    return this.http.post<ResidentesItem>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().catch(erro=>{
+      return Promise.reject(`Erro ao excluir `+erro); 
+    });
+  }
+  editar(editar):Promise<ResidentesItem>{
+    let mudanca:ResidentesItem = editar;
+    console.log(mudanca);
+    let caminho = `${this.baseUrl}/alterar`;
+    return this.http.post<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise().catch(erro=>{
+      return Promise.reject(`Erro ao excluir `+erro); 
+    });
+  }
   //HandleError permite leitura do erro em outras funções
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

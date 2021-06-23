@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { SalvoComponent } from '../salvo/salvo.component';
+import { SalvoComponent } from '../avisos/salvo/salvo.component';
 import { ConexaoService } from '../service/conexao.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
