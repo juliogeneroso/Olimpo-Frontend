@@ -95,6 +95,7 @@ export class ConexaoService {
       return Promise.reject(`Erro ao registrar nova entrega `+erro); 
     });
   }
+  //
   //A ação abaixo registra na Tabela entregas_concluidas e retira dados da tabela entregas_pendentes. 
   //Utilização com Promise, pois o servidor ignora o Observable
 
