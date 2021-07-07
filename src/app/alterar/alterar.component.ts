@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ResidentesItem } from '../service/conexao.model';
 import { AlteradoComponent } from '../avisos/alterado/alterado.component';
 import { Router } from '@angular/router';
+import { ErroComponent } from '../avisos/erro/erro.component';
 
 @Component({
   selector: 'app-alterar',
@@ -22,6 +23,8 @@ export class AlterarComponent implements OnInit {
   public bloco;
   public casa;
   public ramal;
+  carregando:boolean = false;
+  imagePath = "/assets/load.gif";
 
   public dadosResidentes:ResidentesItem;
 
@@ -45,15 +48,28 @@ export class AlterarComponent implements OnInit {
 
   openSnackBar() {
     this.snackBar.openFromComponent(AlteradoComponent, {
-      duration: this.durationInSeconds * 1000,
+      duration: this.durationInSeconds * 500,
+    });
+  }
+  erroSnackBar() {
+    this.carregando = false;
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 500,
     });
   }
   onSubmitCadastro(){
+    this.carregando = true;
     this.AlterarForm.value.bloco = this.AlterarForm.value.bloco.toUpperCase(); 
     this.AlterarForm.value.id = this.id;
-    this.conexao.editar(this.AlterarForm.value);
-    this.AlterarForm.reset();
-    this.openSnackBar();
-    this.router.navigate([`/entrada_saida`]);
+    this.conexao.editar(this.AlterarForm.value).then(()=>{
+      this.AlterarForm.reset();
+    }).then(()=>{
+      this.carregando = false;
+      this.openSnackBar();
+    }).then(()=>{
+      this.router.navigate([`/entrada_saida`]);
+    }).catch(()=>{
+      this.erroSnackBar();
+    });
   }
 }

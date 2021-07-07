@@ -8,6 +8,5 @@ import { Component } from '@angular/core';
 })
 export class ComunicadosComponent {
   panelOpenState = false;
-
   imagePath = "/assets/maintenance.png";
 }

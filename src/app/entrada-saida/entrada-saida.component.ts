@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { ConexaoService } from '../service/conexao.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { SalvoComponent } from '../avisos/salvo/salvo.component';
+import { ErroComponent } from '../avisos/erro/erro.component';
 
 
 
@@ -22,6 +23,9 @@ export class EntradaSaidaComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar){}
 
   durationInSeconds = 5;
+  imagePath = "/assets/load.gif";
+  carregandoEntrada:boolean = false;
+  carregandoSaida:boolean = false;
 
   //Entrada
   EntrarForm = this.formBuilder.group({
@@ -56,39 +60,66 @@ export class EntradaSaidaComponent implements OnInit {
   selectedTipoSaida = this.tiposSaida[0].viewValue;
   //Fim Saída
   
-
-
-  entradas = [
-    
-  ];
-
-  saidas = [
-   
-  ];
+  entradas = [];
+  saidas = [];
 
   ngOnInit(): void {
   }
 
   openSnackBar() {
     this.snackBar.openFromComponent(SalvoComponent, {
-      duration: this.durationInSeconds * 1000,
+      duration: this.durationInSeconds * 500,
+    });
+  }
+  erroSnackBarEntrada() {
+    this.carregandoEntrada=false;
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
+  erroSnackBarSaida() {
+    this.carregandoSaida=false;
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 500,
     });
   }
 
-  onSubmitEntrada(){
-    this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
-    this.conexao.entrada(this.EntrarForm);
-    this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
-    this.openSnackBar();
-    this.EntrarForm.reset();
+  limparCampoEntrada(){
+    this.EntrarForm.reset();  
   }
-  onSubmitSaida(){
-    this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
-    this.conexao.saida(this.SaidaForm);
-    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
-    this.openSnackBar();
-    this.SaidaForm.reset();
+  limparCampoSaida(){
+    this.SaidaForm.reset();  
   }
 
-  erro="";
+   onSubmitEntrada(){
+      this.carregandoEntrada = true;
+      this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
+      this.conexao.entrada(this.EntrarForm).then(() => {
+      this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
+      }).then(() => {
+      this.openSnackBar();
+      this.carregandoEntrada=false
+      }).then(() => {
+      this.EntrarForm.reset();}
+      ).catch(() => {
+      this.erroSnackBarEntrada()});
+  }
+
+  onSubmitSaida(){
+    this.carregandoSaida = true;
+    this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
+    this.conexao.saida(this.SaidaForm).then(() => {
+    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
+    }).then(() => {
+    this.openSnackBar();
+    this.carregandoSaida=false;
+    }).then(()=>{
+    this.SaidaForm.reset();  
+    }).catch(() => {
+    this.erroSnackBarSaida()});;
+  } 
+  
+
 }
+
+ 

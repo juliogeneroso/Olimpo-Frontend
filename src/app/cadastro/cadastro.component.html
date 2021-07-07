@@ -28,7 +28,9 @@
                     </mat-form-field>
                 </div>
                 <div mat-line class="wdt center semifull botao">
-                    <button mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar</button>
+                    <button mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar
+                        <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+                    </button>
                 </div>
             </mat-list-item>    
         </form>

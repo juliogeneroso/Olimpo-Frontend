@@ -28,7 +28,11 @@
           <mat-form-field *ngIf="observacao" style="display: block;">    
             <input matInput type="text" name="obs" formControlName="obs" placeholder="Obervação"> 
           </mat-form-field>
-            <button mat-raised-button style="margin-top: 10px;" color="accent" [disabled]="!checkoutForm.valid" (click)="onSubmit()">Adicionar</button>
+          <div style="text-align: center;">
+            <button mat-raised-button style="margin-top: 10px;" color="accent" [disabled]="!checkoutForm.valid" (click)="onSubmit()">Adicionar
+              <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+            </button>
+          </div>
         </form>
       </div>
     </div><!--Fim COl de cadastro de entregas-->

@@ -61,3 +61,10 @@ mat-form-field{
 .cdk-drag-placeholder {
   opacity: 0;
 }
+
+.spinner{
+  width:28px;
+  height:100%;
+  margin-left: 5px;
+  margin-bottom: 2px;
+}

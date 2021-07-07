@@ -9,3 +9,9 @@
 .botao{
     margin-top: 10px;
 }
+.spinner{
+    width:28px;
+    height:100%;
+    margin-left: 5px;
+    margin-bottom: 2px;
+  }

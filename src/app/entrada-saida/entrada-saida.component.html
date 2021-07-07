@@ -1,14 +1,4 @@
 <div>
-    <div class="row mt-1" *ngIf="erro">
-        <div class="col">
-          <div class="alert alert-primary alert-dismissible fade show" role="alert">
-            <strong>Exemplo de alerta</strong> o botão de fechar funciona.
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
-      </div>
 <!--INICIO ENTRADA-->
     <mat-list style="width: 100%;">
         <div class="container-fluid">
@@ -45,7 +35,10 @@
                                     </mat-form-field>
                                 </div>
                                 <div mat-line class="wdt center semifull">
-                                    <button mat-raised-button color="accent" [disabled]="!EntrarForm.valid" (click)="onSubmitEntrada()">ENTRAR</button><!--Implementar submit-->
+                                    <button mat-raised-button style="margin-right: 30px;" color="primary" (click)="limparCampoEntrada()">LIMPAR
+                                    </button>
+                                    <button mat-raised-button color="accent" [disabled]="!EntrarForm.valid" (click)="onSubmitEntrada()">ENTRAR
+                                    <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregandoEntrada'/></span></button>
                                 </div>
                             </mat-list-item>    
                     </form>    
@@ -112,7 +105,11 @@
                                     </mat-form-field>
                                 </div>
                                 <div mat-line class="wdt center semifull">
-                                    <button mat-raised-button color="warn" [disabled]="!SaidaForm.valid" (click)="onSubmitSaida()">SAÍDA</button><!--Implementar submit-->
+                                    <button mat-raised-button style="margin-right: 30px;" color="primary" (click)="limparCampoSaida()">LIMPAR
+                                    </button>
+                                    <button mat-raised-button color="warn" [disabled]="!SaidaForm.valid" (click)="onSubmitSaida()">SAÍDA
+                                        <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregandoSaida'/></span>
+                                    </button>
                                 </div>
                             </mat-list-item>    
                         </form>
