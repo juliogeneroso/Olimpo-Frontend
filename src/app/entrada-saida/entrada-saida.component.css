@@ -78,4 +78,9 @@ mat-divider{
   .cdk-drag-placeholder {
     opacity: 0;
   }
+
+  .scroll-card{
+    overflow-y: auto;
+    height: 280px;
+  }
   

@@ -32,6 +32,7 @@ import { FormsModule } from '@angular/forms';
 import { ConexaoService } from './service/conexao.service';
 import { HistoricoComponent } from './historico/historico.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 @NgModule({
@@ -67,6 +68,7 @@ import { CadastroComponent } from './cadastro/cadastro.component';
     MatMenuModule,
     MatExpansionModule,
     FormsModule,
+    MatTabsModule,
     ReactiveFormsModule,
     HttpClientModule
   ],

@@ -62,6 +62,9 @@ export class EntradaSaidaComponent implements OnInit {
    
   ];
 
+  ultimaEntrada = [];
+  ultimaSaida = [];
+
   ngOnInit(): void {
   }
 
@@ -69,11 +72,13 @@ export class EntradaSaidaComponent implements OnInit {
     this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
     this.conexao.entrada(this.EntrarForm);
     this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
+    this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
   }
   onSubmitSaida(){
     this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
     this.conexao.saida(this.SaidaForm);
     this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
+    this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
   }
 
   erro="";

@@ -32,4 +32,4 @@ export class ResidentesItem {
     ramal:string;
     bloco: string;
     num: string;
-  }
+}
