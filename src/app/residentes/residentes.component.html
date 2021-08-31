@@ -7,18 +7,18 @@
   >
     <thead class="thead-dark">
       <tr>
+        <th>Nome</th>
         <th>Bloco</th>
         <th>Número</th>
-        <th>Nome</th>
         <th>ID</th>
         <th>Ramal</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let morador of moradores">
+        <td>{{ morador.nome }}</td>
         <td>{{ morador.bloco }}</td>
         <td>{{ morador.num }}</td>
-        <td>{{ morador.nome }}</td>
         <td>{{ morador.id }}</td>
         <td>{{ morador.ramal }}</td>
       </tr>
