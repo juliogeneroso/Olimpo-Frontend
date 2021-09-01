@@ -53,11 +53,12 @@
   "main": "karma.conf.js",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/juliocamargog/olimpo.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
+    "url":"https://github.com/juliocamargog/olimpo.git"
   },
   "homepage": ""
 }

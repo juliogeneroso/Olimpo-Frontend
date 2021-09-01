@@ -1,185 +1,239 @@
-<div class="container">                                        
-    <mat-form-field appearance="" class="block wdt semifull" style="margin-top: 10px;width: 100%;">
-        <mat-label>Tipo</mat-label>
-          <mat-select class="mat-select" [(value)]="selectedTipo">
-            <mat-option [value]="option.viewValue" *ngFor="let option of tipos" (click)="selecionar(option.viewValue)">
-              {{ option.viewValue }}
-            </mat-option>
-        </mat-select>
-    </mat-form-field>
+<div class="container">
+  <mat-form-field
+    appearance=""
+    class="block wdt semifull"
+    style="margin-top: 10px;width: 100%;"
+  >
+    <mat-label>Tipo</mat-label>
+    <mat-select class="mat-select" [(value)]="selectedTipo">
+      <mat-option
+        [value]="option.viewValue"
+        *ngFor="let option of tipos"
+        (click)="selecionar(option.viewValue)"
+      >
+        {{ option.viewValue }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>
 
-
-<div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">
-    <h4>Entradas</h4>     
-    <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasEntrada?.length">
+<div
+  class="tabelaHistorico"
+  *ngIf="selectedTipo == 'Entradas'"
+  style="width: 100%;"
+>
+  <h4>Entradas</h4>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="controlePessoasEntrada?.length"
+  >
     <thead class="thead-dark">
-        <tr>
-            <th>Nome</th>
-            <th>Tipo</th>
-            <th>Bloco</th>
-            <th>Número</th>
-            <th>Data</th>
-            <th>Hora</th>
-        </tr>
-        </thead>
-        <tbody>
-            <tr *ngFor="let entrada of controlePessoasEntrada">
-                <td>{{entrada.nome}}</td>
-                <td>{{entrada.tipo}}</td>
-                <td>{{entrada.bloco}}</td>
-                <td>{{entrada.num}}</td>
-                <td>{{entrada.dia | date: 'dd/MM/yyyy'}}</td>
-                <td>{{entrada.hora}}</td>
-            </tr>
-        </tbody>
-    </table>
-    <table class="table table-responsive-sm table-hover" *ngIf="!controlePessoasEntrada?.length">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Bloco</th>
-                <th>Número</th>
-                <th>Data</th>
-                <th>Hora</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <p class="vazio">Não existem registros de entregas pendentes!</p>
-                </tr>
-            </tbody>
-        </table>
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Data</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let entrada of controlePessoasEntrada">
+        <td>{{ entrada.nome }}</td>
+        <td>{{ entrada.tipo }}</td>
+        <td>{{ entrada.bloco }}</td>
+        <td>{{ entrada.num }}</td>
+        <td>{{ entrada.dia | date: "dd/MM/yyyy" }}</td>
+        <td>{{ entrada.hora }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="!controlePessoasEntrada?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Data</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <p class="vazio">Não existem registros de entregas pendentes!</p>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-<div class="tabelaHistorico" *ngIf="selectedTipo == 'Saidas'" style="width: 100%;">
-    <h4>Saídas</h4>     
-    <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasSaida?.length">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Bloco</th>
-                <th>Número</th>
-                <th>Data</th>
-                <th>Hora</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let saida of controlePessoasSaida">
-                    <td>{{saida.nome}}</td>
-                    <td>{{saida.tipo}}</td>
-                    <td>{{saida.bloco}}</td>
-                    <td>{{saida.num}}</td>
-                    <td>{{saida.dia | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{saida.hora}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-responsive-sm table-hover" *ngIf="!controlePessoasSaida?.length">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <p class="vazio">Não existem registros de entregas pendentes!</p>
-                    </tr>
-                </tbody>
-            </table>
+<div
+  class="tabelaHistorico"
+  *ngIf="selectedTipo == 'Saidas'"
+  style="width: 100%;"
+>
+  <h4>Saídas</h4>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="controlePessoasSaida?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Data</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let saida of controlePessoasSaida">
+        <td>{{ saida.nome }}</td>
+        <td>{{ saida.tipo }}</td>
+        <td>{{ saida.bloco }}</td>
+        <td>{{ saida.num }}</td>
+        <td>{{ saida.dia | date: "dd/MM/yyyy" }}</td>
+        <td>{{ saida.hora }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="!controlePessoasSaida?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Data</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <p class="vazio">Não existem registros de entregas pendentes!</p>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-
-<div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Pendentes'" style="width: 100%;">
-    <h4>Entregas Pendentes</h4>     
-    <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasPendentes?.length">
-        <thead class="thead-dark">
-            <tr>
-                <th>Tipo</th>
-                <th>Bloco</th>
-                <th>Número</th>
-                <th>Observação</th>
-                <th>Entregar</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let pendentes of controleEntregasPendentes">
-                    <td>{{pendentes.viewValue}}</td>
-                    <td>{{pendentes.bloco}}</td>
-                    <td>{{pendentes.num}}</td>
-                    <td *ngIf="pendentes.obs">{{pendentes.obs}}</td>
-                    <td *ngIf="!pendentes.obs">Sem observação registrada!</td>
-                    <td><button type="button" (click)="entregar(pendentes)" class="btn btn-outline-success btn-sm"><mat-icon>send</mat-icon></button></td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-responsive-sm table-hover" *ngIf="!controleEntregasPendentes?.length">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <p class="vazio">Não existem registros de entregas pendentes!</p>
-                    </tr>
-                </tbody>
-            </table>
+<div
+  class="tabelaHistorico"
+  *ngIf="selectedTipo == 'Entregas Pendentes'"
+  style="width: 100%;"
+>
+  <h4>Entregas Pendentes</h4>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="controleEntregasPendentes?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Observação</th>
+        <th>Entregar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pendentes of controleEntregasPendentes">
+        <td>{{ pendentes.viewValue }}</td>
+        <td>{{ pendentes.bloco }}</td>
+        <td>{{ pendentes.num }}</td>
+        <td *ngIf="pendentes.obs">{{ pendentes.obs }}</td>
+        <td *ngIf="!pendentes.obs">Sem observação registrada!</td>
+        <td>
+          <button
+            type="button"
+            (click)="entregar(pendentes)"
+            class="btn btn-outline-success btn-sm"
+          >
+            <mat-icon>send</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="!controleEntregasPendentes?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <p class="vazio">Não existem registros de entregas pendentes!</p>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
-
-<div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Realizadas'" style="width: 100%;">
-    <h4>Entregas Realizadas</h4>     
-    <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasConcluidas?.length">
-        <thead class="thead-dark">
-            <tr>
-                <th>Tipo</th>
-                <th>Bloco</th>
-                <th>Número</th>
-                <th>Observação</th>
-                <th>Data</th>
-                <th>Hora</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let concluidas of controleEntregasConcluidas">
-                    <td>{{concluidas.viewValue}}</td>
-                    <td>{{concluidas.bloco}}</td>
-                    <td>{{concluidas.num}}</td>
-                    <td *ngIf="concluidas.obs">{{concluidas.obs}}</td>
-                    <td *ngIf="!concluidas.obs">Sem observação registrada!</td>
-                    <td>{{concluidas.dia | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{concluidas.hora}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-responsive-sm table-hover" *ngIf="!controleEntregasConcluidas?.length">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <th>Observação</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <p class="vazio">Não existem registros de entregas pendentes!</p>
-                    </tr>
-                </tbody>
-            </table>
+<div
+  class="tabelaHistorico"
+  *ngIf="selectedTipo == 'Entregas Realizadas'"
+  style="width: 100%;"
+>
+  <h4>Entregas Realizadas</h4>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="controleEntregasConcluidas?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Observação</th>
+        <th>Data</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let concluidas of controleEntregasConcluidas">
+        <td>{{ concluidas.viewValue }}</td>
+        <td>{{ concluidas.bloco }}</td>
+        <td>{{ concluidas.num }}</td>
+        <td *ngIf="concluidas.obs">{{ concluidas.obs }}</td>
+        <td *ngIf="!concluidas.obs">Sem observação registrada!</td>
+        <td>{{ concluidas.dia }}</td>
+        <!---| date: 'dd/MM/yyyy' filtro dia não está funcionando-->
+        <td>{{ concluidas.hora }}</td>
+      </tr>
+    </tbody>
+  </table>
+  <table
+    class="table table-responsive-sm table-hover"
+    *ngIf="!controleEntregasConcluidas?.length"
+  >
+    <thead class="thead-dark">
+      <tr>
+        <th>Nome</th>
+        <th>Tipo</th>
+        <th>Bloco</th>
+        <th>Número</th>
+        <th>Observação</th>
+        <th>Data</th>
+        <th>Hora</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <p class="vazio">Não existem registros de entregas pendentes!</p>
+      </tr>
+    </tbody>
+  </table>
 </div>
 <!--</div>-->

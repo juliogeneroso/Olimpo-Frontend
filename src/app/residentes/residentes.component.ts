@@ -23,7 +23,7 @@ export class ResidentesComponent implements OnInit,OnDestroy {
     this.historico = this.conexao.getMoradores().subscribe(
       data => {
         const response = (data as any);
-        this.moradores = response;
+        this.moradores = response;        
       }, err => {
           console.log("deu errado aqui");
       } 
