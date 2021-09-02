@@ -1,0 +1,27 @@
+Objetivos para concluir do Olimpo:
+
+Tratamento de erros .  --- Falta verificar erros do alterar, excluir e tabela!!!!!!!!!!!!!!!!!!!!
+Modal ao excluir dados .
+consulta se � morador na entrada de pessoas e servi�os.
+gerar id para morador .
+arrumar put and delete node. 
+tela de login para porteiro com senha. 
+pagina��o ao exibir - criar filtro por blocos/nomes/ramal.
+evitar colis�o de entrada.
+Ajustar tela de noticias.
+Criar componente de estacionameto. 
+Criar parte de aplicativo de transporte
+Criar aviso de entrega para cliente - cliente possuir app.  ou msg automatica para ramal 
+
+
+Criar um auth guard 
+Mudar tratamento de dados ao editar morador. 
+ajustar design de entrada.
+
+Criar component de log de servi�o no NODE.
+
+
+Criar vers�o morador --><
+
+
+Futuramente - crach� de entrada.

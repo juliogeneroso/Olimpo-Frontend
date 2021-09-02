@@ -1,37 +1,38 @@
 <div class="container">
     <div class="cadastro">
         <h4>Cadastrar novo residente</h4>
-        <form [formGroup]="CadastroForm">
+        <form [formGroup]="AlterarForm">
             <mat-list-item class="full">
                 <div mat-line>
                     <mat-form-field appearance="" class="block wdt semifull campocadastro">
-                        <mat-label>Nome Completo</mat-label>
-                        <input matInput type="text" name="nome" formControlName="nomeCompleto"  minlength="4" maxlength="50" required>
+                        <mat-label>{{this.nome}}</mat-label>
+                        <input matInput type="text" name="nome" formControlName="nome"  minlength="4" maxlength="50" required>
                     </mat-form-field>
                 </div>
                 <div mat-line class="full">
                     <mat-form-field class="block wdt semifull campocadastro">
-                        <mat-label>Bloco   (A-Z)</mat-label>
-                        <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required>
+                        <mat-label>{{this.bloco}}</mat-label>
+                        <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]"  required>
                     </mat-form-field>
                 </div>
                 <div mat-line>
                     <mat-form-field class="block wdt semifull campocadastro">
-                        <mat-label>Casa</mat-label>
+                        <mat-label>{{this.casa}}</mat-label>
                         <input matInput type="number" name="number" formControlName="casa" pattern="^[1-9][0-9]{0,1}" required>
                     </mat-form-field>
                 </div>
                 <div mat-line>
                     <mat-form-field class="block wdt semifull campocadastro">
-                        <mat-label>Ramal</mat-label>
+                        <mat-label>{{this.ramal}}</mat-label>
                         <input matInput type="text" name="ramal" formControlName="ramal" pattern="^[0-9]{4}" required>
                     </mat-form-field>
                 </div>
                 <div mat-line class="wdt center semifull botao">
-                    <button mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar
+                    <button mat-raised-button color="accent" [disabled]="!AlterarForm.valid" (click)="onSubmitCadastro()">Atualizar
                         <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
                     </button>
                 </div>
+                
             </mat-list-item>    
         </form>
     </div>

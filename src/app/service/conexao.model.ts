@@ -32,4 +32,13 @@ export class ResidentesItem {
     ramal:string;
     bloco: string;
     num: string;
+<<<<<<< HEAD
+=======
+  }
+export class Cadastro{
+    nomeCompleto: string;
+    bloco: string;
+    casa: string;
+    ramal: string;
+>>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
 }

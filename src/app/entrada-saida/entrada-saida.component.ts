@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConexaoService } from '../service/conexao.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import { SalvoComponent } from '../avisos/salvo/salvo.component';
+import { ErroComponent } from '../avisos/erro/erro.component';
 
 
 
@@ -17,7 +20,12 @@ interface Tipo {
 })
 export class EntradaSaidaComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService){}
+  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar){}
+
+  durationInSeconds = 5;
+  imagePath = "/assets/load.gif";
+  carregandoEntrada:boolean = false;
+  carregandoSaida:boolean = false;
 
   //Entrada
   EntrarForm = this.formBuilder.group({
@@ -52,16 +60,31 @@ export class EntradaSaidaComponent implements OnInit {
   selectedTipoSaida = this.tiposSaida[0].viewValue;
   //Fim Saída
   
+  entradas = [];
+  saidas = [];
 
+  ngOnInit(): void {
+  }
 
-  entradas = [
-    
-  ];
+  openSnackBar() {
+    this.snackBar.openFromComponent(SalvoComponent, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
+  erroSnackBarEntrada() {
+    this.carregandoEntrada=false;
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
+  erroSnackBarSaida() {
+    this.carregandoSaida=false;
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
 
-  saidas = [
-   
-  ];
-
+<<<<<<< HEAD
   ultimaEntrada = [];
   ultimaSaida = [];
 
@@ -73,13 +96,49 @@ export class EntradaSaidaComponent implements OnInit {
     this.conexao.entrada(this.EntrarForm);
     this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
     this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
+=======
+  limparCampoEntrada(){
+    this.EntrarForm.reset();  
   }
-  onSubmitSaida(){
-    this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
-    this.conexao.saida(this.SaidaForm);
-    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
-    this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
+  limparCampoSaida(){
+    this.SaidaForm.reset();  
   }
 
-  erro="";
+   onSubmitEntrada(){
+      this.carregandoEntrada = true;
+      this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
+      this.conexao.entrada(this.EntrarForm).then(() => {
+      this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
+      }).then(() => {
+      this.openSnackBar();
+      this.carregandoEntrada=false
+      }).then(() => {
+      this.EntrarForm.reset();}
+      ).catch(() => {
+      this.erroSnackBarEntrada()});
+>>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
+  }
+
+  onSubmitSaida(){
+    this.carregandoSaida = true;
+    this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
+    this.conexao.saida(this.SaidaForm).then(() => {
+    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
+<<<<<<< HEAD
+    this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
+  }
+=======
+    }).then(() => {
+    this.openSnackBar();
+    this.carregandoSaida=false;
+    }).then(()=>{
+    this.SaidaForm.reset();  
+    }).catch(() => {
+    this.erroSnackBarSaida()});;
+  } 
+  
+>>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
+
 }
+
+ 

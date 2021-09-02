@@ -3,7 +3,9 @@ import { HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, JsonpClientBac
 import { interval, Observable, ObservedValueOf, throwError  } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { catchError, retry } from 'rxjs/operators';
-import { ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
+import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
+import { ResolveEnd } from '@angular/router';
+;
 
 @Injectable({
   providedIn: 'root'
@@ -49,6 +51,14 @@ export class ConexaoService {
     return this.http.get<controleEntregasConcluidas>(caminho);
   }
 
+  cadastro(form):Promise<Cadastro>{
+    let formulario:Formulario = form.value;
+    let caminho = `${this.baseUrl}/cadastro`;
+    return this.http.post<Cadastro>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().catch(erro=>{
+      return Promise.reject(`Erro ao registrar entrada ` + erro);
+    });
+  }
+
   entrada(form):Promise<Formulario>{
     let formulario:Formulario = form.value;
     //console.log(JSON.stringify(formulario));
@@ -58,6 +68,7 @@ export class ConexaoService {
       return Promise.reject(`Erro ao registrar entrada ` + erro);
     });
   }
+  
   saida(form):Promise<Formulario>{
     let formulario:Formulario = form.value;
     //console.log(JSON.stringify(formulario));
@@ -82,6 +93,7 @@ export class ConexaoService {
       return Promise.reject(`Erro ao registrar nova entrega `+erro); 
     });
   }
+  //
   //A ação abaixo registra na Tabela entregas_concluidas e retira dados da tabela entregas_pendentes. 
   //Utilização com Promise, pois o servidor ignora o Observable
 
@@ -97,7 +109,22 @@ export class ConexaoService {
     });
   }
 
-
+  deletarResidente(excluir:ResidentesItem):Promise<ResidentesItem>{
+    let entregas:ResidentesItem = excluir;
+    console.log(entregas);
+    let caminho = `${this.baseUrl}/excluir`;
+    return this.http.post<ResidentesItem>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().catch(erro=>{
+      return Promise.reject(`Erro ao excluir `+erro); 
+    });
+  }
+  editar(editar):Promise<ResidentesItem>{
+    let mudanca:ResidentesItem = editar;
+    console.log(mudanca);
+    let caminho = `${this.baseUrl}/alterar`;
+    return this.http.post<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise().catch(erro=>{
+      return Promise.reject(`Erro ao excluir `+erro); 
+    });
+  }
   //HandleError permite leitura do erro em outras funções
   handleError(error: HttpErrorResponse) {
     let errorMessage = '';

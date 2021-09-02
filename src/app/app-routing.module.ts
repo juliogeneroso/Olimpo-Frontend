@@ -6,6 +6,8 @@ import { EntregasComponent } from './entregas/entregas.component';
 import { HistoricoComponent } from './historico/historico.component';
 import { ResidentesComponent } from './residentes/residentes.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
+import { AlterarComponent } from './alterar/alterar.component';
+
 
 const routes:Routes = [
   {path:'entrada_saida',component:EntradaSaidaComponent},
@@ -14,6 +16,7 @@ const routes:Routes = [
   {path:'residentes',component:ResidentesComponent},
   {path:'cadastro',component:CadastroComponent},
   {path:'comunicados',component:ComunicadosComponent},
+  {path: 'alterar/:id/:nome/:bloco/:casa/:ramal', component: AlterarComponent},
   {path:'',component:EntradaSaidaComponent}
 ];
 

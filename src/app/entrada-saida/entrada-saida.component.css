@@ -79,8 +79,16 @@ mat-divider{
     opacity: 0;
   }
 
+<<<<<<< HEAD
   .scroll-card{
     overflow-y: auto;
     height: 280px;
+=======
+  .spinner{
+    width:28px;
+    height:100%;
+    margin-left: 5px;
+    margin-bottom: 2px;
+>>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
   }
   
