@@ -63,6 +63,8 @@ export class EntradaSaidaComponent implements OnInit {
   entradas = [];
   saidas = [];
 
+  ngOnInit(): void {
+  }
 
   openSnackBar() {
     this.snackBar.openFromComponent(SalvoComponent, {
@@ -82,17 +84,25 @@ export class EntradaSaidaComponent implements OnInit {
     });
   }
 
-  ultimaEntrada = [];
-  ultimaSaida = [];
-
-  ngOnInit(): void {
+  limparCampoEntrada(){
+    this.EntrarForm.reset();  
+  }
+  limparCampoSaida(){
+    this.SaidaForm.reset();  
   }
 
-  onSubmitEntrada(){
-    this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
-    this.conexao.entrada(this.EntrarForm);
-    this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
-    this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
+   onSubmitEntrada(){
+      this.carregandoEntrada = true;
+      this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
+      this.conexao.entrada(this.EntrarForm).then(() => {
+      this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
+      }).then(() => {
+      this.openSnackBar();
+      this.carregandoEntrada=false
+      }).then(() => {
+      this.EntrarForm.reset();}
+      ).catch(() => {
+      this.erroSnackBarEntrada()});
   }
 
   onSubmitSaida(){
@@ -100,9 +110,16 @@ export class EntradaSaidaComponent implements OnInit {
     this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
     this.conexao.saida(this.SaidaForm).then(() => {
     this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
-    this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
-    })
-  }
+    }).then(() => {
+    this.openSnackBar();
+    this.carregandoSaida=false;
+    }).then(()=>{
+    this.SaidaForm.reset();  
+    }).catch(() => {
+    this.erroSnackBarSaida()});;
+  } 
+  
+
 }
 
-
+ 

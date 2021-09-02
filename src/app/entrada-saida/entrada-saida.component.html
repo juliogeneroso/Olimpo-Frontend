@@ -1,128 +1,5 @@
 <div>
 <!--INICIO ENTRADA-->
-<<<<<<< HEAD
-<mat-tab-group mat-align-tabs="center" animationDuration="500ms" [color]="'accent'" >
-    <!--ABA ENTRADA-->
-    <mat-tab label="Entrada">
-        <mat-list style="width: 100%;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div mat-subheader>ENTRADA</div>
-                        <form [formGroup]="EntrarForm">
-                                <mat-list-item class="full">
-                                    <div mat-line class="full">
-                                        <mat-form-field appearance="" class="block wdt semifull">
-                                            <mat-label>Tipo</mat-label>
-                                            <mat-select class="mat-select full" [(value)]="selectedTipoEntrada" formControlName="viewValueEntrada" required>
-                                                <mat-option [value]="tipoEntrada.viewValue" *ngFor="let tipoEntrada of tiposEntrada">                                            {{tipoEntrada.viewValue}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line class="full">
-                                        <mat-form-field appearance="" class="block wdt semifull">
-                                            <mat-label>Nome Completo</mat-label>
-                                            <input matInput type="text" name="nome" formControlName="nomeCompleto" minlength="5" maxlength="50" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line class="full">
-                                        <mat-form-field class="block wdt semifull">
-                                            <mat-label>Bloco   (A-Z)</mat-label>
-                                            <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line class="full">
-                                        <mat-form-field class="block wdt semifull">
-                                            <mat-label>Casa</mat-label>
-                                            <input matInput type="number" name="number" formControlName="casa" pattern="^[1-9]{1,3}" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line class="wdt center semifull">
-                                        <button mat-raised-button color="accent" [disabled]="!EntrarForm.valid" (click)="onSubmitEntrada()">ENTRAR</button><!--Implementar submit-->
-                                    </div>
-                                </mat-list-item>    
-                        </form>    
-                    </div>
-                        <!--Arrastar CARD ENTRADA E SAIDA-->
-                    <div class="col-sm-6" >
-                        <div mat-subheader style="margin-bottom: 0;">Últimas Entradas</div>
-                        <div class="container scroll-card" style="margin-top: 0;">
-                            <table class="table table-striped">
-                                <tbody>                                  
-                                  <tr *ngFor="let entrada of ultimaEntrada">
-                                     <td>{{entrada}}</td>
-                                  </tr>
-                                </tbody>
-                            </table>    
-                            <div *ngIf="!entradas?.length">
-                                <p>Nenhuma entrada relatada</p>
-                            </div>
-                        </div> 
-                    </div>
-                </div>
-            </div>
-        </mat-list>
-    </mat-tab>
-    <!--FIM ABA ENTRADA-->
-    <!-- ABA SAÍDA-->
-    <mat-tab label="Saída">
-        <mat-list style="width: 100%;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <div mat-subheader>SAÍDA</div>
-                            <form [formGroup]="SaidaForm">
-                                <mat-list-item class="full">
-                                    <div mat-line class="full">
-                                        <mat-form-field appearance="" class="block wdt semifull">
-                                            <mat-label>Tipo</mat-label>
-                                            <mat-select class="mat-select full" [(value)]="selectedTipoSaida" formControlName="viewValueSaida" required>
-                                                <mat-option [value]="tipoSaida.viewValue" *ngFor="let tipoSaida of tiposSaida">
-                                                    {{tipoSaida.viewValue}}
-                                                </mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line>
-                                        <mat-form-field appearance="" class="block wdt semifull">
-                                            <mat-label>Nome Completo</mat-label>
-                                            <input matInput type="text" name="nome" formControlName="nomeCompleto"  minlength="5" maxlength="50" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line class="full">
-                                        <mat-form-field class="block wdt semifull">
-                                            <mat-label>Bloco   (A-Z)</mat-label>
-                                            <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line>
-                                        <mat-form-field class="block wdt semifull">
-                                            <mat-label>Casa</mat-label>
-                                            <input matInput type="number" name="number" formControlName="casa" pattern="^[1-9]{1,3}" required>
-                                        </mat-form-field>
-                                    </div>
-                                    <div mat-line class="wdt center semifull">
-                                        <button mat-raised-button color="warn" [disabled]="!SaidaForm.valid" (click)="onSubmitSaida()">SAÍDA</button><!--Implementar submit-->
-                                    </div>
-                                </mat-list-item>    
-                            </form>
-                    </div>
-                    <div class="col-sm-6">
-                        <div mat-subheader style="margin-bottom: 0;">Últimas Saídas</div>
-                        <div class="container scroll-card" style="margin-top: 0;">
-                            <table class="table table-striped">
-                                <tbody>                                  
-                                  <tr *ngFor="let saida of ultimaSaida">
-                                     <td>{{saida}}</td>
-                                  </tr>
-                                </tbody>
-                            </table> 
-                            <div *ngIf="!saidas?.length">
-                                <p>Nenhuma saída relatada</p>
-                            </div>   
-                        </div>
-=======
     <mat-list style="width: 100%;">
         <div class="container-fluid">
             <div class="row">
@@ -254,16 +131,10 @@
                         <div *ngIf="!saidas?.length">
                             <p>Nenhuma saída relatada</p>
                         </div>   
->>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
                     </div>
                 </div>
-            </div>    
-        </mat-list>  
-    </mat-tab>
-    <!--FIM ABA SAÍDA-->
-</mat-tab-group>
-  
-    
-    <!-- <mat-divider></mat-divider> -->
-    
+            </div>
+        </div>    
+    </mat-list>  
+ <!--FIM SAIDA-->
 </div>

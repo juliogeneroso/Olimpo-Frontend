@@ -12,7 +12,9 @@ import { ResolveEnd } from '@angular/router';
 })
 export class ConexaoService {
 
-  private baseUrl = 'http://localhost:3000';
+ 
+
+  private baseUrl = 'http://localhost:8000';
   
   constructor(private http:HttpClient) { }
 
