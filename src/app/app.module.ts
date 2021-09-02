@@ -32,16 +32,13 @@ import { FormsModule } from '@angular/forms';
 import { ConexaoService } from './service/conexao.service';
 import { HistoricoComponent } from './historico/historico.component';
 import { CadastroComponent } from './cadastro/cadastro.component';
-<<<<<<< HEAD
 import {MatTabsModule} from '@angular/material/tabs';
-=======
-import { SalvoComponent } from './avisos/salvo/salvo.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { DeletadoComponent } from './avisos/deletado/deletado.component';
+import { SalvoComponent } from './avisos/salvo/salvo.component';
 import { AlteradoComponent } from './avisos/alterado/alterado.component';
 import { ErroComponent } from './avisos/erro/erro.component';
 import { AlterarComponent } from './alterar/alterar.component';
->>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 @NgModule({

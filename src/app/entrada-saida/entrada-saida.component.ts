@@ -63,8 +63,6 @@ export class EntradaSaidaComponent implements OnInit {
   entradas = [];
   saidas = [];
 
-  ngOnInit(): void {
-  }
 
   openSnackBar() {
     this.snackBar.openFromComponent(SalvoComponent, {
@@ -84,7 +82,6 @@ export class EntradaSaidaComponent implements OnInit {
     });
   }
 
-<<<<<<< HEAD
   ultimaEntrada = [];
   ultimaSaida = [];
 
@@ -96,27 +93,6 @@ export class EntradaSaidaComponent implements OnInit {
     this.conexao.entrada(this.EntrarForm);
     this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
     this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
-=======
-  limparCampoEntrada(){
-    this.EntrarForm.reset();  
-  }
-  limparCampoSaida(){
-    this.SaidaForm.reset();  
-  }
-
-   onSubmitEntrada(){
-      this.carregandoEntrada = true;
-      this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
-      this.conexao.entrada(this.EntrarForm).then(() => {
-      this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
-      }).then(() => {
-      this.openSnackBar();
-      this.carregandoEntrada=false
-      }).then(() => {
-      this.EntrarForm.reset();}
-      ).catch(() => {
-      this.erroSnackBarEntrada()});
->>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
   }
 
   onSubmitSaida(){
@@ -124,21 +100,9 @@ export class EntradaSaidaComponent implements OnInit {
     this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
     this.conexao.saida(this.SaidaForm).then(() => {
     this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
-<<<<<<< HEAD
     this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
+    })
   }
-=======
-    }).then(() => {
-    this.openSnackBar();
-    this.carregandoSaida=false;
-    }).then(()=>{
-    this.SaidaForm.reset();  
-    }).catch(() => {
-    this.erroSnackBarSaida()});;
-  } 
-  
->>>>>>> dada376568ad0a6681cb39dc0525c252f3674cf0
-
 }
 
- 
+
