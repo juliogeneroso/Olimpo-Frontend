@@ -1,0 +1,43 @@
+<div class="moradores" style="width: 100%;">     
+    <div style="width: 100%;">
+        <table class="table table-responsive-sm table-hover" *ngIf="moradores?.length" style="margin-top:20px;">
+        <thead class="thead-dark">
+            <tr>
+                <th style="text-align: center;">Bloco</th>
+                <th style="text-align: center;">Número</th>
+                <th style="text-align: center;">Nome</th>
+                <th style="text-align: center;">ID</th>
+                <th style="text-align: center;">Ramal</th>
+                <th style="text-align: center;">Editar</th>
+                <th style="text-align: center;">Excluir</th>
+            </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let morador of moradores">
+                                <td style="text-align: center;">{{morador.bloco}}</td>
+                                <td style="text-align: center;">{{morador.num}}</td>
+                                <td>{{morador.nome}}</td>
+                                <td style="text-align: center;">{{morador.id}}</td>
+                                <td style="text-align: center;">{{morador.ramal}}</td>
+                                <td style="text-align: center;"><button type="button" class="btn btn-sm btn-warning"(click)="alterar(morador)"><mat-icon class="icone">build</mat-icon></button></td>
+                                <td style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(morador)"><mat-icon class="icone">delete</mat-icon></button></td>
+                    </tr>
+                       
+            </tbody>
+        </table>
+        <table class="table table-responsive-sm table-hover" *ngIf="!moradores?.length">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Bloco</th>
+                    <th>Número</th>
+                    <th>Nome</th>
+                    <th>ID</th>
+                    <th>Ramal</th>
+                </tr>
+                </thead>
+                <tbody>
+                        <p class="vazio">Não existem moradores registrados!</p>
+                </tbody>
+            </table>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+#container {
+  background: url("../../assets/login/background.jpg");
+  height: 100vh;
+  display: grid;
+  align-items: center;
+}
+
+#box {
+  margin: 0 auto;
+  background-color: white;
+  min-width: 450px;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+h2 {
+  text-align: center;
+  margin-top: 5px;
+  font-family: Helvetica, sans-serif;
+}
+
+.formulario {
+  min-width: 150px;
+  max-width: 500px;
+  display: grid;
+  align-items: center;
+}
+
+mat-form-field {
+  min-width: 300px;
+}
+
+button {
+  margin: 0 auto;
+  min-width: 60%;
+  max-width: 70%;
+}
+
+@media only screen and (max-width: 600px) {
+  #box {
+    margin: 0 auto;
+    background-color: white;
+    min-width: 200px;
+    max-width: 600px;
+    padding: 20px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  }
+  mat-form-field {
+    min-width: 270px;
+  }
+}
