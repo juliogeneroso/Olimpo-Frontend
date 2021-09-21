@@ -103,7 +103,7 @@ export class EntradaSaidaComponent implements OnInit {
       this.openSnackBar();
       this.carregandoEntrada=false
       }).then(() => {
-      this.EntrarForm.reset();}
+      this.limparCampoEntrada()}
       ).catch(() => {
       this.erroSnackBarEntrada()});
   }
@@ -118,7 +118,7 @@ export class EntradaSaidaComponent implements OnInit {
     this.openSnackBar();
     this.carregandoSaida=false;
     }).then(()=>{
-    this.SaidaForm.reset();  
+    this.limparCampoSaida();  
     }).catch(() => {
     this.erroSnackBarSaida()});;
   } 
