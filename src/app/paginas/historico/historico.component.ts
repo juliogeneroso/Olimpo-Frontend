@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, UnsubscriptionError } from 'rxjs';
-import { ConexaoService } from 'src/app/service/conexao.service';
-import { ControleEntradaSaida, controleEntregasConcluidas, Entrega } from '../service/conexao.model';
+import { ConexaoService } from '../../service/conexao.service';
+import { ControleEntradaSaida, controleEntregasConcluidas, Entrega } from '../../service/conexao.model';
 
 
 interface Tipo {

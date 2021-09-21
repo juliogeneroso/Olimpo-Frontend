@@ -1,8 +1,8 @@
 export class Formulario{
-    viewValue: string;
-    nomeCompleto: string;
+    tipo: string;
+    nome: string;
     bloco: string;
-    casa: number;
+    num: number;
 }
 export class Entrega{
     viewValue: string;

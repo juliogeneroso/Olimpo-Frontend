@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ConexaoService } from '../service/conexao.service';
-import { Entrega } from '../service/conexao.model';
+import { ConexaoService } from '../../service/conexao.service';
+import { Entrega } from '../../service/conexao.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { SalvoComponent } from '../avisos/salvo/salvo.component';
-import { ErroComponent } from '../avisos/erro/erro.component';
+import { SalvoComponent } from '../../avisos/salvo/salvo.component';
+import { ErroComponent } from '../../avisos/erro/erro.component';
 
 
 

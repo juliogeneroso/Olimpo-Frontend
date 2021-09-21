@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { SalvoComponent } from '../avisos/salvo/salvo.component';
-import { ConexaoService } from '../service/conexao.service';
+import { SalvoComponent } from '../../avisos/salvo/salvo.component';
+import { ConexaoService } from '../../service/conexao.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { ResidentesItem } from '../service/conexao.model';
-import { AlteradoComponent } from '../avisos/alterado/alterado.component';
+import { ResidentesItem } from '../../service/conexao.model';
+import { AlteradoComponent } from '../../avisos/alterado/alterado.component';
 import { Router } from '@angular/router';
-import { ErroComponent } from '../avisos/erro/erro.component';
+import { ErroComponent } from '../../avisos/erro/erro.component';
 
 @Component({
   selector: 'app-alterar',

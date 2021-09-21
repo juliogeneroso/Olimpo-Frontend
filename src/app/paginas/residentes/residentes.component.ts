@@ -1,9 +1,9 @@
 import {  Component, OnInit, OnDestroy } from '@angular/core';
-import { Cadastro, ResidentesItem } from '../service/conexao.model';
-import { ConexaoService } from '../service/conexao.service';
-import { DeletadoComponent } from '../avisos/deletado/deletado.component';
+import { Cadastro, ResidentesItem } from '../../service/conexao.model';
+import { ConexaoService } from '../../service/conexao.service';
+import { DeletadoComponent } from '../../avisos/deletado/deletado.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { AlteradoComponent } from '../avisos/alterado/alterado.component';
+import { AlteradoComponent } from '../../avisos/alterado/alterado.component';
 import { Router } from '@angular/router';
 
 

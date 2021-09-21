@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, JsonpClientBackend } from '@angular/common/http';
 import { interval, Observable, ObservedValueOf, throwError  } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-import { catchError, retry } from 'rxjs/operators';
 import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
-import { ResolveEnd } from '@angular/router';
 ;
 
 @Injectable({
@@ -63,10 +60,12 @@ export class ConexaoService {
 
   entrada(form):Promise<Formulario>{
     let formulario:Formulario = form.value;
-    //console.log(JSON.stringify(formulario));
+    console.log(JSON.stringify(formulario));
     let caminho = `${this.baseUrl}/registro/entrada`;
     //console.log(caminho,JSON.stringify(formulario),this.httpOptions);
     return this.http.post<Formulario>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().catch(erro=>{
+      console.log("deu erro aqui");
+      console.log(erro);
       return Promise.reject(`Erro ao registrar entrada ` + erro);
     });
   }
@@ -141,3 +140,44 @@ export class ConexaoService {
     return throwError(errorMessage);
   };
 }
+
+
+//app.post('/registro/entregas/concluidas')
+//app.post('/registro/entregas/pendentes')
+
+//app.post('/registro/entrada')
+//app.post('/registro/saida')
+
+//app.get("/entrada")
+//app.get("/saida")
+//app.get("/entrada/:tipo/:bloco/:num")
+//app.get("/entrada/:tipo/:bloco")
+//app.get("/entrada/:tipo")
+//app.get("/saida/:tipo/:bloco/:num")
+//app.get("/saida/:tipo/:bloco"
+//app.get("/saida/:tipo")
+
+//app.get("/entregas/concluidas")
+//app.get("/entregas/pendentes")
+//app.get("/entregas/pendentes/:viewValue/:bloco/:num")
+//app.get("/entregas/pendentes/:viewValue/:bloco")
+//app.get("/entregas/pendentes/:viewValue")
+//app.get("/entregas/concluidas/:viewValue/:bloco/:num")
+//app.get("/entregas/concluidas/:viewValue/:bloco")
+//app.get("/entregas/concluidas/:viewValue")
+
+//app.patch('/alterar/morador/:id')
+//app.post('/cadastro/residente')
+//app.delete('/deletar/morador/:id')
+
+//app.get("/residentes")
+//app.get("/residentes/filtro/id/:id")
+//app.get("/residentes/filtro/nome/:nome)
+//app.get("/residentes/filtro/bloco/:bloco)
+//app.get("/residentes/filtro/num/:num)
+
+//app.get('/exibir/noticias')
+//app.get('/buscar/noticia/:id')
+//app.post('/cadastrar/noticia')
+//app.patch('/editar/noticia/:id')
+//app.delete('/deletar/noticia/:id')

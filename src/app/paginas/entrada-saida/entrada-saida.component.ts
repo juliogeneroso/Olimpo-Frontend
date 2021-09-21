@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { ConexaoService } from '../service/conexao.service';
+import { ConexaoService } from '../../service/conexao.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { SalvoComponent } from '../avisos/salvo/salvo.component';
-import { ErroComponent } from '../avisos/erro/erro.component';
+import { SalvoComponent } from '../../avisos/salvo/salvo.component';
+import { ErroComponent } from '../../avisos/erro/erro.component';
 
 
 
@@ -29,10 +29,10 @@ export class EntradaSaidaComponent implements OnInit {
 
   //Entrada
   EntrarForm = this.formBuilder.group({
-    viewValueEntrada: '',
-    nomeCompleto: '',
+    tipo: '',
+    nome: '',
     bloco:'',
-    casa: '',
+    num: '',
   });
   
   //controle de entrada --- ok 
@@ -46,10 +46,10 @@ export class EntradaSaidaComponent implements OnInit {
 
   //Saída 
   SaidaForm = this.formBuilder.group({
-    viewValueSaida: '',
-    nomeCompleto: '',
+    tipo: '',
+    nome: '',
     bloco:'', 
-    casa: '',
+    num: '',
   });
   /*controle saida----ok */
   tiposSaida: Tipo[] = [
@@ -97,17 +97,13 @@ export class EntradaSaidaComponent implements OnInit {
       this.carregandoEntrada = true;
       this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
       this.conexao.entrada(this.EntrarForm).then(() => {
-      this.entradas.push(this.EntrarForm.value['viewValueEntrada']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['casa']+"º"+" ) - "+this.EntrarForm.value['nomeCompleto']);
+      this.entradas.push(this.EntrarForm.value['tipo']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['num']+"º"+" ) - "+this.EntrarForm.value['nome']);
       this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
       }).then(() => {
       this.openSnackBar();
       this.carregandoEntrada=false
       }).then(() => {
-<<<<<<< HEAD
       this.EntrarForm.reset();}
-=======
-      this.limparCampoEntrada()}
->>>>>>> master
       ).catch(() => {
       this.erroSnackBarEntrada()});
   }
@@ -116,17 +112,13 @@ export class EntradaSaidaComponent implements OnInit {
     this.carregandoSaida = true;
     this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
     this.conexao.saida(this.SaidaForm).then(() => {
-    this.saidas.push(this.SaidaForm.value['viewValueSaida']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['casa']+"º"+" ) - "+this.SaidaForm.value['nomeCompleto']);
+    this.saidas.push(this.SaidaForm.value['tipo']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['num']+"º"+" ) - "+this.SaidaForm.value['nome']);
     this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
     }).then(() => {
     this.openSnackBar();
     this.carregandoSaida=false;
     }).then(()=>{
-<<<<<<< HEAD
     this.SaidaForm.reset();  
-=======
-    this.limparCampoSaida();  
->>>>>>> master
     }).catch(() => {
     this.erroSnackBarSaida()});;
   } 

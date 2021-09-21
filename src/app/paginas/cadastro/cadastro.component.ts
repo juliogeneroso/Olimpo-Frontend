@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { SalvoComponent } from '../avisos/salvo/salvo.component';
-import { ConexaoService } from '../service/conexao.service';
+import { ConexaoService } from '../../service/conexao.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { ErroComponent } from '../avisos/erro/erro.component';
+import { ErroComponent } from '../../avisos/erro/erro.component';
+import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 
 @Component({
   selector: 'app-cadastro',
