@@ -39,10 +39,6 @@ import { DeletadoComponent } from './avisos/deletado/deletado.component';
 import { AlteradoComponent } from './avisos/alterado/alterado.component';
 import { ErroComponent } from './avisos/erro/erro.component';
 import { AlterarComponent } from './alterar/alterar.component';
-<<<<<<< HEAD
-=======
-import { LoginComponent } from './login/login.component';
->>>>>>> master
 
 
 @NgModule({
@@ -54,10 +50,6 @@ import { LoginComponent } from './login/login.component';
     ComunicadosComponent,
     EntradaSaidaComponent,
     HistoricoComponent,
-<<<<<<< HEAD
-=======
-    LoginComponent,
->>>>>>> master
     CadastroComponent,
     SalvoComponent,
     DeletadoComponent,
