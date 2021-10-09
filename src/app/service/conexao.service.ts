@@ -25,7 +25,7 @@ export class ConexaoService {
   };
   
   getMoradores():Observable<ResidentesItem>{
-    let caminho = `${this.baseUrl}/moradores`;
+    let caminho = `${this.baseUrl}/residentes`;
     return this.http.get<ResidentesItem>(caminho);
   }
 
@@ -48,53 +48,87 @@ export class ConexaoService {
     return this.http.get<controleEntregasConcluidas>(caminho);
   }
 
-  async cadastro(form):Promise<Cadastro>{
+  async cadastro(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/cadastro/residente`;
     let resposta;
 
-    await this.http.post<Cadastro>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().then(data => {resposta = data});
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
+    });
     //inserir tratamento de erro aqui;
     return resposta;
   }
 
-  async entrada(form):Promise<Formulario>{
+  async entrada(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/registro/entrada`;
     let resposta;
 
-    await this.http.post<Formulario>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().then(data => {resposta = data});
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
+    });
     //inserir tratamento de erro aqui;
+    console.log(resposta);
     return resposta;
   }
   
-  async saida(form):Promise<Formulario>{
+  async saida(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/registro/saida`;
     let resposta;
 
-    await this.http.post<Formulario>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().then(data => {resposta = data});
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
+    });
     //inserir tratamento de erro aqui;
     return resposta;
   }
 
 
-  async entregasPendentes(entrega):Promise<Entrega>{
+  async entregasPendentes(entrega){
     let entregas:Entrega = entrega.value;
     let caminho = `${this.baseUrl}/registro/entregas/pendentes`;
     let resposta;
     
-    await this.http.post<Entrega>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().then(data => {resposta = data}); 
+    await this.http.post(caminho,JSON.stringify(entregas),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
+    });
     //Inserer tratamento de erro aqui.
     return resposta;
   }
 
-  async entregasConcluidas(entrega):Promise<Entrega>{
+  async entregasConcluidas(entrega){
     let entregas:Entrega = entrega;
     let caminho = `${this.baseUrl}/registro/entregas/concluidas`;
     let resposta;
 
-    await this.http.post<Entrega>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().then(data => {resposta = data}); 
+    console.log(entrega);
+
+    await this.http.post(caminho,JSON.stringify(entregas),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
+    });
+    console.log(resposta);
     //Inserer tratamento de erro aqui.
     return resposta;
   }

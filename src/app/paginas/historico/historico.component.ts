@@ -116,7 +116,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
   entregar(pendentes){
     
     let indice = this.controleEntregasPendentes.indexOf(pendentes);
-    
+    console.log(pendentes);
     //Remove a entrega no banco de dados. pendentes valores em um array: {viewValue:'',bloco:'',num:,obs:''} //lembrando que num é do tipo number
     this.conexaoService.entregasConcluidas(pendentes);
     

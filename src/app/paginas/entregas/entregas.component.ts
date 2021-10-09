@@ -74,27 +74,6 @@ export class EntregasComponent {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex); //Nada acontece aqui. Somente mudança de ordem de serviços.
-    } else {
-      //event.container contem o array de Concluidos, estaria pegando o valor atual do item que soltei.
-      const concluidas = event.container.data[event.currentIndex];
-      //Utilizando service de conexao com node para registro no banco de dados.
-      this.conexao.entregasConcluidas(concluidas).then(()=>{
-        transferArrayItem(event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex);
-      }).then(()=>{
-        this.openSnackBar();
-      }).catch(()=>{
-        this.erroSnackBar();
-      });   
-    }
-  }
-
   onSubmit(){
     this.carregando = true;
     this.checkoutForm.value.bloco = this.checkoutForm.value.bloco.toUpperCase(); //Convertendo para letra Maiuscula para manter padrão no banco de dados.
