@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, UnsubscriptionError } from 'rxjs';
 import { ConexaoService } from '../../service/conexao.service';
-import { ControleEntradaSaida, controleEntregasConcluidas, Entrega } from '../../service/conexao.model';
+import { ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada } from '../../service/conexao.model';
 
 
 interface Tipo {
@@ -22,7 +22,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
 
   public controlePessoasEntrada = new Array<ControleEntradaSaida>();
   public controlePessoasSaida = new Array<ControleEntradaSaida>();
-  public controleEntregasPendentes = new Array<Entrega>();
+  public controleEntregasPendentes = new Array<EntregaPendenteCadastrada>();
   public controleEntregasConcluidas =  new Array<controleEntregasConcluidas>();
   
   private historico;

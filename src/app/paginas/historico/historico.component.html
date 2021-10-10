@@ -94,6 +94,7 @@
         <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasPendentes?.length">
             <thead class="thead-dark">
                 <tr>
+                    <th>ID</th>
                     <th>Tipo</th>
                     <th>Bloco</th>
                     <th>Número</th>
@@ -103,6 +104,7 @@
                 </thead>
                 <tbody>
                     <tr *ngFor="let pendentes of controleEntregasPendentes">
+                        <td>{{pendentes.id}}</td>
                         <td>{{pendentes.viewValue}}</td>
                         <td>{{pendentes.bloco}}</td>
                         <td>{{pendentes.num}}</td>
@@ -115,6 +117,7 @@
             <table class="table table-hover" *ngIf="!controleEntregasPendentes?.length">
                 <thead class="thead-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Nome</th>
                         <th>Tipo</th>
                         <th>Bloco</th>
@@ -131,6 +134,7 @@
     <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasConcluidas?.length">
         <thead class="thead-dark">
             <tr>
+                <th>ID</th>
                 <th>Tipo</th>
                 <th>Bloco</th>
                 <th>Número</th>
@@ -141,6 +145,7 @@
             </thead>
             <tbody>
                 <tr *ngFor="let concluidas of controleEntregasConcluidas">
+                    <td>{{concluidas.id}}</td>
                     <td>{{concluidas.viewValue}}</td>
                     <td>{{concluidas.bloco}}</td>
                     <td>{{concluidas.num}}</td>
@@ -154,6 +159,7 @@
         <table class="table table-responsive-sm table-hover" *ngIf="!controleEntregasConcluidas?.length">
             <thead class="thead-dark">
                 <tr>
+                    <th>ID</th>
                     <th>Nome</th>
                     <th>Tipo</th>
                     <th>Bloco</th>

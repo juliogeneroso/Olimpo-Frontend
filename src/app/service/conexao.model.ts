@@ -10,6 +10,13 @@ export class Entrega{
     num: number;
     obs:string;
 }
+export class EntregaPendenteCadastrada{
+    id: number;
+    viewValue: string;
+    bloco: string;
+    num: number;
+    obs:string;
+}
 export class ControleEntradaSaida{
     nome: string;
     tipo: string;

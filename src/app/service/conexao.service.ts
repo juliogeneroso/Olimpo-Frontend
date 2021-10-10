@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { interval, Observable} from 'rxjs';
-import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
+import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, Formulario, ResidentesItem } from './conexao.model';
 ;
 
 @Injectable({
@@ -39,9 +39,9 @@ export class ConexaoService {
     return this.http.get<ControleEntradaSaida>(caminho);
   }
 
-  getEntregasPendentes():Observable<Entrega>{
+  getEntregasPendentes():Observable<EntregaPendenteCadastrada>{
     let caminho = `${this.baseUrl}/entregas/pendentes`;
-    return this.http.get<Entrega>(caminho);
+    return this.http.get<EntregaPendenteCadastrada>(caminho);
   }
 
   getEntregasConcluidas():Observable<controleEntregasConcluidas>{
