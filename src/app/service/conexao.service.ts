@@ -67,6 +67,9 @@ export class ConexaoService {
     .catch(erro => {
       return erro;
     });
+    if(resposta.status === "203"){
+      return Promise.reject(resposta);
+    }
     //inserir tratamento de erro aqui;
     return resposta;
   }

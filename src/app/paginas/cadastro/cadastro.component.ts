@@ -4,6 +4,7 @@ import { ConexaoService } from '../../service/conexao.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { ErroComponent } from '../../avisos/erro/erro.component';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
+import { JaCadastrado } from 'src/app/avisos/jaCadastrado/jaCadastrado.component';
 
 @Component({
   selector: 'app-cadastro',
@@ -34,24 +35,38 @@ export class CadastroComponent implements OnInit {
       duration: this.durationInSeconds * 500,
     });
   }
+
+  ErroClienteCadastrado() {
+    this.carregando = false;
+    this.snackBar.openFromComponent(JaCadastrado, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
+
   ErroSnackBar() {
     this.carregando = false;
     this.snackBar.openFromComponent(ErroComponent, {
       duration: this.durationInSeconds * 500,
     });
   }
+
   onSubmitCadastro(){
     this.carregando = true;
     this.CadastroForm.value.bloco = this.CadastroForm.value.bloco.toUpperCase(); 
 
-    console.log(this.CadastroForm);
+    //console.log(this.CadastroForm);
     this.conexao.cadastro(this.CadastroForm).then(()=>{
     this.openSnackBar();
     this.carregando = false;
    // })//.then(()=>{
    // this.CadastroForm.reset();
-    }).catch(()=>{
-    this.ErroSnackBar();
+    }).catch((res)=>{
+    //console.log(res);
+    if(res.status == "203"){
+      this.ErroClienteCadastrado();
+    }else{
+      this.ErroSnackBar();
+    }
     });
    
    

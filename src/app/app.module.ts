@@ -39,6 +39,8 @@ import { DeletadoComponent } from './avisos/deletado/deletado.component';
 import { AlteradoComponent } from './avisos/alterado/alterado.component';
 import { ErroComponent } from './avisos/erro/erro.component';
 import { AlterarComponent } from './paginas/alterar/alterar.component';
+import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
+
 
 
 @NgModule({
@@ -56,6 +58,7 @@ import { AlterarComponent } from './paginas/alterar/alterar.component';
     AlteradoComponent,
     ErroComponent,
     AlterarComponent,
+    JaCadastrado
   ],
   imports: [
     BrowserModule,

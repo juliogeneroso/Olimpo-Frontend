@@ -71,9 +71,9 @@ export class ResidentesComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.moradores = response;
-        console.log(this.moradores);
+        //console.log(this.moradores);
         this.paginacaoMoradores = this.moradores.slice(0,20);
-        console.log(this.paginacaoMoradores);
+        //console.log(this.paginacaoMoradores);
       }, erro => {
           console.log("deu errado aqui");
       } 
