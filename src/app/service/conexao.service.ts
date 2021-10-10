@@ -126,7 +126,7 @@ export class ConexaoService {
     let caminho = `${this.baseUrl}/registro/entregas/concluidas`;
     let resposta;
 
-    console.log(entrega);
+    //console.log(entrega);
 
     await this.http.post(caminho,JSON.stringify(entregas),this.httpOptions).toPromise()
     .then(data => {
@@ -135,7 +135,7 @@ export class ConexaoService {
     .catch(erro => {
       return erro;
     });
-    console.log(resposta);
+    //console.log(resposta);
     //Inserer tratamento de erro aqui.
     return resposta;
   }

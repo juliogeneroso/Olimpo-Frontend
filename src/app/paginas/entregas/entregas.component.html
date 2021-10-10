@@ -5,7 +5,7 @@
       <div class="novaEntrega container">
         <form [formGroup]="checkoutForm">
           <div mat-subheader>Nova entrega</div>
-          <mat-form-field>
+          <mat-form-field type="number">
             <mat-label>Tipo</mat-label>
               <mat-select class="mat-select" [(value)]="selectedTipo" formControlName="viewValue" required>
                 <mat-option [value]="option.viewValue" *ngFor="let option of tipos" >

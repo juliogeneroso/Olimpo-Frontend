@@ -10,7 +10,10 @@
         </mat-form-field>
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">
-        <h4>Entradas</h4>     
+        <mat-paginator [length]="this.controlePessoasEntrada.length"
+            [pageSize]="20"
+            (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>    
         <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasEntrada?.length">
         <thead class="thead-dark">
             <tr>
@@ -21,9 +24,9 @@
                 <th>Data</th>
                 <th>Hora</th>
             </tr>
-            </thead>
+            </thead>           
             <tbody>
-                <tr *ngFor="let entrada of controlePessoasEntrada">
+                <tr *ngFor="let entrada of paginacaoPessoasEntrada">
                     <td>{{entrada.nome}}</td>
                     <td>{{entrada.tipo}}</td>
                     <td>{{entrada.bloco}}</td>
@@ -33,6 +36,10 @@
                 </tr>
             </tbody>
         </table>
+        <mat-paginator [length]="this.controlePessoasEntrada.length"
+                    [pageSize]="20"
+                    (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>
         <table class="table table-hover" *ngIf="!controlePessoasEntrada?.length">
             <thead class="thead-dark">
                 <tr>
@@ -50,7 +57,10 @@
                 
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Saidas'" style="width: 100%;">
-        <h4>Saídas</h4>     
+        <mat-paginator [length]="this.controlePessoasSaida.length"
+                    [pageSize]="20"
+                    (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>    
         <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasSaida?.length">
             <thead class="thead-dark">
                 <tr>
@@ -63,7 +73,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let saida of controlePessoasSaida">
+                    <tr *ngFor="let saida of paginacaoPessoasSaida">
                         <td>{{saida.nome}}</td>
                         <td>{{saida.tipo}}</td>
                         <td>{{saida.bloco}}</td>
@@ -89,8 +99,7 @@
             <p *ngIf="!controlePessoasSaida?.length" class="vazio">Não existem registros de entregas pendentes!</p>
                                 
     </div>
-    <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Pendentes'" style="width: 100%;">
-        <h4>Entregas Pendentes</h4>     
+    <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Pendentes'" style="width: 100%;">    
         <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasPendentes?.length">
             <thead class="thead-dark">
                 <tr>
@@ -130,7 +139,10 @@
                                 
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Realizadas'" style="width: 100%;">
-    <h4>Entregas Realizadas</h4>     
+        <mat-paginator [length]="this.controleEntregasConcluidas.length"
+            [pageSize]="20"
+            (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>     
     <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasConcluidas?.length">
         <thead class="thead-dark">
             <tr>
@@ -144,7 +156,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let concluidas of controleEntregasConcluidas">
+                <tr *ngFor="let concluidas of paginacaoEntregasConcluidas">
                     <td>{{concluidas.id}}</td>
                     <td>{{concluidas.viewValue}}</td>
                     <td>{{concluidas.bloco}}</td>
@@ -156,6 +168,10 @@
                 </tr>
             </tbody>
         </table>
+        <mat-paginator [length]="this.controleEntregasConcluidas.length"
+                    [pageSize]="20"
+                    (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>
         <table class="table table-responsive-sm table-hover" *ngIf="!controleEntregasConcluidas?.length">
             <thead class="thead-dark">
                 <tr>

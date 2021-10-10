@@ -55,7 +55,7 @@ import { AlterarComponent } from './paginas/alterar/alterar.component';
     DeletadoComponent,
     AlteradoComponent,
     ErroComponent,
-    AlterarComponent
+    AlterarComponent,
   ],
   imports: [
     BrowserModule,

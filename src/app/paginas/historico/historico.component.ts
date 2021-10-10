@@ -1,8 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, UnsubscriptionError } from 'rxjs';
 import { ConexaoService } from '../../service/conexao.service';
-import { ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada } from '../../service/conexao.model';
-
+import { ControleEntradaSaida, controleEntregasConcluidas, EntregaPendenteCadastrada } from '../../service/conexao.model';
+import { PageEvent } from '@angular/material/paginator';
+import { SalvoComponent } from '../../avisos/salvo/salvo.component';
+import { ErroComponent } from '../../avisos/erro/erro.component';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 interface Tipo {
   value: string;
@@ -18,13 +21,19 @@ export class HistoricoComponent implements OnInit,OnDestroy {
 
  
 
-  constructor(private conexaoService:ConexaoService) { }
+  constructor(private conexaoService:ConexaoService,private snackBar: MatSnackBar) { }
+
+  durationInSeconds = 5;
 
   public controlePessoasEntrada = new Array<ControleEntradaSaida>();
   public controlePessoasSaida = new Array<ControleEntradaSaida>();
   public controleEntregasPendentes = new Array<EntregaPendenteCadastrada>();
   public controleEntregasConcluidas =  new Array<controleEntregasConcluidas>();
   
+  public paginacaoPessoasEntrada;
+  public paginacaoPessoasSaida;
+  public paginacaoEntregasConcluidas;
+
   private historico;
 
   tipos: Tipo[] = [
@@ -46,6 +55,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.controlePessoasEntrada = response;
+        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(0,20);
       },
       error =>{
         console.log('ERROR');
@@ -71,24 +81,28 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.controlePessoasEntrada = response;
+        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(0,20);
       },
       error =>{
         console.log('ERROR');
       }
     );
   }
+
   historicoSaida(){
     this.controlePessoasSaida=[];
     this.historico = this.conexaoService.getSaida().subscribe(
       data => {
         const response = (data as any);
         this.controlePessoasSaida = response;
+        this.paginacaoPessoasSaida = this.controlePessoasSaida.slice(0,20);
       },
       error =>{
         console.log('ERROR');
       }
     );
   }
+
   entregasPendentes(){
     this.controleEntregasPendentes=[];
     this.historico = this.conexaoService.getEntregasPendentes().subscribe(
@@ -101,32 +115,87 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       }
     );
   }
+
   entregasRealizadas(){
     this.controleEntregasConcluidas=[];
     this.historico = this.conexaoService.getEntregasConcluidas().subscribe(
       data => {
         const response = (data as any);
         this.controleEntregasConcluidas = response;
+        //console.log(this.controleEntregasConcluidas);
+        this.paginacaoEntregasConcluidas = this.controleEntregasConcluidas.slice(0,20);
       },
       error =>{
         console.log('ERROR');
       }
     );
   }
+
   entregar(pendentes){
     
     let indice = this.controleEntregasPendentes.indexOf(pendentes);
-    console.log(pendentes);
     //Remove a entrega no banco de dados. pendentes valores em um array: {viewValue:'',bloco:'',num:,obs:''} //lembrando que num é do tipo number
-    this.conexaoService.entregasConcluidas(pendentes);
+    this.conexaoService.entregasConcluidas(pendentes).then(()=> {
+      while(indice>=0){
+        this.controleEntregasPendentes.splice(indice,1);
+        indice = this.controleEntregasPendentes.indexOf(pendentes);
+      }
+    })
+    .then(()=>{
+      this.salvoSucesso();
+    })
+    .catch(()=>{
+      this.erroConcluirPedido();
+    });
     
     //Remove o item da lista de Entregas Pendentes.
-    while(indice>=0){
-      this.controleEntregasPendentes.splice(indice,1);
-      indice = this.controleEntregasPendentes.indexOf(pendentes);
-    }
-    
+   
   }
+
+  onPageChange(event:PageEvent, paginaSelecionada){
+    if(paginaSelecionada == "Entradas"){
+
+      const startIndex = event.pageIndex * event.pageSize;
+      let endIndex = startIndex + event.pageSize;
+
+        if( endIndex > this.controlePessoasEntrada.length){
+          endIndex = this.controlePessoasEntrada.length;
+        }
+        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(startIndex, endIndex);
+    }
+    if(paginaSelecionada == "Saidas"){
+
+      const startIndex = event.pageIndex * event.pageSize;
+      let endIndex = startIndex + event.pageSize;
+      
+        if( endIndex > this.controlePessoasSaida.length){
+          endIndex = this.controlePessoasSaida.length;
+        }
+        this.paginacaoPessoasSaida = this.controlePessoasSaida.slice(startIndex, endIndex);
+    }
+    if(paginaSelecionada == "Entregas Realizadas"){
+      const startIndex = event.pageIndex * event.pageSize;
+      let endIndex = startIndex + event.pageSize;
+      
+        if( endIndex > this.controleEntregasConcluidas.length){
+          endIndex = this.controleEntregasConcluidas.length;
+        }
+        this.paginacaoEntregasConcluidas = this.controleEntregasConcluidas.slice(startIndex, endIndex);
+    }
+  }
+
+  salvoSucesso() {
+    this.snackBar.openFromComponent(SalvoComponent, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
+
+  erroConcluirPedido() {
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 500,
+    });
+  }
+
   ngOnDestroy(){
     this.historico.unsubscribe();
   }
