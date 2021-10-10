@@ -9,11 +9,7 @@
             </mat-select>
         </mat-form-field>
     </div>
-    <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">
-        <mat-paginator [length]="this.controlePessoasEntrada.length"
-            [pageSize]="20"
-            (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>    
+    <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">   
         <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasEntrada?.length">
         <thead class="thead-dark">
             <tr>
@@ -57,10 +53,6 @@
                 
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Saidas'" style="width: 100%;">
-        <mat-paginator [length]="this.controlePessoasSaida.length"
-                    [pageSize]="20"
-                    (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>    
         <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasSaida?.length">
             <thead class="thead-dark">
                 <tr>
@@ -138,11 +130,7 @@
             <p *ngIf="!controleEntregasPendentes?.length" class="vazio">Não existem registros de entregas pendentes!</p>
                                 
     </div>
-    <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Realizadas'" style="width: 100%;">
-        <mat-paginator [length]="this.controleEntregasConcluidas.length"
-            [pageSize]="20"
-            (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>     
+    <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Realizadas'" style="width: 100%;">    
     <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasConcluidas?.length">
         <thead class="thead-dark">
             <tr>
