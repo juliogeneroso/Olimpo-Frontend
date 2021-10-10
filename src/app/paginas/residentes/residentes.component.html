@@ -1,5 +1,9 @@
 <div class="moradores" style="width: 100%;">     
     <div style="width: 100%;">
+        <mat-paginator [length]="this.moradores.length"
+                    [pageSize]="20"
+                    (page)="onPageChange($event)">
+        </mat-paginator>
         <table class="table table-responsive-sm table-hover" *ngIf="moradores?.length" style="margin-top:20px;">
         <thead class="thead-dark">
             <tr>
@@ -13,7 +17,7 @@
             </tr>
             </thead>
             <tbody>
-                    <tr *ngFor="let morador of moradores">
+                    <tr *ngFor="let morador of paginacaoMoradores">
                                 <td style="text-align: center;">{{morador.id}}</td>
                                 <td>{{morador.nome}}</td>
                                 <td style="text-align: center;">{{morador.bloco}}</td>

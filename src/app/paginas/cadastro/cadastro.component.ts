@@ -48,8 +48,8 @@ export class CadastroComponent implements OnInit {
     this.conexao.cadastro(this.CadastroForm).then(()=>{
     this.openSnackBar();
     this.carregando = false;
-    }).then(()=>{
-    this.CadastroForm.reset();
+   // })//.then(()=>{
+   // this.CadastroForm.reset();
     }).catch(()=>{
     this.ErroSnackBar();
     });

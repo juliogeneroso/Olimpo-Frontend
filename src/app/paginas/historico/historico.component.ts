@@ -32,6 +32,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
   
   public paginacaoPessoasEntrada;
   public paginacaoPessoasSaida;
+  public paginacaoEntregasPendentes;
   public paginacaoEntregasConcluidas;
 
   private historico;
@@ -81,7 +82,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.controlePessoasEntrada = response;
-        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(0,20);
+        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(0,19);
       },
       error =>{
         console.log('ERROR');
@@ -95,7 +96,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.controlePessoasSaida = response;
-        this.paginacaoPessoasSaida = this.controlePessoasSaida.slice(0,20);
+        this.paginacaoPessoasSaida = this.controlePessoasSaida.slice(0,19);
       },
       error =>{
         console.log('ERROR');
@@ -109,6 +110,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.controleEntregasPendentes = response;
+        this.controleEntregasPendentes.slice(0,19);
       },
       error =>{
         console.log('ERROR');
@@ -123,7 +125,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
         const response = (data as any);
         this.controleEntregasConcluidas = response;
         //console.log(this.controleEntregasConcluidas);
-        this.paginacaoEntregasConcluidas = this.controleEntregasConcluidas.slice(0,20);
+        this.paginacaoEntregasConcluidas = this.controleEntregasConcluidas.slice(0,19);
       },
       error =>{
         console.log('ERROR');
@@ -142,6 +144,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       }
     })
     .then(()=>{
+      this.reOrganizar();
       this.salvoSucesso();
     })
     .catch(()=>{
@@ -150,6 +153,10 @@ export class HistoricoComponent implements OnInit,OnDestroy {
     
     //Remove o item da lista de Entregas Pendentes.
    
+  }
+
+  reOrganizar(){
+    this.paginacaoEntregasPendentes = this.controleEntregasPendentes.slice(0,19);
   }
 
   onPageChange(event:PageEvent, paginaSelecionada){
@@ -173,6 +180,17 @@ export class HistoricoComponent implements OnInit,OnDestroy {
         }
         this.paginacaoPessoasSaida = this.controlePessoasSaida.slice(startIndex, endIndex);
     }
+
+    if(paginaSelecionada == "Entregas Pendentes"){
+      const startIndex = event.pageIndex * event.pageSize;
+      let endIndex = startIndex + event.pageSize;
+      
+        if( endIndex > this.controleEntregasPendentes.length){
+          endIndex = this.controleEntregasPendentes.length;
+        }
+        this.paginacaoEntregasPendentes = this.controleEntregasPendentes.slice(startIndex, endIndex);
+    }
+
     if(paginaSelecionada == "Entregas Realizadas"){
       const startIndex = event.pageIndex * event.pageSize;
       let endIndex = startIndex + event.pageSize;

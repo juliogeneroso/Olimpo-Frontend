@@ -41,7 +41,7 @@
         <div class="container">
           <h3>Restantes</h3>
             <div *ngIf="restantes?.length">
-                <div class="list-item" *ngFor="let item of restantes" cdkDrag>
+                <div class="list-item" *ngFor="let item of restantes">
                   {{item.viewValue}} ( Bloco {{item.bloco}}  -  AP {{item.num}} º )
                 </div>
             </div>

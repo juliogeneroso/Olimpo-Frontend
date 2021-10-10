@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder} from '@angular/forms';
 import { ConexaoService } from '../../service/conexao.service';
 import { Entrega } from '../../service/conexao.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -79,6 +78,7 @@ export class EntregasComponent {
     this.checkoutForm.value.bloco = this.checkoutForm.value.bloco.toUpperCase(); //Convertendo para letra Maiuscula para manter padrão no banco de dados.
     this.conexao.entregasPendentes(this.checkoutForm).then(()=>{//Acionando service de conexao com Node.
       this.restantes.push(this.checkoutForm.value); //Caso saia tudo da forma correta, é acionado o push no vetor.
+      this.restantes = this.restantes.slice().reverse().slice(0,4);
     }).then(()=>{
       this.carregando = false;
       this.openSnackBar();
