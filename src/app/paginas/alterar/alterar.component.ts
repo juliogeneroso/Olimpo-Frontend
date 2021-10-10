@@ -21,8 +21,10 @@ export class AlterarComponent implements OnInit {
   private id;
   public nome;
   public bloco;
-  public casa;
-  public ramal;
+  public num;
+  public morador;
+  public filtro;
+  //public ramal;
   carregando:boolean = false;
   imagePath = "/assets/load.gif";
 
@@ -30,10 +32,7 @@ export class AlterarComponent implements OnInit {
 
   ngOnInit(): void {
     this.rota.params.subscribe(params => this.id = params['id']);
-    this.rota.params.subscribe(params => this.nome = params['nome']);
-    this.rota.params.subscribe(params => this.bloco = params['bloco']);
-    this.rota.params.subscribe(params => this.casa = params['casa']);
-    this.rota.params.subscribe(params => this.ramal = params['ramal']);
+    this.ionViewDidEnter(this.id);
   }
 
   durationInSeconds = 5;
@@ -42,8 +41,8 @@ export class AlterarComponent implements OnInit {
     id: '',
     nome: '',
     bloco:'',
-    casa: '',
-    ramal: ''
+    num: ''
+   // ramal: ''
   });
 
   openSnackBar() {
@@ -57,17 +56,32 @@ export class AlterarComponent implements OnInit {
       duration: this.durationInSeconds * 500,
     });
   }
+
+  ionViewDidEnter(id:number){
+    this.filtro = this.conexao.filtroID(id).subscribe(
+      data => {
+        const response = (data as any);
+        this.morador = response;
+        this.nome = this.morador[0].nome;
+        this.bloco = this.morador[0].bloco;
+        this.num = this.morador[0].num;
+      }, erro => {
+          console.log("deu errado aqui");
+      } 
+    )
+  }
+
   onSubmitCadastro(){
     this.carregando = true;
     this.AlterarForm.value.bloco = this.AlterarForm.value.bloco.toUpperCase(); 
     this.AlterarForm.value.id = this.id;
-    this.conexao.editar(this.AlterarForm.value).then(()=>{
+    this.conexao.editar(this.AlterarForm.value,this.AlterarForm.value.id).then(()=>{
       this.AlterarForm.reset();
     }).then(()=>{
       this.carregando = false;
       this.openSnackBar();
     }).then(()=>{
-      this.router.navigate([`/entrada_saida`]);
+      this.router.navigate([`/residentes`]);
     }).catch(()=>{
       this.erroSnackBar();
     });

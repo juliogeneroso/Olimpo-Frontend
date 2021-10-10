@@ -42,16 +42,16 @@ export class ResidentesComponent implements OnInit,OnDestroy {
 
   alterar(alterar:ResidentesItem){
     let id = alterar.id;
-    let nome = alterar.nome;
-    let bloco = alterar.bloco
-    let casa = alterar.num;
-    let ramal = alterar.ramal;
+  
+    //let ramal = alterar.ramal;
 
-    this.router.navigate([`/alterar`, id, nome, bloco, casa, ramal]);
+    this.router.navigate([`/alterar`, id]);
   }
+
   excluir(exclusao){
+   // console.log(exclusao.id);
     let indice = this.moradores.indexOf(exclusao);
-    this.conexao.deletarResidente(exclusao);
+    this.conexao.deletarResidente(exclusao.id);
     while(indice>=0){
       this.moradores.splice(indice,1);
       indice = this.moradores.indexOf(exclusao);
@@ -64,7 +64,7 @@ export class ResidentesComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.moradores = response;
-      }, err => {
+      }, erro => {
           console.log("deu errado aqui");
       } 
     )

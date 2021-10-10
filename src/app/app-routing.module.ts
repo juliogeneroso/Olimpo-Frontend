@@ -16,7 +16,7 @@ const routes:Routes = [
   {path:'residentes',component:ResidentesComponent},
   {path:'cadastro',component:CadastroComponent},
   {path:'comunicados',component:ComunicadosComponent},
-  {path: 'alterar/:id/:nome/:bloco/:casa/:ramal', component: AlterarComponent},
+  {path: 'alterar/:id', component: AlterarComponent},
   {path:'',component:EntradaSaidaComponent}
 ];
 

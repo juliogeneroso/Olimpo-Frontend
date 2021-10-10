@@ -23,10 +23,10 @@ export class CadastroComponent implements OnInit {
   }
 
   CadastroForm = this.formBuilder.group({
-    nomeCompleto: '',
+    nome: '',
     bloco:'',
-    casa: '',
-    ramal: ''
+    num: ''
+    //ramal: ''
   });
 
   openSnackBar() {
@@ -44,6 +44,7 @@ export class CadastroComponent implements OnInit {
     this.carregando = true;
     this.CadastroForm.value.bloco = this.CadastroForm.value.bloco.toUpperCase(); 
 
+    console.log(this.CadastroForm);
     this.conexao.cadastro(this.CadastroForm).then(()=>{
     this.openSnackBar();
     this.carregando = false;

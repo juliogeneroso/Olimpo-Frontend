@@ -34,8 +34,8 @@ export class ResidentesItem {
     num: string;
   }
 export class Cadastro{
-    nomeCompleto: string;
+    nome: string;
     bloco: string;
-    casa: string;
-    ramal: string;
+    num: string;
+    //ramal: string;
 }

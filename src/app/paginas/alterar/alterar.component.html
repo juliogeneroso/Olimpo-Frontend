@@ -17,16 +17,16 @@
                 </div>
                 <div mat-line>
                     <mat-form-field class="block wdt semifull campocadastro">
-                        <mat-label>{{this.casa}}</mat-label>
-                        <input matInput type="number" name="number" formControlName="casa" pattern="^[1-9][0-9]{0,1}" required>
+                        <mat-label>{{this.num}}</mat-label>
+                        <input matInput type="number" name="number" formControlName="num" pattern="^[1-9][0-9]{0,1}" required>
                     </mat-form-field>
                 </div>
-                <div mat-line>
+               <!--<div mat-line>
                     <mat-form-field class="block wdt semifull campocadastro">
                         <mat-label>{{this.ramal}}</mat-label>
                         <input matInput type="text" name="ramal" formControlName="ramal" pattern="^[0-9]{4}" required>
                     </mat-form-field>
-                </div>
+                </div>-->
                 <div mat-line class="wdt center semifull botao">
                     <button mat-raised-button color="accent" [disabled]="!AlterarForm.valid" (click)="onSubmitCadastro()">Atualizar
                         <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>

@@ -43,9 +43,15 @@ export class ConexaoService {
     let caminho = `${this.baseUrl}/entregas/pendentes`;
     return this.http.get<Entrega>(caminho);
   }
+
   getEntregasConcluidas():Observable<controleEntregasConcluidas>{
     let caminho = `${this.baseUrl}/entregas/concluidas`;
     return this.http.get<controleEntregasConcluidas>(caminho);
+  }
+
+  filtroID(id):Observable<ResidentesItem>{
+    let caminho = `${this.baseUrl}/residentes/filtro/id/${id}`;
+    return this.http.get<ResidentesItem>(caminho);
   }
 
   async cadastro(form){
@@ -53,6 +59,7 @@ export class ConexaoService {
     let caminho = `${this.baseUrl}/cadastro/residente`;
     let resposta;
 
+    //console.log(formulario);
     await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
     .then(data => {
       resposta = data
@@ -80,7 +87,7 @@ export class ConexaoService {
     console.log(resposta);
     return resposta;
   }
-  
+
   async saida(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/registro/saida`;
@@ -133,18 +140,38 @@ export class ConexaoService {
     return resposta;
   }
 
-  deletarResidente(excluir:ResidentesItem):Promise<ResidentesItem>{
-    let entregas:ResidentesItem = excluir;
-    console.log(entregas);
-    let caminho = `${this.baseUrl}/excluir`;
-    return this.http.post<ResidentesItem>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise()
+  async deletarResidente(id:number){
+    //console.log(id);
+    let caminho = `${this.baseUrl}/deletar/morador/${id}`;
+    let resposta;
+
+    await this.http.delete(caminho).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return erro;
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
   }
-  editar(editar):Promise<ResidentesItem>{
+
+  async editar(editar, id:number){
     let mudanca:ResidentesItem = editar;
-    console.log(mudanca);
-    let caminho = `${this.baseUrl}/alterar`;
-    return this.http.post<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise()
+    let caminho = `${this.baseUrl}/alterar/morador/${id}`;
+    let resposta;
+
+    await this.http.patch<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      erro = erro;
+    })
+    return resposta;
   }
+  
 }
 
 
