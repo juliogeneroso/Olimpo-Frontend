@@ -110,7 +110,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
       data => {
         const response = (data as any);
         this.controleEntregasPendentes = response;
-        this.controleEntregasPendentes.slice(0,19);
+        this.paginacaoEntregasPendentes = this.controleEntregasPendentes.slice(0,19);
       },
       error =>{
         console.log('ERROR');
@@ -134,7 +134,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
   }
 
   entregar(pendentes){
-    
+    console.log(pendentes);
     let indice = this.controleEntregasPendentes.indexOf(pendentes);
     //Remove a entrega no banco de dados. pendentes valores em um array: {viewValue:'',bloco:'',num:,obs:''} //lembrando que num é do tipo number
     this.conexaoService.entregasConcluidas(pendentes).then(()=> {

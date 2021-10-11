@@ -10,7 +10,8 @@
         </mat-form-field>
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">   
-        <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasEntrada?.length">
+        <div *ngIf="controlePessoasEntrada?.length">
+        <table class="table table-responsive-sm table-hover">
         <thead class="thead-dark">
             <tr>
                 <th>Nome</th>
@@ -36,6 +37,7 @@
                     [pageSize]="20"
                     (page)="onPageChange($event, selectedTipo)">
         </mat-paginator>
+        </div>  
         <table class="table table-hover" *ngIf="!controlePessoasEntrada?.length">
             <thead class="thead-dark">
                 <tr>
@@ -53,7 +55,8 @@
                 
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Saidas'" style="width: 100%;">
-        <table class="table table-responsive-sm table-hover" *ngIf="controlePessoasSaida?.length">
+        <div *ngIf="controlePessoasSaida?.length">
+        <table class="table table-responsive-sm table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th>Nome</th>
@@ -75,6 +78,11 @@
                     </tr>
                 </tbody>
             </table>
+            <mat-paginator [length]="this.controlePessoasSaida.length"
+                    [pageSize]="20"
+                    (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>
+        </div>
             <table class="table table-hover" *ngIf="!controlePessoasSaida?.length">
                 <thead class="thead-dark">
                     <tr>
@@ -92,7 +100,7 @@
                                 
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Pendentes'" style="width: 100%;">    
-        <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasPendentes?.length">
+        <div *ngIf="controleEntregasPendentes?.length">        <table class="table table-responsive-sm table-hover">
             <thead class="thead-dark">
                 <tr>
                     <th>ID</th>
@@ -104,7 +112,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let pendentes of controleEntregasPendentes">
+                    <tr *ngFor="let pendentes of paginacaoEntregasPendentes">
                         <td>{{pendentes.id}}</td>
                         <td>{{pendentes.viewValue}}</td>
                         <td>{{pendentes.bloco}}</td>
@@ -115,6 +123,12 @@
                     </tr>
                 </tbody>
             </table>
+            <mat-paginator [length]="this.controleEntregasPendentes.length"
+         [pageSize]="20"
+            (page)="onPageChange($event, selectedTipo)">
+        </mat-paginator>
+        </div>
+
             <table class="table table-hover" *ngIf="!controleEntregasPendentes?.length">
                 <thead class="thead-dark">
                     <tr>
