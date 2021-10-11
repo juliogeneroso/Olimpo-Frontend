@@ -4,33 +4,45 @@
     <div class="col-sm-6"><!--COL de cadastro de entregas -->
       <div class="novaEntrega container">
         <form [formGroup]="checkoutForm">
-          <div mat-subheader>Nova entrega</div>
+          <div mat-subheader>
+            Nova entrega
+          </div>
           <mat-form-field type="number">
-            <mat-label>Tipo</mat-label>
-              <mat-select class="mat-select" [(value)]="selectedTipo" formControlName="viewValue" required>
-                <mat-option [value]="option.viewValue" *ngFor="let option of tipos" >
-                  {{ option.viewValue }}
-                </mat-option>
-              </mat-select>
+            <mat-label>
+              Tipo
+            </mat-label>
+            <mat-select class="mat-select" [(value)]="selectedTipo" formControlName="viewValue" required>
+              <mat-option [value]="option.viewValue" *ngFor="let option of tipos" >
+                {{ option.viewValue }}
+              </mat-option>
+            </mat-select>
           </mat-form-field>
           <mat-form-field style="display: block;">    
-            <mat-label>Bloco   (A-Z)</mat-label>
-            <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required> 
+            <mat-label>
+              Bloco   (A-Z)
+            </mat-label>
+              <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required> 
           </mat-form-field>
           <mat-form-field style="display: block;">    
-            <mat-label>Casa</mat-label>
-            <input matInput type="number" name="num" formControlName="num" pattern="^[1-9][0-9]?[0-9]?" required> 
+            <mat-label>
+              Casa
+            </mat-label>
+              <input matInput type="number" name="num" formControlName="num" pattern="^[1-9][0-9]?[0-9]?" required> 
           </mat-form-field>
           <div>          
-            <mat-label>Deseja adicionar obervação?</mat-label>
-            <input style="margin-left: 10px" type="checkbox" [checked]="observacao" maxlength="500" (click)="adicionarOBS()">
+            <mat-label>
+              Deseja adicionar obervação?
+            </mat-label>
+              <input style="margin-left: 10px" type="checkbox" [checked]="observacao" maxlength="500" (click)="adicionarOBS()">
           </div>
           <mat-form-field *ngIf="observacao" style="display: block;">    
             <input matInput type="text" name="obs" formControlName="obs" placeholder="Obervação"> 
           </mat-form-field>
           <div style="text-align: center;">
             <button mat-raised-button style="margin-top: 10px;" color="accent" [disabled]="!checkoutForm.valid" (click)="onSubmit()">Adicionar
-              <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+              <span>
+                <img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/>
+              </span>
             </button>
           </div>
         </form>

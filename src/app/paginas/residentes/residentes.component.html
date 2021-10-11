@@ -1,46 +1,49 @@
 <div class="moradores" style="width: 100%;">     
     <div style="width: 100%;">
-        <mat-paginator [length]="this.moradores.length"
-                    [pageSize]="20"
-                    (page)="onPageChange($event)">
-        </mat-paginator>
-        <table class="table table-responsive-sm table-hover" *ngIf="moradores?.length" style="margin-top:20px;">
-        <thead class="thead-dark">
-            <tr>
-                <th style="text-align: center;">ID</th>
-                <th style="text-align: center;">Nome</th>
-                <th style="text-align: center;">Bloco</th>
-                <th style="text-align: center;">Número</th>
-                <!--<th style="text-align: center;">Ramal</th>-->
-                <th style="text-align: center;">Editar</th>
-                <th style="text-align: center;">Excluir</th>
-            </tr>
-            </thead>
-            <tbody>
-                    <tr *ngFor="let morador of paginacaoMoradores">
-                                <td style="text-align: center;">{{morador.id}}</td>
-                                <td>{{morador.nome}}</td>
-                                <td style="text-align: center;">{{morador.bloco}}</td>
-                                <td style="text-align: center;">{{morador.num}}</td>
-                                <!--<td style="text-align: center;">{{morador.ramal}}</td>-->
-                                <td style="text-align: center;"><button type="button" class="btn btn-sm btn-warning"(click)="alterar(morador)"><mat-icon class="icone">build</mat-icon></button></td>
-                                <td style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(morador)"><mat-icon class="icone">delete</mat-icon></button></td>
+        <div class="container" *ngIf="moradores?.length">
+            <table class="table table-responsive-sm table-hover" style="margin-top:20px;">
+                <thead class="thead-dark">
+                    <tr>
+                        <th style="text-align: center;">ID</th>
+                        <th style="text-align: center;">Nome</th>
+                        <th style="text-align: center;">Bloco</th>
+                        <th style="text-align: center;">Número</th>
+                        <!--<th style="text-align: center;">Ramal</th>-->
+                        <th style="text-align: center;">Editar</th>
+                        <th style="text-align: center;">Excluir</th>
                     </tr>
-                       
-            </tbody>
-        </table>
-        <table class="table table-hover" *ngIf="!moradores?.length">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <!--<th>Ramal</th>-->
-                </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let morador of paginacaoMoradores">
+                        <td style="text-align: center;">{{morador.id}}</td>
+                        <td>{{morador.nome}}</td>
+                        <td style="text-align: center;">{{morador.bloco}}</td>
+                        <td style="text-align: center;">{{morador.num}}</td>
+                        <!--<td style="text-align: center;">{{morador.ramal}}</td>-->
+                        <td style="text-align: center;"><button type="button" class="btn btn-sm btn-warning"(click)="alterar(morador)"><mat-icon class="icone">build</mat-icon></button></td>
+                        <td style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(morador)"><mat-icon class="icone">delete</mat-icon></button></td>
+                    </tr>   
+                </tbody>
+            </table>
+            <mat-paginator [length]="this.moradores.length" [pageSize]="20" (page)="onPageChange($event)"> 
+            </mat-paginator>
+        </div>
+        <div class="container">
+            <table class="table table-hover" *ngIf="!moradores?.length">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <!--<th>Ramal</th>-->
+                    </tr>
                 </thead>
             </table>
-            <p *ngIf="!moradores?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+            <div>
+                <p *ngIf="!moradores?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+            </div>
+        </div>
     </div>
 </div>
 

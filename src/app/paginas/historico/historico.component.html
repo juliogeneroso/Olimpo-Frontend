@@ -10,62 +10,64 @@
         </mat-form-field>
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">   
-        <div *ngIf="controlePessoasEntrada?.length">
-        <table class="table table-responsive-sm table-hover">
-        <thead class="thead-dark">
-            <tr>
-                <th>Nome</th>
-                <th>Tipo</th>
-                <th>Bloco</th>
-                <th>Número</th>
-                <th>Data</th>
-                <th>Hora</th>
-            </tr>
-            </thead>           
-            <tbody>
-                <tr *ngFor="let entrada of paginacaoPessoasEntrada">
-                    <td>{{entrada.nome}}</td>
-                    <td>{{entrada.tipo}}</td>
-                    <td>{{entrada.bloco}}</td>
-                    <td>{{entrada.num}}</td>
-                    <td>{{entrada.dia | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{entrada.hora}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <mat-paginator [length]="this.controlePessoasEntrada.length"
-                    [pageSize]="20"
-                    (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>
+        <div *ngIf="controlePessoasEntrada?.length" class="container">
+            <table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                    </tr>
+                </thead>           
+                <tbody>
+                    <tr *ngFor="let entrada of paginacaoPessoasEntrada">
+                        <td>{{entrada.nome}}</td>
+                        <td>{{entrada.tipo}}</td>
+                        <td>{{entrada.bloco}}</td>
+                        <td>{{entrada.num}}</td>
+                        <td>{{entrada.dia | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{entrada.hora}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <mat-paginator [length]="this.controlePessoasEntrada.length"
+                        [pageSize]="20"
+                        (page)="onPageChange($event, selectedTipo)">
+            </mat-paginator>
         </div>  
-        <table class="table table-hover" *ngIf="!controlePessoasEntrada?.length">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                </tr>
-            </thead>
-        </table>       
-        
-        <p *ngIf="!controlePessoasEntrada?.length" class="vazio">Não existem registros de entregas pendentes!</p>
-                
+        <div class="container">
+            <table class="table table-hover" *ngIf="!controlePessoasEntrada?.length">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                    </tr>
+                </thead>
+            </table>
+            <div>       
+                <p *ngIf="!controlePessoasEntrada?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+            </div>
+        </div>   
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Saidas'" style="width: 100%;">
-        <div *ngIf="controlePessoasSaida?.length">
-        <table class="table table-responsive-sm table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                </tr>
+        <div *ngIf="controlePessoasSaida?.length" class="container">
+            <table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let saida of paginacaoPessoasSaida">
@@ -81,8 +83,9 @@
             <mat-paginator [length]="this.controlePessoasSaida.length"
                     [pageSize]="20"
                     (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>
+            </mat-paginator>
         </div>
+        <div class="container">
             <table class="table table-hover" *ngIf="!controlePessoasSaida?.length">
                 <thead class="thead-dark">
                     <tr>
@@ -95,21 +98,23 @@
                     </tr>
                 </thead>
             </table>        
-                        
-            <p *ngIf="!controlePessoasSaida?.length" class="vazio">Não existem registros de entregas pendentes!</p>
-                                
+            <div>           
+                <p *ngIf="!controlePessoasSaida?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+            </div>
+        </div>                        
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Pendentes'" style="width: 100%;">    
-        <div *ngIf="controleEntregasPendentes?.length">        <table class="table table-responsive-sm table-hover">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <th>Observação</th>
-                    <th>Entregar</th>
-                </tr>
+        <div *ngIf="controleEntregasPendentes?.length" class="container">       
+            <table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <th>Observação</th>
+                        <th>Entregar</th>
+                    </tr>
                 </thead>
                 <tbody>
                     <tr *ngFor="let pendentes of paginacaoEntregasPendentes">
@@ -124,11 +129,11 @@
                 </tbody>
             </table>
             <mat-paginator [length]="this.controleEntregasPendentes.length"
-         [pageSize]="20"
-            (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>
+                [pageSize]="20"
+                (page)="onPageChange($event, selectedTipo)">
+            </mat-paginator>
         </div>
-
+        <div class="container">
             <table class="table table-hover" *ngIf="!controleEntregasPendentes?.length">
                 <thead class="thead-dark">
                     <tr>
@@ -140,58 +145,62 @@
                     </tr>
                 </thead>
             </table>       
-                        
-            <p *ngIf="!controleEntregasPendentes?.length" class="vazio">Não existem registros de entregas pendentes!</p>
-                                
+             <div>           
+                <p *ngIf="!controleEntregasPendentes?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+            </div>
+        </div>                        
     </div>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entregas Realizadas'" style="width: 100%;">    
-    <table class="table table-responsive-sm table-hover" *ngIf="controleEntregasConcluidas?.length">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Tipo</th>
-                <th>Bloco</th>
-                <th>Número</th>
-                <th>Observação</th>
-                <th>Data</th>
-                <th>Hora</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let concluidas of paginacaoEntregasConcluidas">
-                    <td>{{concluidas.id}}</td>
-                    <td>{{concluidas.viewValue}}</td>
-                    <td>{{concluidas.bloco}}</td>
-                    <td>{{concluidas.num}}</td>
-                    <td *ngIf="concluidas.obs">{{concluidas.obs}}</td>
-                    <td *ngIf="!concluidas.obs">Sem observação registrada!</td>
-                    <td>{{concluidas.dia | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{concluidas.hora}}</td>
-                </tr>
-            </tbody>
-        </table>
-        <mat-paginator [length]="this.controleEntregasConcluidas.length"
-                    [pageSize]="20"
-                    (page)="onPageChange($event, selectedTipo)">
-        </mat-paginator>
-        <table class="table table-responsive-sm table-hover" *ngIf="!controleEntregasConcluidas?.length">
-            <thead class="thead-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Bloco</th>
-                    <th>Número</th>
-                    <th>Observação</th>
-                    <th>Data</th>
-                    <th>Hora</th>
-                </tr>
-            </thead>
-        </table>        
-                    
-        <p *ngIf="!controleEntregasConcluidas?.length" class="vazio">Não existem registros de entregas pendentes!</p>
-                    
-                
-            
+        <div *ngIf="controleEntregasConcluidas?.length" class="container">
+            <table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <th>Observação</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let concluidas of paginacaoEntregasConcluidas">
+                        <td>{{concluidas.id}}</td>
+                        <td>{{concluidas.viewValue}}</td>
+                        <td>{{concluidas.bloco}}</td>
+                        <td>{{concluidas.num}}</td>
+                        <td *ngIf="concluidas.obs">{{concluidas.obs}}</td>
+                        <td *ngIf="!concluidas.obs">Sem observação registrada!</td>
+                        <td>{{concluidas.dia | date: 'dd/MM/yyyy'}}</td>
+                        <td>{{concluidas.hora}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <mat-paginator [length]="this.controleEntregasConcluidas.length"
+                        [pageSize]="20"
+                        (page)="onPageChange($event, selectedTipo)">
+            </mat-paginator>
+        </div>
+        <div class="container">
+            <table class="table table-responsive-sm table-hover" *ngIf="!controleEntregasConcluidas?.length">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Bloco</th>
+                        <th>Número</th>
+                        <th>Observação</th>
+                        <th>Data</th>
+                        <th>Hora</th>
+                    </tr>
+                </thead>
+            </table>        
+            <div>          
+                <p *ngIf="!controleEntregasConcluidas?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+            </div>
+        </div>   
+    </div>               
 </div>
 
