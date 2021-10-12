@@ -84,7 +84,7 @@ export class ConexaoService {
       resposta = data
     })
     .catch(erro => {
-      return erro;
+      return Promise.reject();
     });
     //inserir tratamento de erro aqui;
     console.log(resposta);
@@ -101,7 +101,7 @@ export class ConexaoService {
       resposta = data
     })
     .catch(erro => {
-      return erro;
+      return Promise.reject();
     });
     //inserir tratamento de erro aqui;
     return resposta;
@@ -118,7 +118,7 @@ export class ConexaoService {
       resposta = data
     })
     .catch(erro => {
-      return erro;
+      return Promise.reject();
     });
     //Inserer tratamento de erro aqui.
     return resposta;
@@ -136,7 +136,7 @@ export class ConexaoService {
       resposta = data
     })
     .catch(erro => {
-      return erro;
+      return Promise.reject();
     });
     //console.log(resposta);
     //Inserer tratamento de erro aqui.
@@ -153,7 +153,7 @@ export class ConexaoService {
       resposta = data;
     })
     .catch(erro => {
-      return erro;
+      return Promise.reject();
     })
     console.log(resposta);
     //Inserir tratamento de erro aqui
@@ -170,7 +170,7 @@ export class ConexaoService {
       resposta = data;
     })
     .catch(erro => {
-      erro = erro;
+      return Promise.reject();
     })
     return resposta;
   }

@@ -7,7 +7,7 @@
             <div class="col-sm-6">
               <div mat-subheader>
                 ENTRADA
-              </div>
+              </div> 
                 <form [formGroup]="EntrarForm">
                     <mat-list-item class="full">
                       <div mat-line class="full">
@@ -46,6 +46,7 @@
                             <input matInput type="number" name="number" formControlName="num" pattern="^[1-9][0-9]?[0-9]?" required/>
                         </mat-form-field>
                       </div>
+                      <app-speech-to-text class="center"></app-speech-to-text>
                       <div mat-line class="wdt center semifull">
                         <button mat-raised-button color="accent" [disabled]="!EntrarForm.valid" (click)="onSubmitEntrada()">
                           ENTRAR
@@ -148,3 +149,4 @@
     </mat-tab>
   </mat-tab-group>
 </div>
+

@@ -31,6 +31,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ConexaoService } from './service/conexao.service';
+import { VoiceRecognitionService } from './service/voice.service';
 import { HistoricoComponent } from './paginas/historico/historico.component';
 import { CadastroComponent } from './paginas/cadastro/cadastro.component';
 import { SalvoComponent } from './avisos/salvo/salvo.component';
@@ -40,6 +41,7 @@ import { AlteradoComponent } from './avisos/alterado/alterado.component';
 import { ErroComponent } from './avisos/erro/erro.component';
 import { AlterarComponent } from './paginas/alterar/alterar.component';
 import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
+import { SpeechToTextComponent } from './capturavoz/capturavoz.component';
 
 
 
@@ -58,7 +60,8 @@ import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
     AlteradoComponent,
     ErroComponent,
     AlterarComponent,
-    JaCadastrado
+    JaCadastrado,
+    SpeechToTextComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +89,7 @@ import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [FormBuilder,ConexaoService,MatSnackBar],
+  providers: [FormBuilder,ConexaoService,MatSnackBar,VoiceRecognitionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
