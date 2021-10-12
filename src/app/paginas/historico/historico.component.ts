@@ -5,7 +5,7 @@ import { ControleEntradaSaida, controleEntregasConcluidas, EntregaPendenteCadast
 import { PageEvent } from '@angular/material/paginator';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { ErroComponent } from '../../avisos/erro/erro.component';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import  {MatSnackBar } from '@angular/material/snack-bar';
 
 interface Tipo {
   value: string;

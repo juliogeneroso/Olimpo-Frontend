@@ -27,7 +27,8 @@
                           <mat-label>
                             Nome Completo
                           </mat-label>
-                            <input matInput type="text" name="nome" formControlName="nome" minlength="5" maxlength="50" required/>
+                            <input matInput type="text" name="nome" id="nome"  [ngModel]="voiceService.text" formControlName="nome" minlength="5" maxlength="50" required/>
+                            <button style="border: none;background-color: #fafafa;"><mat-icon (click)="startService()">mic</mat-icon></button>
                         </mat-form-field>
                       </div>
                       <div mat-line class="full">
@@ -46,7 +47,6 @@
                             <input matInput type="number" name="number" formControlName="num" pattern="^[1-9][0-9]?[0-9]?" required/>
                         </mat-form-field>
                       </div>
-                      <app-speech-to-text class="center"></app-speech-to-text>
                       <div mat-line class="wdt center semifull">
                         <button mat-raised-button color="accent" [disabled]="!EntrarForm.valid" (click)="onSubmitEntrada()">
                           ENTRAR
@@ -103,7 +103,8 @@
                     <div mat-line>
                       <mat-form-field appearance="" class="block wdt semifull">
                         <mat-label>Nome Completo</mat-label>
-                          <input matInput type="text" name="nome" formControlName="nome" minlength="5" maxlength="50" required/>
+                          <input matInput type="text" name="nome" id="nome"  [ngModel]="voiceService.text" formControlName="nome" minlength="5" maxlength="50" required/>
+                          <button style="border: none;background-color: #fafafa;"><mat-icon (click)="startService()">mic</mat-icon></button>
                       </mat-form-field>
                     </div>
                     <div mat-line class="full">

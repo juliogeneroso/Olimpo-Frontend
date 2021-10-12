@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, Input, EventEmitter } from '@angular/core';
 
 
 declare var webkitSpeechRecognition: any;
@@ -11,8 +11,9 @@ export class VoiceRecognitionService {
   recognition =  new webkitSpeechRecognition();
   isStoppedSpeechRecog = false;
   public text = '';
+  @Input()  nome = "";
+  @Output() textChange = new EventEmitter();
   tempWords;
-  public contador:number;
 
   constructor() { }
 
@@ -51,6 +52,7 @@ export class VoiceRecognitionService {
   stop() {
     this.isStoppedSpeechRecog = true;
     //this.wordConcat()
+    this.onNameChange();
     this.recognition.stop();
     console.log("End speech recognition")
   }
@@ -66,5 +68,11 @@ export class VoiceRecognitionService {
 
   delete(){
     this.text = '';
+  }
+  pegarPalavra(){
+    return this.text;
+  }
+  onNameChange(){
+    this.textChange.emit(this.text);  
   }
 }

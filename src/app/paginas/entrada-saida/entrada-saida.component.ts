@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConexaoService } from '../../service/conexao.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { ErroComponent } from '../../avisos/erro/erro.component';
+import { VoiceRecognitionService } from '../../service/voice.service';
 
 
 
@@ -11,21 +12,22 @@ interface Tipo {
   value: string;
   viewValue: string;
 }
-
-
 @Component({
   selector: 'app-entrada-saida',
   templateUrl: './entrada-saida.component.html',
-  styleUrls: ['./entrada-saida.component.css']
+  styleUrls: ['./entrada-saida.component.css'],
+  providers:[VoiceRecognitionService]
 })
 export class EntradaSaidaComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar){}
+  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar,public voiceService:VoiceRecognitionService){ this.voiceService.init()}
 
   durationInSeconds = 5;
   imagePath = "/assets/load.gif";
   carregandoEntrada:boolean = false;
   carregandoSaida:boolean = false;
+
+  public microfone:boolean = false;
 
   //Entrada
   EntrarForm = this.formBuilder.group({
@@ -93,33 +95,61 @@ export class EntradaSaidaComponent implements OnInit {
     this.SaidaForm.reset();  
   }
 
+   startService(){
+    if(this.microfone){
+      this.microfone=false;
+      this.stopService();
+    } else {
+     this.microfone=true;
+     this.voiceService.start();
+    }
+  }
+  stopService(){
+    this.voiceService.stop()
+  }
+  deleteService(){
+    this.voiceService.delete();
+  }
+
    onSubmitEntrada(){
+      console.log(this.EntrarForm);
       this.carregandoEntrada = true;
       this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
-      this.conexao.entrada(this.EntrarForm).then(() => {
+      this.conexao.entrada(this.EntrarForm)
+      .then(() => {
       this.entradas.push(this.EntrarForm.value['tipo']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['num']+"º"+" ) - "+this.EntrarForm.value['nome']);
       this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
-      }).then(() => {
+      })
+      .then(() => {
       this.openSnackBar();
       this.carregandoEntrada=false
-      }).catch(() => {
+      })
+      .then(()=>{
+          this.EntrarForm.reset();
+      })
+      .catch(() => {
       this.erroSnackBarEntrada()});
   }
 
   onSubmitSaida(){
+    console.log(this.SaidaForm);
     this.carregandoSaida = true;
     this.SaidaForm.value.bloco = this.SaidaForm.value.bloco.toUpperCase(); 
-    this.conexao.saida(this.SaidaForm).then(() => {
+    this.conexao.saida(this.SaidaForm)
+    .then(() => {
     this.saidas.push(this.SaidaForm.value['tipo']+" ( "+"Bloco "+this.SaidaForm.value['bloco'].toUpperCase()+" AP "+this.SaidaForm.value['num']+"º"+" ) - "+this.SaidaForm.value['nome']);
     this.ultimaSaida = this.saidas.slice().reverse().slice(0,4);
-    }).then(() => {
+    })
+    .then(() => {
     this.openSnackBar();
     this.carregandoSaida=false;
-    }).catch(() => {
+    })
+    .then(()=>{
+      this.SaidaForm.reset();
+    })
+    .catch(() => {
     this.erroSnackBarSaida()});;
   } 
-  
-
 }
 
  
