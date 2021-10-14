@@ -41,6 +41,8 @@ import { AlteradoComponent } from './avisos/alterado/alterado.component';
 import { ErroComponent } from './avisos/erro/erro.component';
 import { AlterarComponent } from './paginas/alterar/alterar.component';
 import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
+import { EntradaComponent } from './paginas/entrada-saida/entrada/entrada.component';
+import { SaidaComponent } from './paginas/entrada-saida/saida/saida.component';
 
 
 
@@ -60,7 +62,9 @@ import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
     AlteradoComponent,
     ErroComponent,
     AlterarComponent,
-    JaCadastrado
+    JaCadastrado,
+    EntradaComponent,
+    SaidaComponent
   ],
   imports: [
     BrowserModule,
