@@ -1,3 +1,5 @@
+import { ThisReceiver } from '@angular/compiler';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Injectable, Output, Input, EventEmitter } from '@angular/core';
 
 
@@ -11,9 +13,9 @@ export class VoiceRecognitionService {
   recognition =  new webkitSpeechRecognition();
   isStoppedSpeechRecog = false;
   public text = '';
-  @Input()  nome = "";
-  @Output() textChange = new EventEmitter();
   tempWords;
+  estilo;
+  microfone;
 
   constructor() { }
 
@@ -33,6 +35,8 @@ export class VoiceRecognitionService {
   }
 
   start() {
+    this.microfone = true;
+    this.estilo = {'color':'#006400'};
     this.text='';
     this.isStoppedSpeechRecog = false;
     this.recognition.start();
@@ -45,14 +49,13 @@ export class VoiceRecognitionService {
       } else {
         this.wordConcat();
         this.stop();
-        //this.recognition.stop();
       }
     });
   }
   stop() {
+    this.microfone=false;
+    this.estilo = {'color':'black'};
     this.isStoppedSpeechRecog = true;
-    //this.wordConcat()
-    this.onNameChange();
     this.recognition.stop();
     console.log("End speech recognition")
   }
@@ -68,11 +71,5 @@ export class VoiceRecognitionService {
 
   delete(){
     this.text = '';
-  }
-  pegarPalavra(){
-    return this.text;
-  }
-  onNameChange(){
-    this.textChange.emit(this.text);  
   }
 }

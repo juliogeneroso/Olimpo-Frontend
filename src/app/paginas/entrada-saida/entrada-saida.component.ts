@@ -1,11 +1,10 @@
-import { Component, OnInit,ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConexaoService } from '../../service/conexao.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { ErroComponent } from '../../avisos/erro/erro.component';
 import { VoiceRecognitionService } from '../../service/voice.service';
-
 
 
 interface Tipo {
@@ -96,21 +95,17 @@ export class EntradaSaidaComponent implements OnInit {
   }
 
    startService(){
-    if(this.microfone){
-      this.microfone=false;
+    if(this.voiceService.microfone){
       this.stopService();
     } else {
-     this.microfone=true;
-     this.voiceService.start();
+      this.voiceService.start();
     }
   }
+
   stopService(){
     this.voiceService.stop()
   }
-  deleteService(){
-    this.voiceService.delete();
-  }
-
+  
    onSubmitEntrada(){
       console.log(this.EntrarForm);
       this.carregandoEntrada = true;

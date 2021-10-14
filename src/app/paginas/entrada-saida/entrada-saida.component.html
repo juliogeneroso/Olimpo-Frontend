@@ -28,7 +28,7 @@
                             Nome Completo
                           </mat-label>
                             <input matInput type="text" name="nome" id="nome"  [ngModel]="voiceService.text" formControlName="nome" minlength="5" maxlength="50" required/>
-                            <button style="border: none;background-color: #fafafa;"><mat-icon (click)="startService()">mic</mat-icon></button>
+                            <button [ngStyle]="voiceService.estilo" style="border: none;background-color: #fafafa;"><mat-icon  (click)="startService()">mic</mat-icon></button>
                         </mat-form-field>
                       </div>
                       <div mat-line class="full">
@@ -103,8 +103,8 @@
                     <div mat-line>
                       <mat-form-field appearance="" class="block wdt semifull">
                         <mat-label>Nome Completo</mat-label>
-                          <input matInput type="text" name="nome" id="nome"  [ngModel]="voiceService.text" formControlName="nome" minlength="5" maxlength="50" required/>
-                          <button style="border: none;background-color: #fafafa;"><mat-icon (click)="startService()">mic</mat-icon></button>
+                           <input matInput type="text" name="nome" id="nome" [(ngModel)]="voiceService.text" formControlName="nome" minlength="5" maxlength="50" required/>
+                           <button style="border: none;background-color: #fafafa;"><mat-icon (click)="startService()">mic</mat-icon></button>
                       </mat-form-field>
                     </div>
                     <div mat-line class="full">
