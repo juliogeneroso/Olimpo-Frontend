@@ -90,7 +90,7 @@ export class ConexaoService {
     console.log(resposta);
     return resposta;
   }
-
+  
   async saida(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/registro/saida`;

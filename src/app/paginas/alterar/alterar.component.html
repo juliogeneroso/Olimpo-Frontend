@@ -5,20 +5,20 @@
             <mat-list-item class="full">
                 <div mat-line>
                     <mat-form-field appearance="" class="block wdt semifull campocadastro">
-                        <mat-label>{{this.nome}}</mat-label>
-                        <input matInput type="text" name="nome" formControlName="nome"  minlength="4" maxlength="50" required>
+                        <mat-label>Nome</mat-label>
+                        <input matInput type="text" name="nome" [(ngModel)]="this.nome" formControlName="nome"  minlength="4" maxlength="50" required>
                     </mat-form-field>
                 </div>
                 <div mat-line class="full">
                     <mat-form-field class="block wdt semifull campocadastro">
-                        <mat-label>{{this.bloco}}</mat-label>
-                        <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]"  required>
+                        <mat-label>Bloco</mat-label>
+                        <input matInput type="text" name="bloco" [(ngModel)]="this.bloco" formControlName="bloco" pattern="^[a-zA-Z]"  required>
                     </mat-form-field>
                 </div>
                 <div mat-line>
                     <mat-form-field class="block wdt semifull campocadastro">
-                        <mat-label>{{this.num}}</mat-label>
-                        <input matInput type="number" name="number" formControlName="num" pattern="^[1-9][0-9]{0,1}" required>
+                        <mat-label>Número</mat-label>
+                        <input matInput type="number" name="number" [(ngModel)]="this.num" formControlName="num" pattern="^[1-9][0-9]{0,2}" required>
                     </mat-form-field>
                 </div>
                <!--<div mat-line>

@@ -26,10 +26,12 @@
                           Nome Completo
                         </mat-label>
                           <input matInput type="text" name="nome" id="nome"  [(ngModel)]="voiceService.text" formControlName="nome" minlength="5" maxlength="50" required/>
-                          <button [ngStyle]="voiceService.estilo" style="border: none;background-color: #fafafa;"><mat-icon  (click)="startService()">mic</mat-icon></button>
+                          <button *ngIf="botaoMicrofone" [ngStyle]="voiceService.estilo" style="border: none;background-color: #fafafa;"><mat-icon (click)="startService()">mic</mat-icon></button>
+                          <button *ngIf="!botaoMicrofone" style="border: none;background-color: #a3a1a1; border-radius: 15px;" (click)="startService()" disabled><mat-icon>mic</mat-icon></button>
+                          <!--Tirar os buttons de dentro do input sem causar erro de estilo e arrumar o mat-icon, reitrando (click) para o botão-->
                       </mat-form-field>
                     </div>
-                    <div mat-line class="full">
+                    <div mat-line class="full"> 
                       <mat-form-field class="block wdt semifull">
                         <mat-label>
                           Bloco (A-Z)

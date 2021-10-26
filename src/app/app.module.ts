@@ -43,8 +43,8 @@ import { AlterarComponent } from './paginas/alterar/alterar.component';
 import { JaCadastrado } from './avisos/jaCadastrado/jaCadastrado.component';
 import { EntradaComponent } from './paginas/entrada-saida/entrada/entrada.component';
 import { SaidaComponent } from './paginas/entrada-saida/saida/saida.component';
-
-
+import { EntradaTempComponent } from './paginas/entrada-saida/entrada-temp/entrada-temp.component';
+import { TempService } from './service/temp.service';
 
 
 @NgModule({
@@ -64,7 +64,8 @@ import { SaidaComponent } from './paginas/entrada-saida/saida/saida.component';
     AlterarComponent,
     JaCadastrado,
     EntradaComponent,
-    SaidaComponent
+    SaidaComponent,
+    EntradaTempComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +93,7 @@ import { SaidaComponent } from './paginas/entrada-saida/saida/saida.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [FormBuilder,ConexaoService,MatSnackBar,VoiceRecognitionService],
+  providers: [FormBuilder,ConexaoService,MatSnackBar,VoiceRecognitionService,TempService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

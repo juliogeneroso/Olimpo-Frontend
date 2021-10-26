@@ -5,6 +5,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { SalvoComponent } from '../../../avisos/salvo/salvo.component';
 import { ErroComponent } from '../../../avisos/erro/erro.component';
 import { VoiceRecognitionService } from '../../../service/voice.service';
+import { TempService } from 'src/app/service/temp.service';
+import { Formulario } from 'src/app/service/conexao.model';
 
 
 interface Tipo {
@@ -15,16 +17,22 @@ interface Tipo {
   selector: 'app-entrada',
   templateUrl: './entrada.component.html',
   styleUrls: ['./entrada.component.css'],
-  providers:[VoiceRecognitionService]
+  providers:[VoiceRecognitionService,TempService]
 })
 export class EntradaComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar,public voiceService:VoiceRecognitionService){ this.voiceService.init()}
+  public botaoMicrofone: boolean = true;
+
+  constructor(private formBuilder: FormBuilder,private conexao:ConexaoService,private snackBar: MatSnackBar,public voiceService:VoiceRecognitionService, public temp: TempService){ 
+    this.voiceService.init()
+    this.botaoMicrofone = true;
+  }
 
   durationInSeconds = 5;
   imagePath = "/assets/load.gif";
   carregandoEntrada:boolean = false;
   carregandoSaida:boolean = false;
+  
 
   public microfone:boolean = false;
 
@@ -49,8 +57,10 @@ export class EntradaComponent implements OnInit {
   ultimaEntrada = [];
 
   ngOnInit(): void {
+    if (!navigator.onLine) {
+    this.botaoMicrofone = false;
+    }
   }
-
   openSnackBar() {
     this.snackBar.openFromComponent(SalvoComponent, {
       duration: this.durationInSeconds * 500,
@@ -86,7 +96,10 @@ export class EntradaComponent implements OnInit {
   }
   
    onSubmitEntrada(){
-      console.log(this.EntrarForm);
+      let v :Formulario = this.EntrarForm.value; 
+      //console.log(v);
+      TempService.novaEntrada.emit(v);
+      //console.log(this.EntrarForm);
       this.carregandoEntrada = true;
       this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
       this.conexao.entrada(this.EntrarForm)
