@@ -17,7 +17,9 @@ export class TempService {
   }
 
     coletaRegistro(){
-      return this.entradaTemp;
+      if(this.entradaTemp){
+        return this.entradaTemp;
+      }
     }
     
     entrada(temp:Formulario){

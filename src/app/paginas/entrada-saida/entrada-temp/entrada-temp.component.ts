@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, AfterViewInit } from '@angular/core';
 import { Formulario } from 'src/app/service/conexao.model';
 import { TempService } from 'src/app/service/temp.service';
 
@@ -8,7 +8,7 @@ import { TempService } from 'src/app/service/temp.service';
   styleUrls: ['./entrada-temp.component.css'],
   providers: [TempService]
 })
-export class EntradaTempComponent implements OnInit {
+export class EntradaTempComponent implements OnInit,AfterViewInit,OnDestroy {
 
   public entradaTemporaria = new Array<Formulario>();
 
@@ -17,15 +17,23 @@ export class EntradaTempComponent implements OnInit {
    }
 
   ngOnInit(){
-    this.entradaTemporaria = this.temp.coletaRegistro();  
+   
+      this.entradaTemporaria = this.temp.coletaRegistro(); 
+   /* TempService.novaEntrada.subscribe(incluir => {
+      this.entradaTemporaria.push(incluir),
+      console.log(this.entradaTemporaria);
+    }); */// ERRO AQUI
+  }
 
+  ngAfterViewInit(){
     TempService.novaEntrada.subscribe(incluir => {
       this.entradaTemporaria.push(incluir),
       console.log(this.entradaTemporaria);
     });
-  }
 
+  }
   ngOnDestroy(){
     TempService.novaEntrada.unsubscribe();
   }
+
 }

@@ -4,7 +4,31 @@
     VALIDACAO DE NOME --- ok
     ADICIONAR TABELA DE ENTRADA E SAIDA ----ok 
 -->
+Objetivos para concluir do Olimpo:
 
+Tratamento de erros .  --- Falta verificar erros do alterar, excluir e tabela!!!!!!!!!!!!!!!!!!!! -- ok
+Modal ao excluir dados . -- Mudança para rota com de admin
+consulta se � morador na entrada de pessoas e servi�os. -- Ainda n
+gerar id para morador . -- ok
+arrumar put and delete node. -- ok
+tela de login para porteiro com senha. 
+pagina��o ao exibir - criar filtro por blocos/nomes/ramal. -- back pronto, falta front
+evitar colis�o de entrada. -- ok
+Ajustar tela de noticias.
+
+
+
+Criar um auth guard 
+Mudar tratamento de dados ao editar morador. 
+ajustar design de entrada.
+
+Criar component de log de servi�o no NODE.
+
+
+Criar vers�o morador --><
+
+
+Futuramente - crach� de entrada.
 
 Arrumar a parte de entregas. -- ok
 Adicionr limite de dropcard = 5, passando de 5, exclui o ultimo. // Mudar para modal -- table de MAx=5 Bootstrap -- Não ok, mas resolvido.
@@ -12,20 +36,36 @@ adicionar componente de histórico.  -- ok
 Ligar ao MongoDB. -- Ligado ao Mysql -- ok
 Criar model de pessoas e entregas. -- ok
 Criar service de integração. -- ok
-Consulta para evitar duplicidade. -- No
+Consulta para evitar duplicidade. -- ok
 implementar noticias. -- No
 
 Próximos objetivos
 
-Consulta para evitar duplicidade. 
+Consulta para evitar duplicidade. ok
 
 implementar noticias.
 implementar lista de moradores.  -- ok
 implementar cadastro de moradores.-- ok
-implementar paginação Angular Material e Bootstrap.
-implementar alerta de erro com temporizador. -- No
+implementar paginação Angular Material e Bootstrap. -- ok
+implementar alerta de erro com temporizador. -- ok
 implementar alteração de cadastros do morador e exclusão de dados em tabelas. -- ok
 implementar consulta de residente.
 
-Consulta para evitar duplicidade. -- No
+Consulta para evitar duplicidade. -- ok
 implementar noticias. -- No
+
+
+25/10/2021 - Próximos objetivos. 
+
+[ ] Montar saida da visitantes e serviço pelo espaço temporário.
+[ ] Cores diferentes para visitantes e serviços. 
+[ ] implementar filtro. 
+[ ] implementar rota de login com autenticaçao
+[ ] implementar log de uso para porteiros
+[ ] implementar rotas extras para sindicos
+[ ] implementar controle de rotas. 
+[ ] implementar funcionalidade de backup. 
+[ ] implementar noticias e consulta de pagamentos. 
+[ ] criar componente de reserva de espaço. 
+[ ] mudar design.
+[ ] criar componente de ordem de serviço.  
