@@ -72,13 +72,7 @@ export class EntradaComponent implements OnInit {
       duration: this.durationInSeconds * 500,
     });
   }
-  erroSnackBarSaida() {
-    this.carregandoSaida=false;
-    this.snackBar.openFromComponent(ErroComponent, {
-      duration: this.durationInSeconds * 500,
-    });
-  }
-
+  
   limparCampoEntrada(){
     this.EntrarForm.reset();  
   }
@@ -96,23 +90,28 @@ export class EntradaComponent implements OnInit {
   }
   
    onSubmitEntrada(){
-      let v :Formulario = this.EntrarForm.value; 
-      //console.log(v);
-      TempService.novaEntrada.emit(v);
-      //console.log(this.EntrarForm);
       this.carregandoEntrada = true;
       this.EntrarForm.value.bloco = this.EntrarForm.value.bloco.toUpperCase(); 
-      this.conexao.entrada(this.EntrarForm)
+      this.conexao.entrada(this.EntrarForm.value)
       .then(() => {
       this.entradas.push(this.EntrarForm.value['tipo']+" ( "+"Bloco "+this.EntrarForm.value['bloco'].toUpperCase()+" AP "+this.EntrarForm.value['num']+"º"+" ) - "+this.EntrarForm.value['nome']);
       this.ultimaEntrada = this.entradas.slice().reverse().slice(0,4);
+      }).then(() => {
+        if(this.EntrarForm.value['tipo']=="Serviços"){
+          let v :Formulario = this.EntrarForm.value;
+          this.conexao.entradaTemporaria(v).then(()=>{
+            this.temp.entrada(v);
+          }).catch(()=>{
+            this.erroSnackBarEntrada();
+          });
+        }
       })
       .then(() => {
       this.openSnackBar();
       this.carregandoEntrada=false
       })
       .then(()=>{
-          this.EntrarForm.reset();
+          //this.EntrarForm.reset();
       })
       .catch(() => {
       this.erroSnackBarEntrada()});

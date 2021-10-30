@@ -54,6 +54,11 @@ export class ConexaoService {
     return this.http.get<ResidentesItem>(caminho);
   }
 
+  getEntradaTemp():Observable<Formulario>{
+    let caminho = `${this.baseUrl}/temporaria/entrada`;
+    return this.http.get<Formulario>(caminho);
+  }
+
   async cadastro(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/cadastro/residente`;
@@ -75,7 +80,7 @@ export class ConexaoService {
   }
 
   async entrada(form){
-    let formulario:Formulario = form.value;
+    let formulario:Formulario = form;
     let caminho = `${this.baseUrl}/registro/entrada`;
     let resposta;
 
@@ -90,9 +95,43 @@ export class ConexaoService {
     console.log(resposta);
     return resposta;
   }
+
+  async entradaTemporaria(form){
+    let formulario:Formulario = form;
+    let caminho = `${this.baseUrl}/registro/entradas/temporarias`;
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
+    });
+    //inserir tratamento de erro aqui;
+    console.log(resposta);
+    return resposta;
+  }
+
+  async tempSaida(form){
+    let formulario:Formulario = form;
+    let caminho = `${this.baseUrl}/registro/entradas/temporarias/sair`;
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
+  }
   
   async saida(form){
-    let formulario:Formulario = form.value;
+    let formulario:Formulario = form;
     let caminho = `${this.baseUrl}/registro/saida`;
     let resposta;
 

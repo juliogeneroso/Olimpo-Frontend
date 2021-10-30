@@ -1,3 +1,14 @@
-<div *ngFor="let temp of entradaTemporaria">
-    <mat-card><p>{{temp.num}}</p></mat-card>
+<div class="pagina-temporaria">
+    <div class="titulo">
+        <p>Entradas Temporárias de Serviços:</p>
+    </div>
+    <div *ngFor="let temp of entradaTemporaria" >
+        <div class="area-card">
+            <mat-card class="card">
+                <P>{{temp.tipo}}</P>
+                <p>Nome: {{temp.nome}} /Bloco: {{temp.bloco}} /Número: {{temp.num}}</p>
+                <button type="button" (click)="sair_temp(temp)" class="btn btn-outline-danger btn-sm"><mat-icon>exit_to_app</mat-icon></button>
+            </mat-card>
+        </div> 
+    </div>
 </div>
