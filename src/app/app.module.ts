@@ -45,6 +45,7 @@ import { EntradaComponent } from './paginas/entrada-saida/entrada/entrada.compon
 import { SaidaComponent } from './paginas/entrada-saida/saida/saida.component';
 import { EntradaTempComponent } from './paginas/entrada-saida/entrada-temp/entrada-temp.component';
 import { TempService } from './service/temp.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { TempService } from './service/temp.service';
     JaCadastrado,
     EntradaComponent,
     SaidaComponent,
-    EntradaTempComponent
+    EntradaTempComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

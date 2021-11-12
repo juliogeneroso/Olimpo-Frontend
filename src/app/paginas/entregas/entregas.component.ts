@@ -57,8 +57,6 @@ export class EntregasComponent {
    }else{
      this.observacao = true;
    }
-   console.log(this.observacao);
-
  }
 
  openSnackBar() {

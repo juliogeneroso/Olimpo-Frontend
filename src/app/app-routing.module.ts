@@ -7,17 +7,51 @@ import { HistoricoComponent } from './paginas/historico/historico.component';
 import { ResidentesComponent } from './paginas/residentes/residentes.component';
 import { CadastroComponent } from './paginas/cadastro/cadastro.component';
 import { AlterarComponent } from './paginas/alterar/alterar.component';
+import { LoginComponent } from './login/login.component';
+
 
 
 const routes:Routes = [
-  {path:'entrada_saida',component:EntradaSaidaComponent},
-  {path:'historico',component:HistoricoComponent},
-  {path:'entregas',component: EntregasComponent },
-  {path:'residentes',component:ResidentesComponent},
-  {path:'cadastro',component:CadastroComponent},
-  {path:'comunicados',component:ComunicadosComponent},
-  {path: 'alterar/:id', component: AlterarComponent},
-  {path:'',component:EntradaSaidaComponent}
+  {
+    path:'',
+    component:EntradaSaidaComponent
+  },
+  {
+    path:'login',
+    component:LoginComponent
+  },
+  {
+    path:'entrada_saida',
+    component:EntradaSaidaComponent
+  },
+  {
+    path:'historico',
+    component:HistoricoComponent
+  },
+  {
+    path:'entregas',
+    component: EntregasComponent 
+  },
+  {
+    path:'residentes',
+    component:ResidentesComponent
+  },
+  {
+    path:'cadastro',
+    component:CadastroComponent
+  },
+  {
+    path:'comunicados',
+    component:ComunicadosComponent
+  },
+  {
+    path: 'alterar/:id', 
+    component: AlterarComponent
+  },
+  {
+    path:'**',
+    component:EntradaSaidaComponent
+  }
 ];
 
 @NgModule({

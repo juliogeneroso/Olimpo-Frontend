@@ -220,9 +220,12 @@ export class ConexaoService {
 //app.post('/registro/entregas/concluidas')
 //app.post('/registro/entregas/pendentes')
 
+//app.post('/registro/entradas/temporarias/sair')
+///app.post('registro/entradas/temporarias')
 //app.post('/registro/entrada') -- ok 
 //app.post('/registro/saida') -- ok
 
+//app.get("temporaria/entrada")
 //app.get("/entrada")
 //app.get("/saida")
 //app.get("/entrada/:tipo/:bloco/:num")

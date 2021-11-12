@@ -57,8 +57,7 @@ implementar noticias. -- No
 
 25/10/2021 - Próximos objetivos. 
 
-[ ] Montar saida da visitantes e serviço pelo espaço temporário.
-[ ] Cores diferentes para visitantes e serviços. 
+[ X ] Montar saida da visitantes e serviço pelo espaço temporário.
 [ ] implementar filtro. 
 [ ] implementar rota de login com autenticaçao
 [ ] implementar log de uso para porteiros

@@ -13,6 +13,7 @@ interface Tipo {
   value: string;
   viewValue: string;
 }
+
 @Component({
   selector: 'app-entrada',
   templateUrl: './entrada.component.html',
