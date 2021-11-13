@@ -8,13 +8,17 @@ import { ResidentesComponent } from './paginas/residentes/residentes.component';
 import { CadastroComponent } from './paginas/cadastro/cadastro.component';
 import { AlterarComponent } from './paginas/alterar/alterar.component';
 import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guardasRotas/auth.guard';
+import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
 
 
 
 const routes:Routes = [
   {
     path:'',
-    component:EntradaSaidaComponent
+    component:EntradaSaidaComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   },
   {
     path:'login',
@@ -22,35 +26,51 @@ const routes:Routes = [
   },
   {
     path:'entrada_saida',
-    component:EntradaSaidaComponent
+    component:EntradaSaidaComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   },
   {
     path:'historico',
-    component:HistoricoComponent
+    component:HistoricoComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   },
   {
     path:'entregas',
-    component: EntregasComponent 
+    component: EntregasComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   },
   {
     path:'residentes',
-    component:ResidentesComponent
+    component:ResidentesComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   },
   {
     path:'cadastro',
-    component:CadastroComponent
+    component:CadastroComponent,
+    canActivate:[AuthAdmGuard],
+    canLoad:[AuthAdmGuard]
   },
   {
     path:'comunicados',
-    component:ComunicadosComponent
+    component:ComunicadosComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   },
   {
     path: 'alterar/:id', 
-    component: AlterarComponent
+    component: AlterarComponent,
+    canActivate:[AuthAdmGuard],
+    canLoad:[AuthAdmGuard]
   },
   {
     path:'**',
-    component:EntradaSaidaComponent
+    component:EntradaSaidaComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
   }
 ];
 

@@ -6,6 +6,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlteradoComponent } from '../../avisos/alterado/alterado.component';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
+import { AuthService } from 'src/app/service/authservice.service';
 
 
 
@@ -16,8 +17,10 @@ import { PageEvent } from '@angular/material/paginator';
 })
 export class ResidentesComponent implements OnInit,OnDestroy {
  
+  mostrarBotaoAdm:boolean = true;
 
-  constructor(private conexao:ConexaoService, private snackBar:MatSnackBar,private router:Router){}
+  constructor(private conexao:ConexaoService, private snackBar:MatSnackBar,
+    private router:Router,private authService: AuthService){}
 
   
   panelOpenState = false;
@@ -27,7 +30,11 @@ export class ResidentesComponent implements OnInit,OnDestroy {
   public paginacaoMoradores;
   durationInSeconds = 5;
 
+  
+
   ngOnInit() {
+    this.mostrarBotaoAdm = this.authService.usuarioAdministrador();
+    console.log(this.mostrarBotaoAdm);
     this.ionViewDidEnter();
   }
 

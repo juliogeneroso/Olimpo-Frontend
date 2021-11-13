@@ -14,9 +14,9 @@ import { MatListModule } from '@angular/material/list';
 import { EntregasComponent } from './paginas/entregas/entregas.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AppRoutingModule } from './app-routing.module';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule} from '@angular/material/select';
 import { ResidentesComponent } from './paginas/residentes/residentes.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -27,7 +27,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatMenuModule } from '@angular/material/menu';
 import { EntradaSaidaComponent } from './paginas/entrada-saida/entrada-saida.component';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { FormBuilder,ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { ConexaoService } from './service/conexao.service';
@@ -46,6 +46,9 @@ import { SaidaComponent } from './paginas/entrada-saida/saida/saida.component';
 import { EntradaTempComponent } from './paginas/entrada-saida/entrada-temp/entrada-temp.component';
 import { TempService } from './service/temp.service';
 import { LoginComponent } from './login/login.component';
+import { AuthService } from './service/authservice.service';
+import { AuthGuard } from './guardasRotas/auth.guard';
+import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
 
 
 @NgModule({
@@ -95,7 +98,9 @@ import { LoginComponent } from './login/login.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [FormBuilder,ConexaoService,MatSnackBar,VoiceRecognitionService,TempService],
+  providers: [FormBuilder,ConexaoService,
+    MatSnackBar,VoiceRecognitionService,TempService,AuthService,
+    AuthGuard, AuthAdmGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

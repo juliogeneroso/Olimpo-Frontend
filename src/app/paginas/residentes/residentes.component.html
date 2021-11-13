@@ -20,8 +20,10 @@
                         <td style="text-align: center;">{{morador.bloco}}</td>
                         <td style="text-align: center;">{{morador.num}}</td>
                         <!--<td style="text-align: center;">{{morador.ramal}}</td>-->
-                        <td style="text-align: center;"><button type="button" class="btn btn-sm btn-warning"(click)="alterar(morador)"><mat-icon class="icone">build</mat-icon></button></td>
-                        <td style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(morador)"><mat-icon class="icone">delete</mat-icon></button></td>
+                        <td *ngIf="mostrarBotaoAdm" style="text-align: center;"><button type="button" class="btn btn-sm btn-warning"(click)="alterar(morador)"><mat-icon class="icone">build</mat-icon></button></td>
+                        <td *ngIf="mostrarBotaoAdm" style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(morador)"><mat-icon class="icone">delete</mat-icon></button></td>
+                        <td *ngIf="!mostrarBotaoAdm" style="text-align: center;"><button type="button" class="btn btn-sm btn-warning"(click)="alterar(morador)" disabled><mat-icon class="icone">build</mat-icon></button></td>
+                        <td *ngIf="!mostrarBotaoAdm" style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(morador)" disabled><mat-icon class="icone">delete</mat-icon></button></td>
                     </tr>   
                 </tbody>
             </table>

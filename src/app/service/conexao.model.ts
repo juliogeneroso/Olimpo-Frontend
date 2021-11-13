@@ -1,23 +1,23 @@
-export class Formulario{
+export interface Formulario{
     tipo: string;
     nome: string;
     bloco: string;
     num: number;
 }
-export class Entrega{
+export interface Entrega{
     viewValue: string;
     bloco: string;
     num: number;
     obs:string;
 }
-export class EntregaPendenteCadastrada{
+export interface EntregaPendenteCadastrada{
     id: number;
     viewValue: string;
     bloco: string;
     num: number;
     obs:string;
 }
-export class ControleEntradaSaida{
+export interface ControleEntradaSaida{
     nome: string;
     tipo: string;
     bloco: string;
@@ -25,7 +25,7 @@ export class ControleEntradaSaida{
     hora: string;
     dia: string;
 }
-export class controleEntregasConcluidas{
+export interface controleEntregasConcluidas{
     tipo: string;
     bloco: string;
     num: number;
@@ -33,16 +33,20 @@ export class controleEntregasConcluidas{
     hora: string;
     dia: string;
 }
-export class ResidentesItem {
+export interface ResidentesItem {
     id: number;
     nome: string;
     ramal:string;
     bloco: string;
     num: string;
   }
-export class Cadastro{
+export interface Cadastro{
     nome: string;
     bloco: string;
     num: string;
     //ramal: string;
+}
+export interface Login{
+    usuario: string;
+    senha: string;
 }
