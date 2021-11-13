@@ -9,17 +9,24 @@ import { AuthService } from '../service/authservice.service';
 })
 export class LoginComponent implements OnInit {
 
+  erro:boolean = false;
+  mensagemErro = "ID ou Senha incorretos";
+
   constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
 
   LoginForm = this.formBuilder.group({
-    usuario:'',
+    id:'',
     senha:''
   });
 
   ngOnInit(): void {
+    this.authService.erroEmitter.subscribe(erro=>{
+      this.erro = erro;
+    });
   }
 
   logar(){
+    this.authService.erroEmitter.emit(false);
     this.authService.login(this.LoginForm.value);
   }
 

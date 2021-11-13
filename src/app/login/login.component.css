@@ -42,4 +42,9 @@
     background-color: #ffd740;
     width: 100%;
 }
-  
+.erro{
+  color: red;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: 600;
+}

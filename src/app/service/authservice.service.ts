@@ -2,6 +2,8 @@ import { Injectable, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Login } from './conexao.model';
 import { Router } from '@angular/router';
+import { RepositionScrollStrategy } from '@angular/cdk/overlay';
+import { ThisReceiver } from '@angular/compiler';
 
 
 @Injectable({
@@ -14,19 +16,47 @@ export class AuthService {
     private usuarioAdm = false;
 
     mostrarMenuEmitter = new EventEmitter<boolean>();
+    erroEmitter = new EventEmitter<boolean>();
+    rotaAdmEmitter = new EventEmitter<boolean>();
+
+    private baseUrl = 'http://localhost:8000';
     
-    constructor(private route: Router){
+    constructor(private route: Router,private http:HttpClient){
 
     }
 
-    login(form:Login){
-      let formulario:Login = form;
+    private headers = new HttpHeaders({
+      "Content-Type":  "application/json",
+      "Accept": "application/json"
+    });
+    private httpOptions = {
+      headers: this.headers
+    };
 
-      if(formulario.usuario==="18025946711" && formulario.senha==="25052000"){
+
+    async login(form:Login){
+      console.log(form);
+      let caminho = `${this.baseUrl}/entrar`;
+      let resposta;
+
+      await this.http.post(caminho,JSON.stringify(form),this.httpOptions).toPromise()
+      .then(data => {
+        resposta = data
+      })
+      .catch(erro => {
+        this.erroEmitter.emit(true);
+      });
+
+      if(resposta){
+
         this.usuarioAutenticado = true;
 
         this.mostrarMenuEmitter.emit(true);
-    
+        
+        if(resposta.detalhe[0].admin){
+          this.usuarioAdm = true;
+          this.rotaAdmEmitter.emit(true);
+        }
 
         this.route.navigate(['/']);
       } else {
@@ -42,4 +72,6 @@ export class AuthService {
     usuarioAdministrador(){
       return this.usuarioAdm;
     }
+
+    
 }

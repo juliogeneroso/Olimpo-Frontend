@@ -8,7 +8,7 @@
           <mat-label>
             Usuário
           </mat-label>
-            <input matInput formControlName="usuario" name="usuario" minlength="11" maxlength="11" required/>
+            <input matInput formControlName="id" name="id" minlength="11" maxlength="11" required/>
         </mat-form-field>
         <mat-form-field>
           <mat-label>
@@ -16,6 +16,7 @@
           </mat-label>
             <input matInput type="password" formControlName="senha" name="senha" minlength="8" maxlength="20" required />
         </mat-form-field>
+        <span *ngIf="erro" class="erro">* {{mensagemErro}} *</span>
         <button mat-raised-button color="accent" (click)="logar()">
           Entrar
         </button>

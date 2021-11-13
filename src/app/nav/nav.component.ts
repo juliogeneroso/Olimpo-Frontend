@@ -18,12 +18,16 @@ export class NavComponent {
     );
 
   mostrarMenu:boolean = false;
+  rotaAdm:boolean = false;
 
   constructor(private breakpointObserver: BreakpointObserver,private authService: AuthService) {}
 
   ngOnInit(){
     this.authService.mostrarMenuEmitter.subscribe(mostrar => {
       this.mostrarMenu = mostrar;
+    })
+    this.authService.rotaAdmEmitter.subscribe(rota=>{
+      this.rotaAdm = rota;
     })
   }
 

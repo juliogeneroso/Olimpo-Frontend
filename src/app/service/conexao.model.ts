@@ -47,6 +47,11 @@ export interface Cadastro{
     //ramal: string;
 }
 export interface Login{
-    usuario: string;
+    id: string;
     senha: string;
+}
+export interface logado{
+    id: string;
+    senha: string;
+    adm: boolean;
 }

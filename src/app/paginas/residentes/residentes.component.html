@@ -1,6 +1,7 @@
 <div class="moradores" style="width: 100%;">     
     <div style="width: 100%;">
         <div class="container" *ngIf="moradores?.length">
+            <h6 *ngIf="!mostrarBotaoAdm">Editar e Excluir somente para ADM</h6>
             <table class="table table-responsive-sm table-hover" style="margin-top:20px;">
                 <thead class="thead-dark">
                     <tr>
