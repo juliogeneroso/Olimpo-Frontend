@@ -20,11 +20,14 @@ export class LoginComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.authService.mostrarMenuEmitter.emit(false);
+    
     this.authService.erroEmitter.subscribe(erro=>{
       this.erro = erro;
     });
-  }
+   
 
+  }
   logar(){
     this.authService.erroEmitter.emit(false);
     this.authService.login(this.LoginForm.value);

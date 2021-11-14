@@ -59,10 +59,10 @@ implementar noticias. -- No
 
 [ X ] Montar saida da visitantes e serviço pelo espaço temporário.
 [ ] implementar filtro. 
-[ ] implementar rota de login com autenticaçao
+[ X ] implementar rota de login com autenticaçao
 [ ] implementar log de uso para porteiros
-[ ] implementar rotas extras para sindicos
-[ ] implementar controle de rotas. 
+[  ] implementar rotas extras para sindicos
+[ X ] implementar controle de rotas. 
 [ ] implementar funcionalidade de backup. 
 [ ] implementar noticias e consulta de pagamentos. 
 [ ] criar componente de reserva de espaço. 

@@ -4,6 +4,7 @@ import { Login } from './conexao.model';
 import { Router } from '@angular/router';
 import { RepositionScrollStrategy } from '@angular/cdk/overlay';
 import { ThisReceiver } from '@angular/compiler';
+import { from } from 'rxjs';
 
 
 @Injectable({
@@ -35,7 +36,7 @@ export class AuthService {
 
 
     async login(form:Login){
-      console.log(form);
+      console.log(form.id)
       let caminho = `${this.baseUrl}/entrar`;
       let resposta;
 
@@ -48,9 +49,13 @@ export class AuthService {
       });
 
       if(resposta){
+        
+        //sessionStorage.setItem('id',resposta.detalhe[0].id);
+        //sessionStorage.setItem('senha',resposta.detalhe[0].senha);
+        //sessionStorage.setItem('admin',resposta.detalhe[0].admin);
 
         this.usuarioAutenticado = true;
-
+        
         this.mostrarMenuEmitter.emit(true);
         
         if(resposta.detalhe[0].admin){
@@ -73,5 +78,10 @@ export class AuthService {
       return this.usuarioAdm;
     }
 
-    
+    sair(){
+      this.usuarioAutenticado = false;
+      this.mostrarMenuEmitter.emit(false);
+      this.usuarioAdm = false;
+      this.route.navigate(['/']);
+    }
 }

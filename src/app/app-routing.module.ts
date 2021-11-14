@@ -10,6 +10,7 @@ import { AlterarComponent } from './paginas/alterar/alterar.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guardasRotas/auth.guard';
 import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
+import { CalendarioComponent } from './paginas/calendario/calendario.component';
 
 
 
@@ -57,6 +58,12 @@ const routes:Routes = [
   {
     path:'comunicados',
     component:ComunicadosComponent,
+    canActivate:[AuthGuard],
+    canLoad:[AuthGuard]
+  },
+  {
+    path:'calendario',
+    component:CalendarioComponent,
     canActivate:[AuthGuard],
     canLoad:[AuthGuard]
   },

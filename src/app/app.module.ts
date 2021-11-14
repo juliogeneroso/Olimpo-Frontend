@@ -49,6 +49,8 @@ import { LoginComponent } from './login/login.component';
 import { AuthService } from './service/authservice.service';
 import { AuthGuard } from './guardasRotas/auth.guard';
 import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
+import { CalendarioComponent } from './paginas/calendario/calendario.component';
+
 
 
 @NgModule({
@@ -70,7 +72,8 @@ import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
     EntradaComponent,
     SaidaComponent,
     EntradaTempComponent,
-    LoginComponent
+    LoginComponent,
+    CalendarioComponent
   ],
   imports: [
     BrowserModule,

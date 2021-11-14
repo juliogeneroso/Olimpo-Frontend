@@ -31,4 +31,7 @@ export class NavComponent {
     })
   }
 
+  sair(){
+    this.authService.sair();
+  }
 }

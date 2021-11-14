@@ -1,25 +1,36 @@
-<div id="container">
-    <div id="box">
-        <div class="titulo">
-            <h2>Monte Olímpo</h2>
-        </div>
-      <form class="formulario" [formGroup]="LoginForm">
-        <mat-form-field>
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" [formGroup]="LoginForm">
+        <span class="login100-form-title p-b-26">
+          Monte Olímpo
+        </span>
+        <span class="login100-form-title p-b-48">
+          <i class="zmdi zmdi-font"></i>
+        </span>
+        <mat-form-field class="usuario" style="width: 100%;">
           <mat-label>
             Usuário
           </mat-label>
             <input matInput formControlName="id" name="id" minlength="11" maxlength="11" required/>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field class="senha" style="width: 100%;">
           <mat-label>
             Senha
           </mat-label>
             <input matInput type="password" formControlName="senha" name="senha" minlength="8" maxlength="20" required />
         </mat-form-field>
-        <span *ngIf="erro" class="erro">* {{mensagemErro}} *</span>
-        <button mat-raised-button color="accent" (click)="logar()">
-          Entrar
-        </button>
+        <div class="container-login100-form-btn">
+          <div style="width: 90%;">
+            <div class="erro">
+              <span *ngIf="erro">* {{mensagemErro}} *</span>
+            </div>
+            <button mat-raised-button color="accent" class="login100-form-btn" (click)="logar()">
+              <span style="color: black;">Entrar</span>
+            </button>
+          </div>
+        </div>
       </form>
     </div>
   </div>
+</div>
