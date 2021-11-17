@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHandler, HttpHeaders, HttpErrorResponse, JsonpClientBackend } from '@angular/common/http';
-import { interval, Observable, ObservedValueOf, throwError  } from 'rxjs';
-import { FormGroup } from '@angular/forms';
-import { catchError, retry } from 'rxjs/operators';
-import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, Formulario, ResidentesItem } from './conexao.model';
-import { ResolveEnd } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { interval, Observable} from 'rxjs';
+import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, Formulario, ResidentesItem } from './conexao.model';
 ;
 
 @Injectable({
@@ -27,117 +24,238 @@ export class ConexaoService {
     headers: this.headers
   };
   
-  //Pega a lista de todos moradores, é retornado o array de obejtos JSON. Contendo informações de: 
   getMoradores():Observable<ResidentesItem>{
-    let caminho = `${this.baseUrl}/moradores`;
+    let caminho = `${this.baseUrl}/residentes`;
     return this.http.get<ResidentesItem>(caminho);
   }
-  //Pega o registro de entradas total já realizados, é retornado o array de objetos JSON. Contendo informações de Nome,Tipo,Bloco,Num,Data e hora
+
   getEntrada():Observable<ControleEntradaSaida>{
     let caminho = `${this.baseUrl}/entrada`;
     return this.http.get<ControleEntradaSaida>(caminho);
   }
 
-  //Pega o registro de saidas total já realizados, é retornado o array de objetos JSON. Contendo informações de Nome,Tipo,Bloco,Num,Data e hora
   getSaida():Observable<ControleEntradaSaida>{
     let caminho = `${this.baseUrl}/saida`;
     return this.http.get<ControleEntradaSaida>(caminho);
   }
 
-  getEntregasPendentes():Observable<Entrega>{
+  getEntregasPendentes():Observable<EntregaPendenteCadastrada>{
     let caminho = `${this.baseUrl}/entregas/pendentes`;
-    return this.http.get<Entrega>(caminho);
+    return this.http.get<EntregaPendenteCadastrada>(caminho);
   }
+
   getEntregasConcluidas():Observable<controleEntregasConcluidas>{
     let caminho = `${this.baseUrl}/entregas/concluidas`;
     return this.http.get<controleEntregasConcluidas>(caminho);
   }
 
-  cadastro(form):Promise<Cadastro>{
-    let formulario:Formulario = form.value;
-    let caminho = `${this.baseUrl}/cadastro`;
-    return this.http.post<Cadastro>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao registrar entrada ` + erro);
-    });
+  filtroID(id):Observable<ResidentesItem>{
+    let caminho = `${this.baseUrl}/residentes/filtro/id/${id}`;
+    return this.http.get<ResidentesItem>(caminho);
   }
 
-  entrada(form):Promise<Formulario>{
+  getEntradaTemp():Observable<Formulario>{
+    let caminho = `${this.baseUrl}/temporaria/entrada`;
+    return this.http.get<Formulario>(caminho);
+  }
+
+  async cadastro(form){
     let formulario:Formulario = form.value;
-    //console.log(JSON.stringify(formulario));
-    let caminho = `${this.baseUrl}/registro/entrada`;
-    //console.log(caminho,JSON.stringify(formulario),this.httpOptions);
-    return this.http.post<Formulario>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao registrar entrada ` + erro);
+    let caminho = `${this.baseUrl}/cadastro/residente`;
+    let resposta;
+
+    //console.log(formulario);
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
     });
+    if(resposta.status === "203"){
+      return Promise.reject(resposta);
+    }
+    //inserir tratamento de erro aqui;
+    return resposta;
+  }
+
+  async entrada(form){
+    let formulario:Formulario = form;
+    let caminho = `${this.baseUrl}/registro/entrada`;
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
+    });
+    //inserir tratamento de erro aqui;
+    console.log(resposta);
+    return resposta;
+  }
+
+  async entradaTemporaria(form){
+    let formulario:Formulario = form;
+    let caminho = `${this.baseUrl}/registro/entradas/temporarias`;
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
+    });
+    //inserir tratamento de erro aqui;
+    console.log(resposta);
+    return resposta;
+  }
+
+  async tempSaida(form){
+    let formulario:Formulario = form;
+    let caminho = `${this.baseUrl}/registro/entradas/temporarias/sair`;
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
   }
   
-  saida(form):Promise<Formulario>{
-    let formulario:Formulario = form.value;
-    //console.log(JSON.stringify(formulario));
+  async saida(form){
+    let formulario:Formulario = form;
     let caminho = `${this.baseUrl}/registro/saida`;
-    //console.log(caminho,JSON.stringify(formulario),this.httpOptions);
-    return this.http.post<Formulario>(caminho,JSON.stringify(formulario),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao registrar saida ` + erro);
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
     });
+    //inserir tratamento de erro aqui;
+    return resposta;
   }
 
-  //A ação abaixo registra os dados de entregas pendentes na tabela entregas_pendentes
-  //Utilização com Promise, pois o servidor ignora o Observable
-  // Model Entrega => viewValue: string; bloco: string; num: number; obs:string;
 
-  entregasPendentes(entrega):Promise<Entrega>{
+  async entregasPendentes(entrega){
     let entregas:Entrega = entrega.value;
-    //caminho padrão baseURl: http://localhost:8000
     let caminho = `${this.baseUrl}/registro/entregas/pendentes`;
-    //O post do server está aceitando somente passagem de parâmetros via JSON. Modelo de arquivo: {"viewValue":"Mercadorias","bloco":"A","num":123,"obs":""}
-    //this.httpOptions representa a regra de conexão de passagem de dados, sendo definido como Json
-    return this.http.post<Entrega>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao registrar nova entrega `+erro); 
+    let resposta;
+    
+    await this.http.post(caminho,JSON.stringify(entregas),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
     });
+    //Inserer tratamento de erro aqui.
+    return resposta;
   }
-  //
-  //A ação abaixo registra na Tabela entregas_concluidas e retira dados da tabela entregas_pendentes. 
-  //Utilização com Promise, pois o servidor ignora o Observable
 
-  entregasConcluidas(entrega):Promise<Entrega>{
-    //Não utilizo entrega.value pois já vem como Array e não objeto
+  async entregasConcluidas(entrega){
     let entregas:Entrega = entrega;
-    //caminho padrão baseURl: http://localhost:8000
     let caminho = `${this.baseUrl}/registro/entregas/concluidas`;
-    //O post do server está aceitando somente passagem de parâmetros via JSON. Modelo de arquivo: {"viewValue":"Mercadorias","bloco":"A","num":123,"obs":""}
-    //this.httpOptions representa a regra de conexão de passagem de dados, sendo definido como Json
-    return this.http.post<Entrega>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao registrar nova entrega `+erro); 
+    let resposta;
+
+    //console.log(entrega);
+
+    await this.http.post(caminho,JSON.stringify(entregas),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
     });
+    //console.log(resposta);
+    //Inserer tratamento de erro aqui.
+    return resposta;
   }
 
-  deletarResidente(excluir:ResidentesItem):Promise<ResidentesItem>{
-    let entregas:ResidentesItem = excluir;
-    console.log(entregas);
-    let caminho = `${this.baseUrl}/excluir`;
-    return this.http.post<ResidentesItem>(caminho,JSON.stringify(entregas),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao excluir `+erro); 
-    });
+  async deletarResidente(id:number){
+    //console.log(id);
+    let caminho = `${this.baseUrl}/deletar/morador/${id}`;
+    let resposta;
+
+    await this.http.delete(caminho).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
   }
-  editar(editar):Promise<ResidentesItem>{
+
+  async editar(editar, id:number){
     let mudanca:ResidentesItem = editar;
-    console.log(mudanca);
-    let caminho = `${this.baseUrl}/alterar`;
-    return this.http.post<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise().catch(erro=>{
-      return Promise.reject(`Erro ao excluir `+erro); 
-    });
+    let caminho = `${this.baseUrl}/alterar/morador/${id}`;
+    let resposta;
+
+    await this.http.patch<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    return resposta;
   }
-  //HandleError permite leitura do erro em outras funções
-  handleError(error: HttpErrorResponse) {
-    let errorMessage = '';
-    if (error.error instanceof ErrorEvent) {
-      // Erro ocorreu no lado do cliente
-      errorMessage = error.error.message;
-    } else {
-      // Erro ocorreu no lado do servidor
-      errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
-    }
-    //console.log("handleError"+errorMessage);
-    return throwError(errorMessage);
-  };
+  
 }
+
+
+//app.post('/registro/entregas/concluidas')
+//app.post('/registro/entregas/pendentes')
+
+//app.post('/registro/entradas/temporarias/sair')
+///app.post('registro/entradas/temporarias')
+//app.post('/registro/entrada') -- ok 
+//app.post('/registro/saida') -- ok
+
+//app.get("temporaria/entrada")
+//app.get("/entrada")
+//app.get("/saida")
+//app.get("/entrada/:tipo/:bloco/:num")
+//app.get("/entrada/:tipo/:bloco")
+//app.get("/entrada/:tipo")
+//app.get("/saida/:tipo/:bloco/:num")
+//app.get("/saida/:tipo/:bloco"
+//app.get("/saida/:tipo")
+
+//app.get("/entregas/concluidas")
+//app.get("/entregas/pendentes")
+//app.get("/entregas/pendentes/:viewValue/:bloco/:num")
+//app.get("/entregas/pendentes/:viewValue/:bloco")
+//app.get("/entregas/pendentes/:viewValue")
+//app.get("/entregas/concluidas/:viewValue/:bloco/:num")
+//app.get("/entregas/concluidas/:viewValue/:bloco")
+//app.get("/entregas/concluidas/:viewValue")
+
+//app.patch('/alterar/morador/:id')
+//app.post('/cadastro/residente')
+//app.delete('/deletar/morador/:id')
+
+//app.get("/residentes")
+//app.get("/residentes/filtro/id/:id")
+//app.get("/residentes/filtro/nome/:nome)
+//app.get("/residentes/filtro/bloco/:bloco)
+//app.get("/residentes/filtro/num/:num)
+
+//app.get('/exibir/noticias')
+//app.get('/buscar/noticia/:id')
+//app.post('/cadastrar/noticia')
+//app.patch('/editar/noticia/:id')
+//app.delete('/deletar/noticia/:id')

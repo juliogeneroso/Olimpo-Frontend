@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { AuthService } from '../service/authservice.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +9,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  erro:boolean = false;
+  mensagemErro = "ID ou Senha incorretos";
+
+  constructor(private formBuilder: FormBuilder, private authService: AuthService) { }
+
+  LoginForm = this.formBuilder.group({
+    id:'',
+    senha:''
+  });
 
   ngOnInit(): void {
+    this.authService.mostrarMenuEmitter.emit(false);
+    
+    this.authService.erroEmitter.subscribe(erro=>{
+      this.erro = erro;
+    });
+   
+
+  }
+  logar(){
+    this.authService.erroEmitter.emit(false);
+    this.authService.login(this.LoginForm.value);
   }
 
 }

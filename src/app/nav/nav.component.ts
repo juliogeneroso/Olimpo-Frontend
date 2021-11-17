@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { AuthService } from '../service/authservice.service';
 
 @Component({
   selector: 'app-nav',
@@ -16,6 +17,21 @@ export class NavComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  mostrarMenu:boolean = false;
+  rotaAdm:boolean = false;
 
+  constructor(private breakpointObserver: BreakpointObserver,private authService: AuthService) {}
+
+  ngOnInit(){
+    this.authService.mostrarMenuEmitter.subscribe(mostrar => {
+      this.mostrarMenu = mostrar;
+    })
+    this.authService.rotaAdmEmitter.subscribe(rota=>{
+      this.rotaAdm = rota;
+    })
+  }
+
+  sair(){
+    this.authService.sair();
+  }
 }

@@ -1,0 +1,69 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-6"><!--COL de cadastro de entregas -->
+      <div class="novaEntrega container">
+        <form [formGroup]="checkoutForm">
+          <div mat-subheader>
+            Nova entrega
+          </div>
+          <mat-form-field type="number">
+            <mat-label>
+              Tipo
+            </mat-label>
+            <mat-select class="mat-select" [(value)]="selectedTipo" formControlName="viewValue" required>
+              <mat-option [value]="option.viewValue" *ngFor="let option of tipos" >
+                {{ option.viewValue }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field style="display: block;">    
+            <mat-label>
+              Bloco   (A-Z)
+            </mat-label>
+              <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required> 
+          </mat-form-field>
+          <mat-form-field style="display: block;">    
+            <mat-label>
+              Casa
+            </mat-label>
+              <input matInput type="number" name="num" formControlName="num" pattern="^[1-9][0-9]?[0-9]?" required> 
+          </mat-form-field>
+          <div>          
+            <mat-label>
+              Deseja adicionar obervação?
+            </mat-label>
+              <input style="margin-left: 10px" type="checkbox" [checked]="observacao" maxlength="500" (click)="adicionarOBS()">
+          </div>
+          <mat-form-field *ngIf="observacao" style="display: block;">    
+            <input matInput type="text" name="obs" formControlName="obs" placeholder="Obervação"> 
+          </mat-form-field>
+          <div style="text-align: center;">
+            <button mat-raised-button style="margin-top: 10px;" color="accent" [disabled]="!checkoutForm.valid" (click)="onSubmit()">Adicionar
+              <span>
+                <img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/>
+              </span>
+            </button>
+          </div>
+        </form>
+      </div>
+    </div><!--Fim COl de cadastro de entregas-->
+    <div class="col-sm-6">
+      <div class="listagem">
+        <div class="container">
+          <h3>Restantes</h3>
+            <div *ngIf="restantes?.length">
+                <div class="list-item" *ngFor="let item of restantes">
+                  {{item.viewValue}} ( Bloco {{item.bloco}}  -  AP {{item.num}} º )
+                </div>
+            </div>
+            <div *ngIf="!restantes?.length">
+              <p>Nenhuma entrega pendente!</p>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--[cdkDropListConnectTo]="todoList" foi desconectado-->
+
