@@ -36,7 +36,7 @@ export class AuthService {
 
 
     async login(form:Login){
-      console.log(form.id)
+      //console.log(form.id)
       let caminho = `${this.baseUrl}/entrar`;
       let resposta;
 

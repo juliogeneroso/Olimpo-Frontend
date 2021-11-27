@@ -12,7 +12,8 @@
         <a mat-list-item routerLink="/residentes"><mat-icon>face</mat-icon><span> Residentes</span></a>
         <a mat-list-item routerLink="/calendario"><mat-icon>calendar_today</mat-icon><span> Calendário</span></a>
         <a mat-list-item routerLink="/comunicados"><mat-icon>speaker_notes</mat-icon><span> Comunicados</span></a>      
-        <a *ngIf="rotaAdm" mat-list-item routerLink="/cadastro" style="color: red;"><mat-icon>assignment_ind</mat-icon><span> Cadastro</span></a>
+        <a *ngIf="rotaAdm" mat-list-item routerLink="/cadastro" style="color: red;"><mat-icon>assignment_ind</mat-icon><span> Cadastro Morador</span></a>
+        <a *ngIf="rotaAdm" mat-list-item routerLink="/cadastroPorteiro" style="color: red;"><mat-icon>assignment_ind</mat-icon><span> Cadastro Porteiro</span></a>
         <a mat-list-item (click)="sair()" style="border-top: 1px solid black;"><mat-icon>exit_to_app</mat-icon><span> Sair</span></a>
       </mat-nav-list>
     </mat-sidenav>
@@ -27,7 +28,7 @@
         <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
       </button>
       <mat-icon style="width: 30px;">maps_home_work</mat-icon>
-      <span> Condomínio Monte Olimpo</span>
+      <span> SISCOND</span>
     </mat-toolbar>
     
     <router-outlet></router-outlet>

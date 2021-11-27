@@ -50,6 +50,7 @@ import { AuthService } from './service/authservice.service';
 import { AuthGuard } from './guardasRotas/auth.guard';
 import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
 import { CalendarioComponent } from './paginas/calendario/calendario.component';
+import { CadastroPorteiroComponent } from './paginas/cadastro-porteiro/cadastro-porteiro.component';
 
 
 
@@ -73,7 +74,8 @@ import { CalendarioComponent } from './paginas/calendario/calendario.component';
     SaidaComponent,
     EntradaTempComponent,
     LoginComponent,
-    CalendarioComponent
+    CalendarioComponent,
+    CadastroPorteiroComponent
   ],
   imports: [
     BrowserModule,

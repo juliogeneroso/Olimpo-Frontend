@@ -32,6 +32,7 @@ export class NavComponent {
   }
 
   sair(){
+    this.rotaAdm = false;
     this.authService.sair();
   }
 }

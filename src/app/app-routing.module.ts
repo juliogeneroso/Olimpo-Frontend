@@ -11,6 +11,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './guardasRotas/auth.guard';
 import { AuthAdmGuard } from './guardasRotas/auth-adm.guard';
 import { CalendarioComponent } from './paginas/calendario/calendario.component';
+import { CadastroPorteiroComponent } from './paginas/cadastro-porteiro/cadastro-porteiro.component';
 
 
 
@@ -52,6 +53,12 @@ const routes:Routes = [
   {
     path:'cadastro',
     component:CadastroComponent,
+    canActivate:[AuthAdmGuard],
+    canLoad:[AuthAdmGuard]
+  },
+  {
+    path:'cadastroPorteiro',
+    component:CadastroPorteiroComponent,
     canActivate:[AuthAdmGuard],
     canLoad:[AuthAdmGuard]
   },
