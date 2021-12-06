@@ -55,3 +55,15 @@ export interface logado{
     senha: string;
     adm: boolean;
 }
+
+export interface loginDados{
+    id:string;
+    nome:string;
+    senha:string;
+}
+
+export interface exibirLogin{
+    id:string;
+    nome:string;
+    admin:boolean;
+}

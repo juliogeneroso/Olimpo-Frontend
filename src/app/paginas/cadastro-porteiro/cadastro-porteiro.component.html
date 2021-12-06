@@ -1,1 +1,38 @@
-<p>cadastro-porteiro works!</p>
+<div class="container">
+    <div class="cadastro">
+        <h4>Cadastrar novo residente</h4>
+        <form [formGroup]="CadastroForm">
+            <mat-list-item class="full">
+                <div mat-line>
+                    <mat-form-field type="number" appearance="" class="block wdt semifull campocadastro">
+                        <mat-label>Nome Completo</mat-label>
+                        <input matInput type="text" name="nome" formControlName="nome"  minlength="4" maxlength="50" required>
+                    </mat-form-field>
+                </div>
+                <div mat-line class="full">
+                    <mat-form-field  type="number" class="block wdt semifull campocadastro">
+                        <mat-label>CPF</mat-label>
+                        <input matInput type="number" name="id" formControlName="id" minlength="11" maxlength="11" required>
+                    </mat-form-field>
+                </div>
+                <div mat-line>
+                    <mat-form-field type="number" class="block wdt semifull campocadastro">
+                        <mat-label>Senha</mat-label>
+                        <input matInput type="password" name="senha" formControlName="senha" minlength="8" maxlength="20" required>
+                    </mat-form-field>
+                </div>
+                <!--<div mat-line>
+                    <mat-form-field class="block wdt semifull campocadastro">
+                        <mat-label>Ramal</mat-label>
+                        <input matInput type="text" name="ramal" formControlName="ramal" pattern="^[0-9]{4}" required>
+                    </mat-form-field>
+                </div>-->
+                <div mat-line class="wdt center semifull botao">
+                    <button mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar
+                        <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+                    </button>
+                </div>
+            </mat-list-item>    
+        </form>
+    </div>
+</div>

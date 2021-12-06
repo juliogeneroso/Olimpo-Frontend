@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { interval, Observable} from 'rxjs';
-import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, Formulario, ResidentesItem } from './conexao.model';
+import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, Formulario, loginDados, ResidentesItem } from './conexao.model';
 ;
 
 @Injectable({
@@ -62,6 +62,26 @@ export class ConexaoService {
   async cadastro(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/cadastro/residente`;
+    let resposta;
+
+    //console.log(formulario);
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return erro;
+    });
+    if(resposta.status === "203"){
+      return Promise.reject(resposta);
+    }
+    //inserir tratamento de erro aqui;
+    return resposta;
+  }
+
+  async cadastroPorteiro(form){
+    let formulario:loginDados = form.value;
+    let caminho = `${this.baseUrl}/cadastrar/porteiro`;
     let resposta;
 
     //console.log(formulario);
