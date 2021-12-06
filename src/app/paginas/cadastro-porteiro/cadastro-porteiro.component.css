@@ -6,9 +6,7 @@
 .campocadastro{
     width:100%;
 }
-.botao{
-    margin-top: 10px;
-}
+
 .spinner{
     width:28px;
     height:100%;
@@ -21,3 +19,17 @@
 h4{
   margin:20px;
 }
+
+.full-width-table {
+    width: 100%;
+  }
+  .moradores{
+    margin-top: 20px;
+  }
+  .vazio{
+    margin: 20px;
+  }
+  .btn{
+    border-radius: 80px;
+  }
+  

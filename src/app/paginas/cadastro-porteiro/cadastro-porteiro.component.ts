@@ -6,6 +6,7 @@ import { ErroComponent } from '../../avisos/erro/erro.component';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { JaCadastrado } from 'src/app/avisos/jaCadastrado/jaCadastrado.component';
 import { ExibirLogin } from 'src/app/service/conexao.model';
+import { DeletadoComponent } from 'src/app/avisos/deletado/deletado.component';
 
 @Component({
   selector: 'app-cadastro-porteiro',
@@ -41,7 +42,7 @@ export class CadastroPorteiroComponent implements OnInit,OnDestroy {
         this.porteirosCadastrados = response;
       },
       error =>{
-        console.log('ERROR');
+        this.ErroSnackBar();
       }
     );
   }
@@ -65,6 +66,28 @@ export class CadastroPorteiroComponent implements OnInit,OnDestroy {
       duration: this.durationInSeconds * 500,
     });
   }
+
+  openSnackBarDeletado() {
+    this.snackBar.openFromComponent(DeletadoComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
+ 
+
+  excluir(exclusao){
+    // console.log(exclusao.id);
+     let indice = this.porteirosCadastrados.indexOf(exclusao);
+     this.conexao.deletarPorteiro(exclusao.id).then(()=>{
+      while(indice>=0){
+        this.porteirosCadastrados.splice(indice,1);
+        indice = this.porteirosCadastrados.indexOf(exclusao);
+      }
+      this.openSnackBarDeletado();
+     }).catch(()=>{
+       this.ErroSnackBar();
+     });
+    
+   }
 
   onSubmitCadastro(){
     this.carregando = true;

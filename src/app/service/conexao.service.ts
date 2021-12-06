@@ -224,6 +224,23 @@ export class ConexaoService {
     return resposta;
   }
 
+  async deletarPorteiro(id:number){
+    //console.log(id);
+    let caminho = `${this.baseUrl}/deletar/porteiro/${id}`;
+    let resposta;
+
+    await this.http.delete(caminho).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
+  }
+
   async editar(editar, id:number){
     let mudanca:ResidentesItem = editar;
     let caminho = `${this.baseUrl}/alterar/morador/${id}`;

@@ -44,14 +44,16 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Adm</th>
+                        <th style="text-align:center">Opções</th>
                     </tr>
                 </thead>           
                 <tbody>
-                    <tr *ngFor="let porteiros of porteirosCadastrados">
-                        <td>{{porteiros.id}}</td>
-                        <td>{{porteiros.nome}}</td>
-                        <td *ngIf="porteiros.admin">Sim</td>
-                        <td *ngIf="!porteiros.admin">Não</td>
+                    <tr *ngFor="let porteiro of porteirosCadastrados">
+                        <td>{{porteiro.id}}</td>
+                        <td>{{porteiro.nome}}</td>
+                        <td *ngIf="porteiro.admin">Sim</td>
+                        <td *ngIf="!porteiro.admin">Não</td>
+                        <td *ngIf="!porteiro.admin" style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(porteiro)"><mat-icon class="icone">delete</mat-icon></button></td>
                     </tr>
                 </tbody>
             </table>

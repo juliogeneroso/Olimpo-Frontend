@@ -7,6 +7,7 @@ import { AlteradoComponent } from '../../avisos/alterado/alterado.component';
 import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { AuthService } from 'src/app/service/authservice.service';
+import { ErroComponent } from 'src/app/avisos/erro/erro.component';
 
 
 
@@ -48,6 +49,11 @@ export class ResidentesComponent implements OnInit,OnDestroy {
       duration: this.durationInSeconds * 1000,
     });
   }
+  openSnackBarErro(){
+    this.snackBar.openFromComponent(ErroComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
+  }
 
   alterar(alterar:ResidentesItem){
     let id = alterar.id;
@@ -60,13 +66,17 @@ export class ResidentesComponent implements OnInit,OnDestroy {
   excluir(exclusao){
    // console.log(exclusao.id);
     let indice = this.moradores.indexOf(exclusao);
-    this.conexao.deletarResidente(exclusao.id);
-    while(indice>=0){
-      this.moradores.splice(indice,1);
-      indice = this.moradores.indexOf(exclusao);
-    }
-    this.reOrganizar();
-    this.openSnackBarDeletado();
+    this.conexao.deletarResidente(exclusao.id).then(()=>{
+      while(indice>=0){
+        this.moradores.splice(indice,1);
+        indice = this.moradores.indexOf(exclusao);
+      }
+      this.reOrganizar();
+      this.openSnackBarDeletado();
+    }).catch(()=>{
+      this.openSnackBarErro();
+    });
+    
   }
 
   reOrganizar(){
