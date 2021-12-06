@@ -35,4 +35,26 @@
             </mat-list-item>    
         </form>
     </div>
+
+    <div class="tabelaHistorico" style="width: 100%;">   
+        <div *ngIf="porteirosCadastrados?.length" class="container">
+            <table class="table table-responsive-sm table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Adm</th>
+                    </tr>
+                </thead>           
+                <tbody>
+                    <tr *ngFor="let porteiros of porteirosCadastrados">
+                        <td>{{porteiros.id}}</td>
+                        <td>{{porteiros.nome}}</td>
+                        <td *ngIf="porteiros.admin">Sim</td>
+                        <td *ngIf="!porteiros.admin">Não</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>  
+    </div>
 </div>

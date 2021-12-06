@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { interval, UnsubscriptionError } from 'rxjs';
 import { ConexaoService } from '../../service/conexao.service';
-import { ControleEntradaSaida, controleEntregasConcluidas, EntregaPendenteCadastrada } from '../../service/conexao.model';
+import { ControleEntradaSaida, ControleEntregasConcluidas, EntregaPendenteCadastrada } from '../../service/conexao.model';
 import { PageEvent } from '@angular/material/paginator';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { ErroComponent } from '../../avisos/erro/erro.component';
@@ -28,7 +28,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
   public controlePessoasEntrada = new Array<ControleEntradaSaida>();
   public controlePessoasSaida = new Array<ControleEntradaSaida>();
   public controleEntregasPendentes = new Array<EntregaPendenteCadastrada>();
-  public controleEntregasConcluidas =  new Array<controleEntregasConcluidas>();
+  public controleEntregasConcluidas =  new Array<ControleEntregasConcluidas>();
   
   public paginacaoPessoasEntrada;
   public paginacaoPessoasSaida;

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { interval, Observable} from 'rxjs';
-import { Cadastro, ControleEntradaSaida, controleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, Formulario, loginDados, ResidentesItem } from './conexao.model';
+import { Cadastro, ControleEntradaSaida, ControleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, ExibirLogin, Formulario, LoginDados, ResidentesItem } from './conexao.model';
 ;
 
 @Injectable({
@@ -44,9 +44,9 @@ export class ConexaoService {
     return this.http.get<EntregaPendenteCadastrada>(caminho);
   }
 
-  getEntregasConcluidas():Observable<controleEntregasConcluidas>{
+  getEntregasConcluidas():Observable<ControleEntregasConcluidas>{
     let caminho = `${this.baseUrl}/entregas/concluidas`;
-    return this.http.get<controleEntregasConcluidas>(caminho);
+    return this.http.get<ControleEntregasConcluidas>(caminho);
   }
 
   filtroID(id):Observable<ResidentesItem>{
@@ -57,6 +57,11 @@ export class ConexaoService {
   getEntradaTemp():Observable<Formulario>{
     let caminho = `${this.baseUrl}/temporaria/entrada`;
     return this.http.get<Formulario>(caminho);
+  }
+
+  getPorteirosCadastrados():Observable<ExibirLogin>{
+    let caminho = `${this.baseUrl}/porteiros`;
+    return this.http.get<ExibirLogin>(caminho);
   }
 
   async cadastro(form){
@@ -80,7 +85,7 @@ export class ConexaoService {
   }
 
   async cadastroPorteiro(form){
-    let formulario:loginDados = form.value;
+    let formulario:LoginDados = form.value;
     let caminho = `${this.baseUrl}/cadastrar/porteiro`;
     let resposta;
 

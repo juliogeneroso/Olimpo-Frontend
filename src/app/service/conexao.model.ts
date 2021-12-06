@@ -25,7 +25,7 @@ export interface ControleEntradaSaida{
     hora: string;
     dia: string;
 }
-export interface controleEntregasConcluidas{
+export interface ControleEntregasConcluidas{
     tipo: string;
     bloco: string;
     num: number;
@@ -50,19 +50,19 @@ export interface Login{
     id: string;
     senha: string;
 }
-export interface logado{
+export interface Logado{
     id: string;
     senha: string;
     adm: boolean;
 }
 
-export interface loginDados{
+export interface LoginDados{
     id:string;
     nome:string;
     senha:string;
 }
 
-export interface exibirLogin{
+export interface ExibirLogin{
     id:string;
     nome:string;
     admin:boolean;
