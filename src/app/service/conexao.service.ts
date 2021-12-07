@@ -74,8 +74,9 @@ export class ConexaoService {
     return this.http.get<DatasReservadasConsulta>(caminho);
   }
 
-  verificarDisponibilidade():Observable<DatasReservadasConsulta>{
-    let caminho = `${this.baseUrl}/consultar/data/:dia/:mes/:ano`;
+  verificarDisponibilidade(form):Observable<DatasReservadasConsulta>{
+    let consulta:DatasReservadasCadastro = form.value; 
+    let caminho = `${this.baseUrl}/consultar/data/${consulta.dia}/${consulta.mes}/${consulta.ano}`;
     return this.http.get<DatasReservadasConsulta>(caminho);
   }
 

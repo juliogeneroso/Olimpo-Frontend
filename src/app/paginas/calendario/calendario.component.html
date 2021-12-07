@@ -26,7 +26,7 @@
             
                   <mat-form-field  type="number" class="block wdt semifull campocadastro">
                       <mat-label>Mês</mat-label>
-                      <input matInput type="number" name="mes" formControlName="mes" pattern="^(0?[1-9]|[1][1-2])" required>
+                      <input matInput type="number" name="mes" formControlName="mes" pattern="^(0?[1-9]|[1][0-2])" required>
                   </mat-form-field>
               
               
@@ -37,14 +37,14 @@
               
               
                 <mat-form-field  type="number" class="block wdt semifull campocadastro">
-                    <mat-label>Duração</mat-label>
+                    <mat-label>Duração (1-6 Horas)</mat-label>
                     <input matInput type="number" name="duracao" formControlName="duracao" pattern="^(0?[1-6])" required>
                 </mat-form-field>
               </div>
               <div mat-line class="full">
                 <mat-form-field  type="number" class="block wdt semifull campocadastro3">
-                    <mat-label>Quantidade de Pesssoas</mat-label>
-                    <input matInput type="number" name="quantPessoas" formControlName="quantPessoas" required>
+                    <mat-label>Quantidade de Pesssoas (Máx 59)</mat-label>
+                    <input matInput type="number" name="quantPessoas" formControlName="quantPessoas" pattern="^(0?[1-9]|[1-5][0-9])" required>
                 </mat-form-field>
               </div>
                 
@@ -55,10 +55,16 @@
                     </mat-form-field>
                 </div>-->
                 <div mat-line class="wdt center semifull botaocadastrar">
+                    <button *ngIf="!disponibilidade" mat-raised-button color="primary" [disabled]="!CadastroForm.valid" (click)="verificarDisponibilidade()">Verificar Data
+                        <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+                    </button>
+                </div>
+                <div mat-line class="wdt center semifull botaocadastrar">
                     <button *ngIf="disponibilidade" mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar
                         <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
                     </button>
                 </div>
+                <p *ngIf="mostrarNaoDis" style="color: brown;margin-left: 20px;font-weight: 600;">A data não se encontra disponível no sistema</p>
             </mat-list-item>    
         </form>
     </div>

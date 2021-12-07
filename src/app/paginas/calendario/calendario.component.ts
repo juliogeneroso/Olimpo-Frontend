@@ -26,6 +26,7 @@ export class CalendarioComponent implements OnInit, OnDestroy {
   public datasReservadas = new Array<DatasReservadasConsulta>();
   public disponibilidade = false;
   private datas;
+  public mostrarNaoDis:boolean = false;
 
   public menu;
 
@@ -63,6 +64,7 @@ CadastroForm = this.formBuilder.group({
   }
 
   fecharFormulario(){
+    this.mostrarNaoDis = false;
     this.menu=false;
     this.CadastroForm.reset();
   }
@@ -108,6 +110,26 @@ CadastroForm = this.formBuilder.group({
      
    }
 
+   verificarDisponibilidade(){
+     this.mostrarNaoDis = false;
+    this.datas = this.conexao.verificarDisponibilidade(this.CadastroForm).subscribe(
+      data => {
+        const response = (data as any);
+        if(response.length){
+          this.disponibilidade = false;
+          this.mostrarNaoDis = true;
+        }
+        else
+          this.disponibilidade = true;
+      },
+      error =>{
+        this.disponibilidade = false;
+        this.mostrarNaoDis = true;
+        this.ErroSnackBar();
+      }
+    );
+   }
+
   onSubmitCadastro(){
     this.carregando = true;
   
@@ -123,6 +145,7 @@ CadastroForm = this.formBuilder.group({
       this.ErroSnackBar();
     });
 
+    this.disponibilidade = false;
    }
 
   ngOnDestroy(){
