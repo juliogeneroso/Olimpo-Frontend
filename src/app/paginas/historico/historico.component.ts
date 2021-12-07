@@ -6,6 +6,7 @@ import { PageEvent } from '@angular/material/paginator';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { ErroComponent } from '../../avisos/erro/erro.component';
 import  {MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder } from '@angular/forms';
 
 interface Tipo {
   value: string;
@@ -21,7 +22,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
 
  
 
-  constructor(private conexaoService:ConexaoService,private snackBar: MatSnackBar) { }
+  constructor(private conexaoService:ConexaoService,private snackBar: MatSnackBar,private formBuilder: FormBuilder) { }
 
   durationInSeconds = 5;
 
@@ -35,6 +36,7 @@ export class HistoricoComponent implements OnInit,OnDestroy {
   public paginacaoEntregasPendentes;
   public paginacaoEntregasConcluidas;
 
+  public variavel;
   private historico;
 
   tipos: Tipo[] = [
@@ -46,9 +48,15 @@ export class HistoricoComponent implements OnInit,OnDestroy {
 
   selectedTipo = this.tipos[0].viewValue;
 
+  checkoutForm = this.formBuilder.group({
+    bloco:'',
+    num:''
+  });
+  
 
   ngOnInit(): void {
     this.ionViewDidEnter();
+    this.variavel="Entradas";
   }
 
   ionViewDidEnter(){ 
@@ -74,6 +82,8 @@ export class HistoricoComponent implements OnInit,OnDestroy {
     }if(tipo==="Entregas Realizadas"){
       this.entregasRealizadas();
     }
+
+    this.variavel = tipo;
   } 
 
   historicoEntrada(){
@@ -199,6 +209,84 @@ export class HistoricoComponent implements OnInit,OnDestroy {
           endIndex = this.controleEntregasConcluidas.length;
         }
         this.paginacaoEntregasConcluidas = this.controleEntregasConcluidas.slice(startIndex, endIndex);
+    }
+  }
+
+  consulta(){
+    if(this.variavel==="Entradas"){
+      this.controlePessoasEntrada=[];
+      this.historico = this.conexaoService.consultaEntradaBlocoNum(this.checkoutForm).subscribe(
+      data => {
+        const response = (data as any);
+        this.controlePessoasEntrada = response;
+        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(0,19);
+      },
+      error =>{
+        console.log('ERROR');
+      }
+    );
+    }if(this.variavel==="Saidas"){
+      this.controlePessoasSaida=[];
+      this.historico = this.conexaoService.consultaSaidaBlocoNum(this.checkoutForm).subscribe(
+      data => {
+        const response = (data as any);
+        this.controlePessoasSaida = response;
+        this.paginacaoPessoasSaida = this.controlePessoasSaida.slice(0,19);
+      },
+      error =>{
+        console.log('ERROR');
+      }
+    );
+    }if(this.variavel==="Entregas Pendentes"){
+      this.controleEntregasPendentes=[];
+      this.historico = this.conexaoService.consultaEntregasPendentes(this.checkoutForm).subscribe(
+      data => {
+        const response = (data as any);
+        this.controleEntregasPendentes = response;
+        this.paginacaoEntregasPendentes = this.controleEntregasPendentes.slice(0,19);
+      },
+      error =>{
+        console.log('ERROR');
+      }
+    );
+    }if(this.variavel==="Entregas Realizadas"){
+      this.controleEntregasConcluidas=[];
+      this.historico = this.conexaoService.consultaEntregasConcluidas(this.checkoutForm).subscribe(
+      data => {
+        const response = (data as any);
+        this.controleEntregasConcluidas = response;
+        //console.log(this.controleEntregasConcluidas);
+        this.paginacaoEntregasConcluidas = this.controleEntregasConcluidas.slice(0,19);
+      },
+      error =>{
+        console.log('ERROR');
+      }
+    );
+    }else{
+      this.controlePessoasEntrada=[];
+      this.historico = this.conexaoService.consultaEntradaBlocoNum(this.checkoutForm).subscribe(
+      data => {
+        const response = (data as any);
+        this.controlePessoasEntrada = response;
+        this.paginacaoPessoasEntrada = this.controlePessoasEntrada.slice(0,19);
+      },
+      error =>{
+        console.log('ERROR');
+      }
+    );
+    }
+  }
+
+  removerFiltro(){
+    this.checkoutForm.reset();
+    if(this.variavel==="Entradas"){
+      this.historicoEntrada();
+    }if(this.variavel==="Saidas"){
+      this.historicoSaida();
+    }if(this.variavel==="Entregas Pendentes"){
+      this.entregasPendentes();
+    }if(this.variavel==="Entregas Realizadas"){
+      this.entregasRealizadas();
     }
   }
 

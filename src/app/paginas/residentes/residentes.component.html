@@ -2,6 +2,24 @@
     <div style="width: 100%;">
         <div class="container" *ngIf="moradores?.length">
             <h6 *ngIf="!mostrarBotaoAdm">Editar e Excluir somente para ADM</h6>
+            <form [formGroup]="checkoutForm">
+                <mat-form-field style="width: 30%;">    
+                  <mat-label>
+                    Buscar ID
+                  </mat-label>
+                    <input matInput type="number" name="num" formControlName="id" pattern="^[1-9][0-9]?[0-9]?" required> 
+                </mat-form-field>
+                <button mat-raised-button style="margin-left: 20px" color="accent" [disabled]="!checkoutForm.valid" (click)="consultaId()">Filtrar
+                    <span>
+                        <img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/>
+                      </span>
+                    </button>
+                <button mat-raised-button style="margin-left: 20px" color="warn" [disabled]="!checkoutForm.valid" (click)="removerFiltro()">Remover Filtro    
+                    <span>
+                      <img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/>
+                    </span>
+                  </button>
+              </form>
             <table class="table table-responsive-sm table-hover" style="margin-top:20px;">
                 <thead class="thead-dark">
                     <tr>
@@ -44,7 +62,7 @@
                 </thead>
             </table>
             <div>
-                <p *ngIf="!moradores?.length" class="vazio">Não existem registros de entregas pendentes!</p>
+                <p *ngIf="!moradores?.length" class="vazio">Residentes não encontrados!</p>
             </div>
         </div>
     </div>

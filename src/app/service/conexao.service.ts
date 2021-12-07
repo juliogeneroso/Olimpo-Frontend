@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { interval, Observable} from 'rxjs';
+import { from, interval, Observable} from 'rxjs';
 import { Cadastro, ComunicadosCadastro, ComunicadosConsulta, ControleEntradaSaida, ControleEntregasConcluidas, DatasReservadasCadastro, DatasReservadasConsulta, Entrega, EntregaPendenteCadastrada, ExibirLogin, Formulario, LoginDados, ResidentesItem } from './conexao.model';
 ;
 
@@ -49,7 +49,8 @@ export class ConexaoService {
     return this.http.get<ControleEntregasConcluidas>(caminho);
   }
 
-  filtroID(id):Observable<ResidentesItem>{
+  filtroID(form):Observable<ResidentesItem>{
+    let id = form.value.id;
     let caminho = `${this.baseUrl}/residentes/filtro/id/${id}`;
     return this.http.get<ResidentesItem>(caminho);
   }
@@ -79,7 +80,33 @@ export class ConexaoService {
     let caminho = `${this.baseUrl}/consultar/data/${consulta.dia}/${consulta.mes}/${consulta.ano}`;
     return this.http.get<DatasReservadasConsulta>(caminho);
   }
+  //////////////////////////////////////
 
+  consultaEntradaBlocoNum(form):Observable<ControleEntradaSaida>{
+    let dados = form.value;
+    let caminho = `${this.baseUrl}/entrada/${(dados.bloco).toUpperCase()}/${dados.num}`;
+    return this.http.get<ControleEntradaSaida>(caminho);
+  }
+
+  consultaSaidaBlocoNum(form):Observable<ControleEntradaSaida>{
+    let dados = form.value;
+    let caminho = `${this.baseUrl}/saida/${(dados.bloco).toUpperCase()}/${dados.num}`;
+    return this.http.get<ControleEntradaSaida>(caminho);
+  }
+
+  consultaEntregasPendentes(form):Observable<EntregaPendenteCadastrada>{
+    let dados = form.value;
+    let caminho = `${this.baseUrl}/pendentes/${(dados.bloco).toUpperCase()}/${dados.num}`;
+    return this.http.get<EntregaPendenteCadastrada>(caminho);
+  }
+
+  consultaEntregasConcluidas(form):Observable<ControleEntregasConcluidas>{
+    let dados = form.value;
+
+    let caminho = `${this.baseUrl}/concluidas/${(dados.bloco).toUpperCase()}/${dados.num}`;
+    return this.http.get<ControleEntregasConcluidas>(caminho);
+  }
+  //////////////////////////////////////////////
   async cadastro(form){
     let formulario:Formulario = form.value;
     let caminho = `${this.baseUrl}/cadastro/residente`;

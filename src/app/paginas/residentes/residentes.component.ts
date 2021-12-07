@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { PageEvent } from '@angular/material/paginator';
 import { AuthService } from 'src/app/service/authservice.service';
 import { ErroComponent } from 'src/app/avisos/erro/erro.component';
+import { FormBuilder } from '@angular/forms';
 
 
 
@@ -21,7 +22,7 @@ export class ResidentesComponent implements OnInit,OnDestroy {
   mostrarBotaoAdm:boolean = true;
 
   constructor(private conexao:ConexaoService, private snackBar:MatSnackBar,
-    private router:Router,private authService: AuthService){}
+    private router:Router,private authService: AuthService,private formBuilder: FormBuilder){}
 
   
   panelOpenState = false;
@@ -31,6 +32,10 @@ export class ResidentesComponent implements OnInit,OnDestroy {
   public paginacaoMoradores;
   durationInSeconds = 5;
 
+
+  checkoutForm = this.formBuilder.group({
+    id:''
+  });
   
 
   ngOnInit() {
@@ -96,6 +101,27 @@ export class ResidentesComponent implements OnInit,OnDestroy {
       } 
     )
   }
+
+  removerFiltro(){
+    this.checkoutForm.reset();
+    this.ionViewDidEnter();
+  }
+
+  consultaId(){
+    this.historico = this.conexao.filtroID(this.checkoutForm).subscribe(
+      data => {
+        const response = (data as any);
+        this.moradores = response;
+        //console.log(this.moradores);
+        this.paginacaoMoradores = this.moradores.slice(0,20);
+        //console.log(this.paginacaoMoradores);
+      }, erro => {
+         this.openSnackBarErro();
+      } 
+    )
+
+  }
+
   onPageChange(event:PageEvent){
 
       const startIndex = event.pageIndex * event.pageSize;

@@ -9,6 +9,24 @@
             </mat-select>
         </mat-form-field>
     </div>
+    <form [formGroup]="checkoutForm" style="text-align: center;">
+        <mat-form-field style="width: 20%;;margin-right: 20px;">    
+          <mat-label>
+            Filtro Bloco   (A-Z)
+          </mat-label>
+            <input matInput type="text" name="bloco" formControlName="bloco" pattern="^[a-zA-Z]" required> 
+        </mat-form-field>
+        <mat-form-field style="width: 20%;margin-left: 20px;"> 
+          <mat-label>
+            Filtro Casa
+          </mat-label>
+            <input matInput type="number" name="num" formControlName="num" pattern="^[1-9][0-9]?[0-9]?" required> 
+        </mat-form-field>         
+          <button mat-raised-button style="margin-top: 10px;margin-left: 20px;" color="accent" [disabled]="!checkoutForm.valid" (click)="consulta()">Filtrar
+          </button>
+          <button mat-raised-button style="margin-left: 20px" color="warn" [disabled]="!checkoutForm.valid" (click)="removerFiltro()">Remover Filtro    
+          </button>
+      </form>
     <div class="tabelaHistorico" *ngIf="selectedTipo == 'Entradas'" style="width: 100%;">   
         <div *ngIf="controlePessoasEntrada?.length" class="container">
             <table class="table table-responsive-sm table-hover">
