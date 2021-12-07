@@ -32,6 +32,7 @@ export class AlterarComponent implements OnInit {
 
   ngOnInit(): void {
     this.rota.params.subscribe(params => this.id = params['id']);
+    console.log(this.id);
     this.ionViewDidEnter(this.id);
   }
 
@@ -58,13 +59,17 @@ export class AlterarComponent implements OnInit {
   }
 
   ionViewDidEnter(id:number){
-    this.filtro = this.conexao.filtroID(id).subscribe(
+    console.log(this.id);
+    this.filtro = this.conexao.filtroID2(id).subscribe(
       data => {
         const response = (data as any);
         this.morador = response;
+        console.log(this.morador);
         this.nome = this.morador[0].nome;
         this.bloco = this.morador[0].bloco;
         this.num = this.morador[0].num;
+
+        console.log(this.morador);
       }, erro => {
           console.log("deu errado aqui");
       } 

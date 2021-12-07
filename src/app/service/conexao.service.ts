@@ -55,6 +55,11 @@ export class ConexaoService {
     return this.http.get<ResidentesItem>(caminho);
   }
 
+  filtroID2(id:number):Observable<ResidentesItem>{
+    let caminho = `${this.baseUrl}/residentes/filtro/id/${id}`;
+    return this.http.get<ResidentesItem>(caminho);
+  }
+
   getEntradaTemp():Observable<Formulario>{
     let caminho = `${this.baseUrl}/temporaria/entrada`;
     return this.http.get<Formulario>(caminho);
