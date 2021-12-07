@@ -33,7 +33,7 @@
                     </tr>
                 </tbody>
             </table>
-            <mat-paginator [length]="this.controlePessoasEntrada.length"
+            <mat-paginator *ngIf="this.controlePessoasEntrada.length > 20" [length]="this.controlePessoasEntrada.length"
                         [pageSize]="20"
                         (page)="onPageChange($event, selectedTipo)">
             </mat-paginator>
@@ -80,7 +80,7 @@
                     </tr>
                 </tbody>
             </table>
-            <mat-paginator [length]="this.controlePessoasSaida.length"
+            <mat-paginator *ngIf="this.controlePessoasSaida.length > 20" [length]="this.controlePessoasSaida.length"
                     [pageSize]="20"
                     (page)="onPageChange($event, selectedTipo)">
             </mat-paginator>
@@ -128,7 +128,7 @@
                     </tr>
                 </tbody>
             </table>
-            <mat-paginator [length]="this.controleEntregasPendentes.length"
+            <mat-paginator *ngIf="this.controleEntregasPendentes.length > 20" [length]="this.controleEntregasPendentes.length"
                 [pageSize]="20"
                 (page)="onPageChange($event, selectedTipo)">
             </mat-paginator>
@@ -177,7 +177,7 @@
                     </tr>
                 </tbody>
             </table>
-            <mat-paginator [length]="this.controleEntregasConcluidas.length"
+            <mat-paginator *ngIf="this.controleEntregasConcluidas.length > 20" [length]="this.controleEntregasConcluidas.length"
                         [pageSize]="20"
                         (page)="onPageChange($event, selectedTipo)">
             </mat-paginator>

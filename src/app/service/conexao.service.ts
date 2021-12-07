@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { interval, Observable} from 'rxjs';
-import { Cadastro, ControleEntradaSaida, ControleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, ExibirLogin, Formulario, LoginDados, ResidentesItem } from './conexao.model';
+import { Cadastro, ComunicadosCadastro, ComunicadosConsulta, ControleEntradaSaida, ControleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, ExibirLogin, Formulario, LoginDados, ResidentesItem } from './conexao.model';
 ;
 
 @Injectable({
@@ -62,6 +62,11 @@ export class ConexaoService {
   getPorteirosCadastrados():Observable<ExibirLogin>{
     let caminho = `${this.baseUrl}/porteiros`;
     return this.http.get<ExibirLogin>(caminho);
+  }
+
+  getComunicados():Observable<ComunicadosConsulta>{
+    let caminho = `${this.baseUrl}/exibir/noticias`;
+    return this.http.get<ComunicadosConsulta>(caminho);
   }
 
   async cadastro(form){
@@ -207,6 +212,26 @@ export class ConexaoService {
     return resposta;
   }
 
+  async cadastroComunicado(comunicado){
+    let comunicados:ComunicadosCadastro = comunicado.value;
+    console.log(comunicados);
+    let caminho = `${this.baseUrl}/cadastrar/noticias`;
+    let resposta;
+
+    //console.log(entrega);
+
+    await this.http.post(caminho,JSON.stringify(comunicados),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
+    });
+    //console.log(resposta);
+    //Inserer tratamento de erro aqui.
+    return resposta;
+  }
+
   async deletarResidente(id:number){
     //console.log(id);
     let caminho = `${this.baseUrl}/deletar/morador/${id}`;
@@ -227,6 +252,23 @@ export class ConexaoService {
   async deletarPorteiro(id:number){
     //console.log(id);
     let caminho = `${this.baseUrl}/deletar/porteiro/${id}`;
+    let resposta;
+
+    await this.http.delete(caminho).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
+  }
+
+  async deletarComunicado(id:number){
+    //console.log(id);
+    let caminho = `${this.baseUrl}/deletar/noticia/${id}`;
     let resposta;
 
     await this.http.delete(caminho).toPromise()

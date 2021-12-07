@@ -1,7 +1,7 @@
 import { Component, OnInit,OnDestroy } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { ConexaoService } from '../../service/conexao.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { MatSnackBar} from '@angular/material/snack-bar';
 import { ErroComponent } from '../../avisos/erro/erro.component';
 import { SalvoComponent } from '../../avisos/salvo/salvo.component';
 import { JaCadastrado } from 'src/app/avisos/jaCadastrado/jaCadastrado.component';
@@ -99,6 +99,7 @@ export class CadastroPorteiroComponent implements OnInit,OnDestroy {
     }).then(()=>{
       this.ionViewDidEnter();
     }).catch((res)=>{
+      this.carregando = false;
     //console.log(res);
     if(res.status == "203"){
       this.ErroClienteCadastrado();

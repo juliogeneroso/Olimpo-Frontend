@@ -1,6 +1,52 @@
-<div class="container">
-  <div class="manutencao">
-    <img class="imagemManutencao" [src]="imagePath" alt="image"/>
-    <h3 style="margin-top: 30px;">Opss... Estamos em construção para esta parte!</h3>
+<div>
+    <button *ngIf="!menu" type="button" class="btn btn-sm btn-warning botaoAdicionar" (click)="abrirFormulario()">Adicionar</button>
+    <button *ngIf="menu" type="button" class="btn btn-sm btn-danger botaoFechar" (click)="fecharFormulario()">Fechar</button>
+</div>
+<div style="text-align: center;" *ngIf="menu">
+    <div class="cadastro">
+        <h4 class="tituloComunicado">Novo comunicado</h4>
+        <form [formGroup]="CadastroForm">
+            <mat-list-item class="full">
+                <div mat-line>
+                    <mat-form-field type="number" appearance="" class="block wdt semifull campocadastro">
+                        <mat-label>Título</mat-label>
+                        <input matInput type="text" name="titulo" formControlName="titulo"  minlength="4" maxlength="60" required>
+                    </mat-form-field>
+                </div>
+                <div mat-line class="full">
+                    <mat-form-field  type="number" class="block wdt semifull campocadastro">
+                        <mat-label>Comunicados</mat-label>
+                        <input matInput type="text" name="dados" formControlName="dados" minlength="4" maxlength="500" required>
+                    </mat-form-field>
+                </div>
+                <div mat-line class="wdt center semifull botao">
+                    <button mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar
+                        <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+                    </button>
+                </div>
+            </mat-list-item>    
+        </form>
+    </div>
+</div>
+<div class="pagina-temporaria">
+  <div class="titulo">
+      <p style="text-align: left;font-size: 38px;">Comunicados</p>
+  </div>
+  <div *ngIf="comunicados.length">
+    <div *ngFor="let comunicado of paginacaoComunicados" >
+        <div class="area-card">
+            <mat-card class="card">
+                <h3>{{comunicado.titulo}}</h3>
+                <p>{{comunicado.dia | date: 'dd/MM/yyyy'}}</p>
+                <p>{{comunicado.dados}}</p>
+                <p style="text-align: end; margin-right: 25px;"><button type="button" class="btn btn-sm btn-danger" style="border-radius: 10px;" (click)="excluir(comunicado)"><mat-icon class="icone">delete</mat-icon></button></p>
+            </mat-card>
+        </div> 
+    </div>
+  </div>
+  <mat-paginator *ngIf="this.comunicados.length > 5" [length]="this.comunicados.length" [pageSize]="5" (page)="onPageChange($event)"> 
+    </mat-paginator>
+  <div *ngIf="!comunicados.length">
+      <p style="margin-left: 30px;text-align: left;">Sem comunicados cadastros até o momento!</p>
   </div>
 </div>

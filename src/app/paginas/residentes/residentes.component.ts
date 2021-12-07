@@ -92,7 +92,7 @@ export class ResidentesComponent implements OnInit,OnDestroy {
         this.paginacaoMoradores = this.moradores.slice(0,20);
         //console.log(this.paginacaoMoradores);
       }, erro => {
-          console.log("deu errado aqui");
+         this.openSnackBarErro();
       } 
     )
   }

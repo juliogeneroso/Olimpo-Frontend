@@ -28,7 +28,7 @@
                     </tr>   
                 </tbody>
             </table>
-            <mat-paginator [length]="this.moradores.length" [pageSize]="20" (page)="onPageChange($event)"> 
+            <mat-paginator *ngIf="this.moradores.length > 20" [length]="this.moradores.length" [pageSize]="20" (page)="onPageChange($event)"> 
             </mat-paginator>
         </div>
         <div class="container">

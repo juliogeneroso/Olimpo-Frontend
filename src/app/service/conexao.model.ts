@@ -67,3 +67,14 @@ export interface ExibirLogin{
     nome:string;
     admin:boolean;
 }
+
+export interface ComunicadosConsulta{
+    titulo:string;
+    dados:string;
+    id:number;
+    dia:string;
+}
+export interface ComunicadosCadastro{
+    titulo:string;
+    dados:string;
+}
