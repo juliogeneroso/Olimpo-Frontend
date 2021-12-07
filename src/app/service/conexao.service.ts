@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { interval, Observable} from 'rxjs';
-import { Cadastro, ComunicadosCadastro, ComunicadosConsulta, ControleEntradaSaida, ControleEntregasConcluidas, Entrega, EntregaPendenteCadastrada, ExibirLogin, Formulario, LoginDados, ResidentesItem } from './conexao.model';
+import { Cadastro, ComunicadosCadastro, ComunicadosConsulta, ControleEntradaSaida, ControleEntregasConcluidas, DatasReservadasCadastro, DatasReservadasConsulta, Entrega, EntregaPendenteCadastrada, ExibirLogin, Formulario, LoginDados, ResidentesItem } from './conexao.model';
 ;
 
 @Injectable({
@@ -67,6 +67,16 @@ export class ConexaoService {
   getComunicados():Observable<ComunicadosConsulta>{
     let caminho = `${this.baseUrl}/exibir/noticias`;
     return this.http.get<ComunicadosConsulta>(caminho);
+  }
+
+  getDatas():Observable<DatasReservadasConsulta>{
+    let caminho = `${this.baseUrl}/exibir/datas`;
+    return this.http.get<DatasReservadasConsulta>(caminho);
+  }
+
+  verificarDisponibilidade():Observable<DatasReservadasConsulta>{
+    let caminho = `${this.baseUrl}/consultar/data/:dia/:mes/:ano`;
+    return this.http.get<DatasReservadasConsulta>(caminho);
   }
 
   async cadastro(form){
@@ -232,6 +242,23 @@ export class ConexaoService {
     return resposta;
   }
 
+  async CadastroDataReservada(form){
+    let formulario:DatasReservadasCadastro = form.value;
+    let caminho = `${this.baseUrl}/agendar`;
+    let resposta;
+
+    await this.http.post(caminho,JSON.stringify(formulario),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data
+    })
+    .catch(erro => {
+      return Promise.reject();
+    });
+    //inserir tratamento de erro aqui;
+    console.log(resposta);
+    return resposta;
+  }
+
   async deletarResidente(id:number){
     //console.log(id);
     let caminho = `${this.baseUrl}/deletar/morador/${id}`;
@@ -252,6 +279,22 @@ export class ConexaoService {
   async deletarPorteiro(id:number){
     //console.log(id);
     let caminho = `${this.baseUrl}/deletar/porteiro/${id}`;
+    let resposta;
+
+    await this.http.delete(caminho).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    console.log(resposta);
+    //Inserir tratamento de erro aqui
+    return resposta;
+  }
+  
+  async deletarReserva(id:number){
+    let caminho = `${this.baseUrl}/deletar/reserva/${id}`;
     let resposta;
 
     await this.http.delete(caminho).toPromise()
@@ -289,6 +332,21 @@ export class ConexaoService {
     let resposta;
 
     await this.http.patch<ResidentesItem>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise()
+    .then(data => {
+      resposta = data;
+    })
+    .catch(erro => {
+      return Promise.reject();
+    })
+    return resposta;
+  }
+
+  async editarReserva(editar, id:number){
+    let mudanca:DatasReservadasConsulta = editar;
+    let caminho = `${this.baseUrl}/editar/noticia/${id}`;
+    let resposta;
+
+    await this.http.patch<DatasReservadasConsulta>(caminho,JSON.stringify(mudanca),this.httpOptions).toPromise()
     .then(data => {
       resposta = data;
     })

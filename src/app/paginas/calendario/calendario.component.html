@@ -1,8 +1,103 @@
-<div class="container">
-    <div class="manutencao">
-      <img class="imagemManutencao" [src]="imagePath" alt="image"/>
-      <h3 style="margin-top: 30px;">Opss... Estamos em construção para esta parte!</h3>
+<div>
+    <div class="cadastro">
+      <button *ngIf="!menu" type="button" class="btn btn-sm btn-warning botaoAdicionar" (click)="abrirFormulario()">Adicionar nova Reserva</button>
+      <button *ngIf="menu" type="button" class="btn btn-sm btn-danger botaoFechar" (click)="fecharFormulario()">Cancelar</button>
+
+      <div *ngIf="menu" class="cadastro">
+        <h4 style="margin-left: 20px;">Cadastrar nova reserva</h4>
+        <form [formGroup]="CadastroForm">
+            <mat-list-item class="full">
+                <div mat-line>
+                  <mat-form-field type="number" appearance="" class="block wdt semifull campocadastro2">
+                    <mat-label>Id</mat-label>
+                    <input matInput type="number" name="ID" formControlName="id"  minlength="1" maxlength="5" required>
+                  </mat-form-field>
+                    <mat-form-field type="number" appearance="" class="block wdt semifull campocadastro2">
+                        <mat-label>Nome Completo</mat-label>
+                        <input matInput type="text" name="nome" formControlName="nome"  minlength="4" maxlength="50" required>
+                    </mat-form-field>
+                </div>
+                <div mat-line class="full">
+                    <mat-form-field  type="number" class="block wdt semifull campocadastro">
+                        <mat-label>Dia</mat-label>
+                        <input matInput type="number" name="dia" formControlName="dia" pattern="^(0?[1-9]|[12][0-9]|3[01])" required>
+                    </mat-form-field>
+                
+            
+                  <mat-form-field  type="number" class="block wdt semifull campocadastro">
+                      <mat-label>Mês</mat-label>
+                      <input matInput type="number" name="mes" formControlName="mes" pattern="^(0?[1-9]|[1][1-2])" required>
+                  </mat-form-field>
+              
+              
+                <mat-form-field  type="number" class="block wdt semifull campocadastro">
+                    <mat-label>Ano</mat-label>
+                    <input matInput type="number" name="ano" formControlName="ano" pattern="\d{4}" required>
+                </mat-form-field>
+              
+              
+                <mat-form-field  type="number" class="block wdt semifull campocadastro">
+                    <mat-label>Duração</mat-label>
+                    <input matInput type="number" name="duracao" formControlName="duracao" pattern="^(0?[1-6])" required>
+                </mat-form-field>
+              </div>
+              <div mat-line class="full">
+                <mat-form-field  type="number" class="block wdt semifull campocadastro3">
+                    <mat-label>Quantidade de Pesssoas</mat-label>
+                    <input matInput type="number" name="quantPessoas" formControlName="quantPessoas" required>
+                </mat-form-field>
+              </div>
+                
+                <!--<div mat-line>
+                    <mat-form-field class="block wdt semifull campocadastro">
+                        <mat-label>Ramal</mat-label>
+                        <input matInput type="text" name="ramal" formControlName="ramal" pattern="^[0-9]{4}" required>
+                    </mat-form-field>
+                </div>-->
+                <div mat-line class="wdt center semifull botaocadastrar">
+                    <button *ngIf="disponibilidade" mat-raised-button color="accent" [disabled]="!CadastroForm.valid" (click)="onSubmitCadastro()">Cadastrar
+                        <span><img class="spinner" [src]="imagePath" alt="image" *ngIf='carregando'/></span>
+                    </button>
+                </div>
+            </mat-list-item>    
+        </form>
     </div>
+    </div>
+    <div class="consulta">
+      
+    </div>
+    <div class="tabelaHistorico" style="width: 100%;">   
+      <div *ngIf="datasReservadas?.length">
+          <table class="table table-responsive-sm table-hover">
+              <thead class="thead-dark">
+                  <tr>
+                      <th>Reserva</th>
+                      <th>ID</th>
+                      <th style="text-align: center;">Nome</th>
+                      <th style="text-align: center;">Dia</th>
+                      <th style="text-align: center;">Mês</th>
+                      <th style="text-align: center;">Ano</th>
+                      <th style="text-align: center;">Duração</th>
+                      <th style="text-align: center;">Quantidade de Pessoas</th>
+                      <!--<th style="text-align: center;">Editar</th>-->
+                      <th style="text-align: center;">Excluir</th>
+                  </tr>
+              </thead>           
+              <tbody>
+                  <tr *ngFor="let data of datasReservadas">
+                      <td>{{data.reservaid}}</td>
+                      <td>{{data.id}}</td>
+                      <td style="text-align: center;">{{data.nome}}</td>
+                      <td style="text-align: center;">{{data.dia}}</td>
+                      <td style="text-align: center;">{{data.mes}}</td>
+                      <td style="text-align: center;">{{data.ano}}</td>
+                      <td style="text-align: center;">{{data.duracao}} Horas</td>
+                      <td style="text-align: center;">{{data.quantPessoas}}</td>
+                     <!-- <td style="text-align: center;"><button type="button" class="btn btn-sm btn-warning" style="border-radius: 10px;" (click)="alterar(data)"><mat-icon class="icone">build</mat-icon></button></td>-->
+                      <td style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" style="border-radius: 10px;" (click)="excluir(data)"><mat-icon class="icone">delete</mat-icon></button></td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>  
   </div>
-  
-  
+</div>

@@ -1,10 +1,46 @@
-.mat-form-field + .mat-form-field {
-    margin-left: 8px;
-  }
-  .manutencao{
-    text-align: center;
-    margin-top: 15%;
-  }
-  .imagemManutencao{
-    width: 50%;
-  }
+.cadastro{
+    margin-top: 40px;
+    width: 100%;
+}
+.cadastroForm{
+    width: 100%;
+}
+.campocadastro{
+    width: 10%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.campocadastro2{
+    width: 40%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+.campocadastro3{
+    width: 40%;
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.botaocadastrar{
+    margin-left: 20px;
+    margin-top: 10px;
+}
+
+.botaoAdicionar{
+    margin-top: 30px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.botaoFechar{
+    margin-top: 30px;
+    margin-left: 30px;
+    font-size: 16px;
+    font-weight: bold;
+}
+.tabelaHistorico{
+    margin-top: 50px;
+}

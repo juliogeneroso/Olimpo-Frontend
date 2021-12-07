@@ -74,7 +74,29 @@ export interface ComunicadosConsulta{
     id:number;
     dia:string;
 }
+
 export interface ComunicadosCadastro{
     titulo:string;
     dados:string;
 }
+
+export interface DatasReservadasCadastro{
+  id:number;
+  nome:string;
+  dia: number;
+  mes: string;
+  ano: number;
+  duracao: number;
+  quantPessoas: number
+}
+
+export interface DatasReservadasConsulta{
+    reservaid:number;
+    id:number;
+    nome:string;
+    dia: number;
+    mes: number;
+    ano: number;
+    duracao: number;
+    quantPessoas: number
+  }

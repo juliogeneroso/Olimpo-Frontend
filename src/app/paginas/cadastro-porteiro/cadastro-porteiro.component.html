@@ -54,6 +54,7 @@
                         <td *ngIf="porteiro.admin">Sim</td>
                         <td *ngIf="!porteiro.admin">Não</td>
                         <td *ngIf="!porteiro.admin" style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(porteiro)"><mat-icon class="icone">delete</mat-icon></button></td>
+                        <td *ngIf="porteiro.admin" style="text-align: center;"><button type="button" class="btn btn-sm btn-danger" (click)="excluir(porteiro)" disabled><mat-icon class="icone">delete</mat-icon></button></td>
                     </tr>
                 </tbody>
             </table>
